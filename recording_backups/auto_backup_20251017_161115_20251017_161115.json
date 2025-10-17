@@ -1,0 +1,133 @@
+[
+  {
+    "timestamp": "2025-10-17T15:43:45.679401",
+    "action": "navigation",
+    "details": {
+      "url": "https://www.ibm.com/in-en",
+      "title": "IBM",
+      "previous_url": ""
+    }
+  },
+  {
+    "timestamp": "2025-10-17T15:45:37.523132",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "aria-label": "",
+        "data-autoid": "c4d--search-with-typeahead",
+        "direction": "bottom",
+        "input-timeout": "200",
+        "language": "en-in",
+        "placeholder": "Search all of IBM",
+        "size": "md",
+        "slot": "search",
+        "type": "",
+        "value": ""
+      },
+      "className": "",
+      "coordinates": {
+        "clickX": 1564,
+        "clickY": 25,
+        "elementBottom": 48,
+        "elementCenterX": 1596.5,
+        "elementCenterY": 24,
+        "elementHeight": 48,
+        "elementLeft": 1596.5,
+        "elementRight": 1596.5,
+        "elementTop": 0,
+        "elementWidth": 0,
+        "pageX": 1564,
+        "pageY": 25,
+        "relativeX": -32.5,
+        "relativeY": 25,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-autoid": "c4d--search-with-typeahead"
+      },
+      "href": "",
+      "id": "",
+      "name": "",
+      "parent": {
+        "className": "",
+        "id": "",
+        "tagName": "C4D-MASTHEAD"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+        "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-search-with-typeahead[1]"
+      },
+      "siblingsCount": 6,
+      "src": "",
+      "tagName": "C4D-SEARCH-WITH-TYPEAHEAD",
+      "target": "",
+      "text": "",
+      "textContent": "",
+      "timestamp": "2025-10-17T10:15:37.321Z",
+      "title": "",
+      "type": "",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(22, 22, 22)",
+        "color": "rgb(22, 22, 22)",
+        "cursor": "auto",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", system-ui, -apple-system, BlinkMacSystemFont, \".SFNSText-Regular\", sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "height": "48px",
+        "margin": "0px 0px 0px 48px",
+        "opacity": "1",
+        "padding": "0px",
+        "position": "relative",
+        "width": "0px",
+        "zIndex": "auto"
+      }
+    },
+    "screenshot": {
+      "filename": "screenshot_1_20251017_154537.png",
+      "path": "screenshots/screenshot_1_20251017_154537.png",
+      "element_bounds": {
+        "left": 1596.5,
+        "top": 0,
+        "width": 0,
+        "height": 48
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    },
+    "vlm_description": "This is an image of a webpage, specifically the top right corner where a button labeled \"HTML not available\" is located. The button has rounded corners and a shadow effect, with a white background and blue text. There are no icons or images visible on the button.",
+    "element_html": null
+  },
+  {
+    "timestamp": "2025-10-17T15:45:51.331863",
+    "action": "text_input",
+    "details": {
+      "id": "",
+      "inShadowRoot": true,
+      "name": "q",
+      "placeholder": "Search all of IBM",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-17T10:15:51.068Z",
+      "type": "text",
+      "value": "IBM",
+      "consolidated_from": 2
+    },
+    "screenshot": {
+      "filename": "screenshot_3_20251017_154551.png",
+      "path": "screenshots/screenshot_3_20251017_154551.png"
+    },
+    "vlm_description": "This is an image of a webpage, specifically the top-left corner where the text \"HTML not available\" is displayed in bold, white font against a light background. The text is centered within a small blue button with rounded corners and a shadow effect. There are no other elements immediately adjacent to this button, nor are there any distinctive features or unique identifiers that stand out from similar elements on the webpage.",
+    "element_html": null
+  }
+]

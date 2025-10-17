@@ -1,0 +1,340 @@
+[
+  {
+    "timestamp": "2025-10-17T14:12:19.063463",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "id": "regular-btn"
+      },
+      "className": "",
+      "coordinates": {
+        "clickX": 84,
+        "clickY": 156,
+        "elementBottom": 175.78125,
+        "elementCenterX": 84.4609375,
+        "elementCenterY": 156.28125,
+        "elementHeight": 39,
+        "elementLeft": 18,
+        "elementRight": 150.921875,
+        "elementTop": 136.78125,
+        "elementWidth": 132.921875,
+        "pageX": 84,
+        "pageY": 156,
+        "relativeX": 66,
+        "relativeY": 19.21875,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 909,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {},
+      "href": "",
+      "id": "regular-btn",
+      "name": "",
+      "parent": {
+        "className": "",
+        "id": "",
+        "tagName": "BODY"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "#regular-btn",
+        "xpath": "//*[@id=\"regular-btn\"]"
+      },
+      "siblingsCount": 10,
+      "src": "",
+      "tagName": "BUTTON",
+      "target": "",
+      "text": "Regular Button",
+      "textContent": "Regular Button",
+      "timestamp": "2025-10-17T08:42:18.558Z",
+      "title": "",
+      "type": "submit",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgb(239, 239, 239)",
+        "border": "2px outset rgb(0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "cursor": "default",
+        "display": "inline-block",
+        "fontFamily": "Arial",
+        "fontSize": "13.3333px",
+        "fontWeight": "400",
+        "height": "39px",
+        "margin": "10px",
+        "opacity": "1",
+        "padding": "10px 20px",
+        "position": "static",
+        "width": "132.922px",
+        "zIndex": "auto"
+      }
+    },
+    "screenshot": {
+      "filename": "screenshot_1_20251017_141219.png",
+      "path": "screenshots/screenshot_1_20251017_141219.png",
+      "element_bounds": {
+        "left": 18,
+        "top": 136.78125,
+        "width": 132.921875,
+        "height": 39
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 909
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-17T14:12:19.722470",
+    "action": "text_input",
+    "details": {
+      "ariaDescribedBy": "",
+      "ariaLabel": "",
+      "ariaRequired": "",
+      "attributes": {
+        "id": "regular-input",
+        "placeholder": "Regular input",
+        "type": "text"
+      },
+      "autocomplete": "",
+      "className": "",
+      "coordinates": {
+        "elementBottom": 166.78125,
+        "elementCenterX": 257.421875,
+        "elementCenterY": 156.28125,
+        "elementHeight": 21,
+        "elementLeft": 164.921875,
+        "elementRight": 349.921875,
+        "elementTop": 145.78125,
+        "elementWidth": 185,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 909,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {},
+      "disabled": false,
+      "form": {
+        "action": "",
+        "id": "",
+        "method": "",
+        "name": ""
+      },
+      "id": "regular-input",
+      "label": "",
+      "maxLength": -1,
+      "minLength": -1,
+      "name": "",
+      "parent": {
+        "className": "",
+        "id": "",
+        "tagName": "BODY"
+      },
+      "placeholder": "Regular input",
+      "readOnly": false,
+      "required": false,
+      "selectionEnd": 18,
+      "selectionStart": 18,
+      "selectors": {
+        "cssSelector": "#regular-input",
+        "xpath": "//*[@id=\"regular-input\"]"
+      },
+      "tagName": "INPUT",
+      "timestamp": "2025-10-17T08:42:19.517Z",
+      "type": "text",
+      "value": "Regular input text",
+      "visualProperties": {
+        "backgroundColor": "rgb(255, 255, 255)",
+        "border": "2px inset rgb(118, 118, 118)",
+        "borderRadius": "0px",
+        "boxShadow": "none",
+        "color": "rgb(0, 0, 0)",
+        "display": "inline-block",
+        "fontFamily": "Arial",
+        "fontSize": "13.3333px",
+        "fontWeight": "400",
+        "height": "15px",
+        "margin": "0px",
+        "padding": "1px 2px",
+        "width": "177px"
+      }
+    },
+    "screenshot": {
+      "filename": "screenshot_2_20251017_141219.png",
+      "path": "screenshots/screenshot_2_20251017_141219.png",
+      "element_bounds": {
+        "left": 164.921875,
+        "top": 145.78125,
+        "width": 185,
+        "height": 21
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 909
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-17T14:12:20.351208",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "id": "shadow-host"
+      },
+      "className": "",
+      "coordinates": {
+        "clickX": 0,
+        "clickY": 0,
+        "elementBottom": 311.59375,
+        "elementCenterX": 960,
+        "elementCenterY": 282.09375,
+        "elementHeight": 59,
+        "elementLeft": 8,
+        "elementRight": 1912,
+        "elementTop": 252.59375,
+        "elementWidth": 1904,
+        "pageX": 0,
+        "pageY": 0,
+        "relativeX": -8,
+        "relativeY": -252.59375,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 909,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {},
+      "href": "",
+      "id": "shadow-host",
+      "name": "",
+      "parent": {
+        "className": "",
+        "id": "",
+        "tagName": "BODY"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "#shadow-host",
+        "xpath": "//*[@id=\"shadow-host\"]"
+      },
+      "siblingsCount": 10,
+      "src": "",
+      "tagName": "DIV",
+      "target": "",
+      "text": "",
+      "textContent": "",
+      "timestamp": "2025-10-17T08:42:19.846Z",
+      "title": "",
+      "type": "",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "cursor": "auto",
+        "display": "block",
+        "fontFamily": "\"Times New Roman\"",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "height": "59px",
+        "margin": "0px",
+        "opacity": "1",
+        "padding": "0px",
+        "position": "static",
+        "width": "1904px",
+        "zIndex": "auto"
+      }
+    },
+    "screenshot": {
+      "filename": "screenshot_3_20251017_141220.png",
+      "path": "screenshots/screenshot_3_20251017_141220.png",
+      "element_bounds": {
+        "left": 8,
+        "top": 252.59375,
+        "width": 1904,
+        "height": 59
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 909
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-17T14:12:20.965497",
+    "action": "text_input",
+    "details": {
+      "id": "shadow-input",
+      "inShadowRoot": true,
+      "name": "",
+      "placeholder": "Shadow DOM input",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-17T08:42:20.761Z",
+      "type": "text",
+      "value": "Shadow input text"
+    },
+    "screenshot": {
+      "filename": "screenshot_4_20251017_141220.png",
+      "path": "screenshots/screenshot_4_20251017_141220.png"
+    }
+  },
+  {
+    "timestamp": "2025-10-17T14:12:21.652007",
+    "action": "click",
+    "details": {
+      "className": "",
+      "coordinates": {
+        "clickX": 55,
+        "clickY": 68,
+        "pageX": 55,
+        "pageY": 68
+      },
+      "href": "",
+      "id": "iframe-btn",
+      "iframeIndex": 1,
+      "inIframe": true,
+      "tagName": "BUTTON",
+      "text": "iframe Button",
+      "timestamp": "2025-10-17T08:42:21.147Z",
+      "type": "submit"
+    },
+    "screenshot": {
+      "filename": "screenshot_5_20251017_141221.png",
+      "path": "screenshots/screenshot_5_20251017_141221.png",
+      "element_bounds": {
+        "left": 0,
+        "top": 0,
+        "width": 0,
+        "height": 0
+      },
+      "viewport_size": {
+        "width": 0,
+        "height": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-17T14:12:22.301982",
+    "action": "text_input",
+    "details": {
+      "id": "iframe-input",
+      "iframeIndex": 1,
+      "inIframe": true,
+      "name": "",
+      "placeholder": "iframe input",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-17T08:42:22.094Z",
+      "type": "text",
+      "value": "iframe input text"
+    },
+    "screenshot": {
+      "filename": "screenshot_6_20251017_141222.png",
+      "path": "screenshots/screenshot_6_20251017_141222.png"
+    }
+  }
+]

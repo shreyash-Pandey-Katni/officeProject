@@ -1,0 +1,350 @@
+[
+  {
+    "timestamp": "2025-10-17T16:11:43.664365",
+    "action": "navigation",
+    "details": {
+      "url": "https://www.ibm.com/in-en",
+      "title": "IBM",
+      "previous_url": ""
+    }
+  },
+  {
+    "timestamp": "2025-10-17T16:11:58.098160",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "aria-label": "",
+        "data-autoid": "c4d--search-with-typeahead",
+        "direction": "bottom",
+        "input-timeout": "200",
+        "language": "en-in",
+        "placeholder": "Search all of IBM",
+        "size": "md",
+        "slot": "search",
+        "type": "",
+        "value": ""
+      },
+      "className": "",
+      "coordinates": {
+        "clickX": 1574,
+        "clickY": 20,
+        "elementBottom": 48,
+        "elementCenterX": 1596.5,
+        "elementCenterY": 24,
+        "elementHeight": 48,
+        "elementLeft": 1596.5,
+        "elementRight": 1596.5,
+        "elementTop": 0,
+        "elementWidth": 0,
+        "pageX": 1574,
+        "pageY": 20,
+        "relativeX": -22.5,
+        "relativeY": 20,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-autoid": "c4d--search-with-typeahead"
+      },
+      "href": "",
+      "id": "",
+      "name": "",
+      "parent": {
+        "className": "",
+        "id": "",
+        "tagName": "C4D-MASTHEAD"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+        "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-search-with-typeahead[1]"
+      },
+      "siblingsCount": 6,
+      "src": "",
+      "tagName": "C4D-SEARCH-WITH-TYPEAHEAD",
+      "target": "",
+      "text": "",
+      "textContent": "",
+      "timestamp": "2025-10-17T10:41:57.951Z",
+      "title": "",
+      "type": "",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(22, 22, 22)",
+        "color": "rgb(22, 22, 22)",
+        "cursor": "auto",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", system-ui, -apple-system, BlinkMacSystemFont, \".SFNSText-Regular\", sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "height": "48px",
+        "margin": "0px 0px 0px 48px",
+        "opacity": "1",
+        "padding": "0px",
+        "position": "relative",
+        "width": "0px",
+        "zIndex": "auto"
+      }
+    },
+    "locators": {
+      "tag_name": "C4D-SEARCH-WITH-TYPEAHEAD"
+    },
+    "screenshot": {
+      "filename": "screenshot_1_20251017_161158.png",
+      "path": "screenshots/screenshot_1_20251017_161158.png",
+      "element_bounds": {
+        "left": 1596.5,
+        "top": 0,
+        "width": 0,
+        "height": 48
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    },
+    "vlm_description": "This is an image of a webpage, specifically the top right corner where a button labeled \"HTML not available\" is located. The button has rounded corners and a shadow effect, with a white background and blue text. There are no icons or images visible on the button.",
+    "element_html": null
+  },
+  {
+    "timestamp": "2025-10-17T16:12:02.372323",
+    "action": "text_input",
+    "details": {
+      "id": "",
+      "inShadowRoot": true,
+      "name": "q",
+      "placeholder": "Search all of IBM",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-17T10:42:02.110Z",
+      "type": "text",
+      "value": "IBM",
+      "consolidated_from": 2
+    },
+    "locators": {
+      "name": "q",
+      "tag_name": "INPUT",
+      "placeholder": "Search all of IBM",
+      "type": "text",
+      "value": "IBM",
+      "in_shadow_root": true
+    },
+    "screenshot": {
+      "filename": "screenshot_3_20251017_161202.png",
+      "path": "screenshots/screenshot_3_20251017_161202.png"
+    },
+    "vlm_description": "This is an image of a screenshot, specifically the top-left corner where the text \"HTML not available\" is displayed in bold, white font against a blue background. The text is centered within a rounded rectangle with a slight shadow effect. There are no other elements immediately adjacent to this text box.",
+    "element_html": null
+  },
+  {
+    "timestamp": "2025-10-17T16:12:05.080308",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "active": "",
+        "aria-label": "",
+        "data-autoid": "c4d--search-with-typeahead",
+        "direction": "bottom",
+        "input-timeout": "200",
+        "language": "en-in",
+        "open": "",
+        "placeholder": "Search all of IBM",
+        "size": "md",
+        "slot": "search",
+        "type": "",
+        "unfocused": "",
+        "value": "IBM"
+      },
+      "className": "",
+      "coordinates": {
+        "clickX": 1568,
+        "clickY": 27,
+        "elementBottom": 48,
+        "elementCenterX": 949.5,
+        "elementCenterY": 24,
+        "elementHeight": 48,
+        "elementLeft": 302.5,
+        "elementRight": 1596.5,
+        "elementTop": 0,
+        "elementWidth": 1294,
+        "pageX": 1568,
+        "pageY": 27,
+        "relativeX": 1265.5,
+        "relativeY": 27,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-autoid": "c4d--search-with-typeahead"
+      },
+      "href": "",
+      "id": "",
+      "name": "",
+      "parent": {
+        "className": "",
+        "id": "",
+        "tagName": "C4D-MASTHEAD"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+        "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-search-with-typeahead[1]"
+      },
+      "siblingsCount": 6,
+      "src": "",
+      "tagName": "C4D-SEARCH-WITH-TYPEAHEAD",
+      "target": "",
+      "text": "",
+      "textContent": "",
+      "timestamp": "2025-10-17T10:42:04.885Z",
+      "title": "",
+      "type": "",
+      "value": "IBM",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(22, 22, 22)",
+        "color": "rgb(22, 22, 22)",
+        "cursor": "auto",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", system-ui, -apple-system, BlinkMacSystemFont, \".SFNSText-Regular\", sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "height": "48px",
+        "margin": "0px",
+        "opacity": "1",
+        "padding": "0px",
+        "position": "relative",
+        "width": "1294px",
+        "zIndex": "999"
+      }
+    },
+    "locators": {
+      "tag_name": "C4D-SEARCH-WITH-TYPEAHEAD",
+      "value": "IBM"
+    },
+    "screenshot": {
+      "filename": "screenshot_4_20251017_161205.png",
+      "path": "screenshots/screenshot_4_20251017_161205.png",
+      "element_bounds": {
+        "left": 302.5,
+        "top": 0,
+        "width": 1294,
+        "height": 48
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    },
+    "vlm_description": "This is an image of a webpage, specifically the top-center area where the text \"HTML not available\" is displayed in bold, white font against a black background. The button has rounded corners, a shadow effect, and a blue border. There are no icons or images visible on this element.",
+    "element_html": null
+  },
+  {
+    "timestamp": "2025-10-17T16:12:07.231715",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "data-autoid": "c4d--masthead__l0-nav--nav1",
+        "menu-label": "Hybrid Cloud",
+        "style": "--c4d-ce--viewport-width: 1905px;",
+        "trigger-content": "Hybrid Cloud"
+      },
+      "className": "",
+      "coordinates": {
+        "clickX": 520,
+        "clickY": 17,
+        "elementBottom": 48,
+        "elementCenterX": 471.71875,
+        "elementCenterY": 24,
+        "elementHeight": 48,
+        "elementLeft": 395.15625,
+        "elementRight": 548.28125,
+        "elementTop": 0,
+        "elementWidth": 153.125,
+        "pageX": 520,
+        "pageY": 17,
+        "relativeX": 124.84375,
+        "relativeY": 17,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-autoid": "c4d--masthead__l0-nav--nav1"
+      },
+      "href": "",
+      "id": "",
+      "name": "",
+      "parent": {
+        "className": "",
+        "id": "",
+        "tagName": "C4D-TOP-NAV"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-top-nav > c4d-megamenu-top-nav-menu:nth-of-type(2)",
+        "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-top-nav[1]/c4d-megamenu-top-nav-menu[2]"
+      },
+      "siblingsCount": 6,
+      "src": "",
+      "tagName": "C4D-MEGAMENU-TOP-NAV-MENU",
+      "target": "",
+      "text": "",
+      "textContent": "\n          \n        ",
+      "timestamp": "2025-10-17T10:42:07.130Z",
+      "title": "",
+      "type": "",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(22, 22, 22)",
+        "color": "rgb(22, 22, 22)",
+        "cursor": "auto",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", system-ui, -apple-system, BlinkMacSystemFont, \".SFNSText-Regular\", sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "height": "48px",
+        "margin": "0px",
+        "opacity": "1",
+        "padding": "0px",
+        "position": "relative",
+        "width": "153.125px",
+        "zIndex": "auto"
+      }
+    },
+    "locators": {
+      "tag_name": "C4D-MEGAMENU-TOP-NAV-MENU"
+    },
+    "screenshot": {
+      "filename": "screenshot_5_20251017_161207.png",
+      "path": "screenshots/screenshot_5_20251017_161207.png",
+      "element_bounds": {
+        "left": 395.15625,
+        "top": 0,
+        "width": 153.125,
+        "height": 48
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    },
+    "vlm_description": "This is an image of a webpage, specifically the top-left corner where the text \"HTML not available\" is displayed in bold, white font against a light gray background. The button has rounded corners and a shadow effect, with a size of approximately 153x48 pixels. There are no icons or images visible on this element.",
+    "element_html": null
+  }
+]

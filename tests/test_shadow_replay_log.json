@@ -1,0 +1,197 @@
+[
+  {
+    "timestamp": "2025-10-17T14:26:16.587654",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "id": "regular-btn",
+        "onclick": "showResult('Regular button clicked')"
+      },
+      "className": "",
+      "coordinates": {
+        "clickX": 84,
+        "clickY": 156,
+        "elementBottom": 175.78125,
+        "elementCenterX": 84.4609375,
+        "elementCenterY": 156.28125,
+        "elementHeight": 39,
+        "elementLeft": 18,
+        "elementRight": 150.921875,
+        "elementTop": 136.78125,
+        "elementWidth": 132.921875,
+        "pageX": 84,
+        "pageY": 156,
+        "relativeX": 66,
+        "relativeY": 19.21875,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 909,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {},
+      "href": "",
+      "id": "regular-btn",
+      "name": "",
+      "parent": {
+        "className": "",
+        "id": "",
+        "tagName": "BODY"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "#regular-btn",
+        "xpath": "//*[@id=\"regular-btn\"]"
+      },
+      "siblingsCount": 7,
+      "src": "",
+      "tagName": "BUTTON",
+      "target": "",
+      "text": "Regular Button",
+      "textContent": "Regular Button",
+      "timestamp": "2025-10-17T08:56:16.081Z",
+      "title": "",
+      "type": "submit",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgb(239, 239, 239)",
+        "border": "2px outset rgb(0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "cursor": "default",
+        "display": "inline-block",
+        "fontFamily": "Arial",
+        "fontSize": "13.3333px",
+        "fontWeight": "400",
+        "height": "39px",
+        "margin": "10px",
+        "opacity": "1",
+        "padding": "10px 20px",
+        "position": "static",
+        "width": "132.922px",
+        "zIndex": "auto"
+      }
+    },
+    "screenshot": {
+      "filename": "screenshot_1_20251017_142616.png",
+      "path": "screenshots/screenshot_1_20251017_142616.png",
+      "element_bounds": {
+        "left": 18,
+        "top": 136.78125,
+        "width": 132.921875,
+        "height": 39
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 909
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-17T14:26:17.199521",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "id": "shadow-host"
+      },
+      "className": "",
+      "coordinates": {
+        "clickX": 0,
+        "clickY": 0,
+        "elementBottom": 311.59375,
+        "elementCenterX": 960,
+        "elementCenterY": 282.09375,
+        "elementHeight": 59,
+        "elementLeft": 8,
+        "elementRight": 1912,
+        "elementTop": 252.59375,
+        "elementWidth": 1904,
+        "pageX": 0,
+        "pageY": 0,
+        "relativeX": -8,
+        "relativeY": -252.59375,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 909,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {},
+      "href": "",
+      "id": "shadow-host",
+      "name": "",
+      "parent": {
+        "className": "",
+        "id": "",
+        "tagName": "BODY"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "#shadow-host",
+        "xpath": "//*[@id=\"shadow-host\"]"
+      },
+      "siblingsCount": 7,
+      "src": "",
+      "tagName": "DIV",
+      "target": "",
+      "text": "",
+      "textContent": "",
+      "timestamp": "2025-10-17T08:56:16.695Z",
+      "title": "",
+      "type": "",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "cursor": "auto",
+        "display": "block",
+        "fontFamily": "\"Times New Roman\"",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "height": "59px",
+        "margin": "0px",
+        "opacity": "1",
+        "padding": "0px",
+        "position": "static",
+        "width": "1904px",
+        "zIndex": "auto"
+      }
+    },
+    "screenshot": {
+      "filename": "screenshot_2_20251017_142617.png",
+      "path": "screenshots/screenshot_2_20251017_142617.png",
+      "element_bounds": {
+        "left": 8,
+        "top": 252.59375,
+        "width": 1904,
+        "height": 59
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 909
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-17T14:26:17.801811",
+    "action": "text_input",
+    "details": {
+      "id": "shadow-input",
+      "inShadowRoot": true,
+      "name": "shadow-field",
+      "placeholder": "Shadow DOM input",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-17T08:56:17.596Z",
+      "type": "text",
+      "value": "Test from shadow"
+    },
+    "screenshot": {
+      "filename": "screenshot_3_20251017_142617.png",
+      "path": "screenshots/screenshot_3_20251017_142617.png"
+    }
+  }
+]

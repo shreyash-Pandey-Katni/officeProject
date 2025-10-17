@@ -1,0 +1,11 @@
+{
+  "name": "browser-activity-recorder",
+  "version": "1.0.0",
+  "description": "A tool to record browser activities and convert them into natural language using Selenium and an LLM.",
+  "main": "main.py",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "start": "python main.py"
+  }
+}

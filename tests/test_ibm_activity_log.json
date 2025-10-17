@@ -1,0 +1,446 @@
+[
+  {
+    "timestamp": "2025-10-17T13:19:40.367203",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "class": "active",
+        "data-di-id": "di-id-23718dec-57e5963c"
+      },
+      "className": "active",
+      "coordinates": {
+        "clickX": 1544,
+        "clickY": 454,
+        "elementBottom": 466.5,
+        "elementCenterX": 1544.5,
+        "elementCenterY": 454.75,
+        "elementHeight": 23.5,
+        "elementLeft": 1530.5,
+        "elementRight": 1558.5,
+        "elementTop": 443,
+        "elementWidth": 28,
+        "pageX": 1544,
+        "pageY": 534,
+        "relativeX": 13.5,
+        "relativeY": 11,
+        "scrollX": 0,
+        "scrollY": 80,
+        "viewportHeight": 909,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-di-id": "di-id-23718dec-57e5963c"
+      },
+      "href": "",
+      "id": "",
+      "name": "",
+      "parent": {
+        "className": "newsfeed__pagination-container",
+        "id": "",
+        "tagName": "DIV"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "div#mbox-leadspace-side > div > div > button",
+        "xpath": "//*[@id=\"mbox-leadspace-side\"]/div[1]/div[1]/button[1]"
+      },
+      "siblingsCount": 4,
+      "src": "",
+      "tagName": "BUTTON",
+      "target": "",
+      "text": "1",
+      "textContent": "1",
+      "timestamp": "2025-10-17T07:49:40.192Z",
+      "title": "",
+      "type": "submit",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(15, 98, 254)",
+        "color": "rgb(15, 98, 254)",
+        "cursor": "pointer",
+        "display": "inline-block",
+        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
+        "fontSize": "13.3333px",
+        "fontWeight": "400",
+        "height": "23.5px",
+        "margin": "0px 2px",
+        "opacity": "1",
+        "padding": "1px 6px",
+        "position": "static",
+        "width": "28px",
+        "zIndex": "auto"
+      }
+    },
+    "screenshot": {
+      "filename": "screenshot_1_20251017_131940.png",
+      "path": "screenshots/screenshot_1_20251017_131940.png",
+      "element_bounds": {
+        "left": 1530.5,
+        "top": 443,
+        "width": 28,
+        "height": 23.5
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 909
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-17T13:19:43.364824",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "data-di-id": "di-id-23718dec-ceecc786"
+      },
+      "className": "",
+      "coordinates": {
+        "clickX": 1576,
+        "clickY": 454,
+        "elementBottom": 466.5,
+        "elementCenterX": 1576.5,
+        "elementCenterY": 454.75,
+        "elementHeight": 23.5,
+        "elementLeft": 1562.5,
+        "elementRight": 1590.5,
+        "elementTop": 443,
+        "elementWidth": 28,
+        "pageX": 1576,
+        "pageY": 534,
+        "relativeX": 13.5,
+        "relativeY": 11,
+        "scrollX": 0,
+        "scrollY": 80,
+        "viewportHeight": 909,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-di-id": "di-id-23718dec-ceecc786"
+      },
+      "href": "",
+      "id": "",
+      "name": "",
+      "parent": {
+        "className": "newsfeed__pagination-container",
+        "id": "",
+        "tagName": "DIV"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "div#mbox-leadspace-side > div > div > button:nth-of-type(2)",
+        "xpath": "//*[@id=\"mbox-leadspace-side\"]/div[1]/div[1]/button[2]"
+      },
+      "siblingsCount": 4,
+      "src": "",
+      "tagName": "BUTTON",
+      "target": "",
+      "text": "2",
+      "textContent": "2",
+      "timestamp": "2025-10-17T07:49:43.187Z",
+      "title": "",
+      "type": "submit",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(15, 98, 254)",
+        "color": "rgb(15, 98, 254)",
+        "cursor": "pointer",
+        "display": "inline-block",
+        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
+        "fontSize": "13.3333px",
+        "fontWeight": "400",
+        "height": "23.5px",
+        "margin": "0px 2px",
+        "opacity": "1",
+        "padding": "1px 6px",
+        "position": "static",
+        "width": "28px",
+        "zIndex": "auto"
+      }
+    },
+    "screenshot": {
+      "filename": "screenshot_2_20251017_131943.png",
+      "path": "screenshots/screenshot_2_20251017_131943.png",
+      "element_bounds": {
+        "left": 1562.5,
+        "top": 443,
+        "width": 28,
+        "height": 23.5
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 909
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-17T13:19:46.460061",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {},
+      "className": "",
+      "coordinates": {
+        "clickX": 328,
+        "clickY": 454,
+        "elementBottom": 476.65625,
+        "elementCenterX": 304.5,
+        "elementCenterY": 454.65625,
+        "elementHeight": 44,
+        "elementLeft": 216.5,
+        "elementRight": 392.5,
+        "elementTop": 432.65625,
+        "elementWidth": 176,
+        "pageX": 328,
+        "pageY": 544,
+        "relativeX": 111.5,
+        "relativeY": 21.34375,
+        "scrollX": 0,
+        "scrollY": 90,
+        "viewportHeight": 909,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {},
+      "href": "",
+      "id": "",
+      "name": "",
+      "parent": {
+        "className": "",
+        "id": "",
+        "tagName": "C4D-BUTTON-GROUP-ITEM"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "div#mbox-leadspace_cta > c4d-button-group > a > c4d-button-group-item > span",
+        "xpath": "//*[@id=\"mbox-leadspace_cta\"]/c4d-button-group[1]/a[1]/c4d-button-group-item[1]/span[1]"
+      },
+      "siblingsCount": 1,
+      "src": "",
+      "tagName": "SPAN",
+      "target": "",
+      "text": "Explore AI Agents for business",
+      "textContent": "Explore AI Agents for business",
+      "timestamp": "2025-10-17T07:49:46.293Z",
+      "title": "",
+      "type": "",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(255, 255, 255)",
+        "color": "rgb(255, 255, 255)",
+        "cursor": "pointer",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "height": "44px",
+        "margin": "0px",
+        "opacity": "1",
+        "padding": "0px",
+        "position": "static",
+        "width": "176px",
+        "zIndex": "auto"
+      }
+    },
+    "screenshot": {
+      "filename": "screenshot_3_20251017_131946.png",
+      "path": "screenshots/screenshot_3_20251017_131946.png",
+      "element_bounds": {
+        "left": 216.5,
+        "top": 432.65625,
+        "width": 176,
+        "height": 44
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 909
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-17T13:19:49.467453",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {},
+      "className": "",
+      "coordinates": {
+        "clickX": 600,
+        "clickY": 454,
+        "elementBottom": 476.65625,
+        "elementCenterX": 575.6953125,
+        "elementCenterY": 454.65625,
+        "elementHeight": 44,
+        "elementLeft": 488.5,
+        "elementRight": 662.890625,
+        "elementTop": 432.65625,
+        "elementWidth": 174.390625,
+        "pageX": 600,
+        "pageY": 544,
+        "relativeX": 111.5,
+        "relativeY": 21.34375,
+        "scrollX": 0,
+        "scrollY": 90,
+        "viewportHeight": 909,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {},
+      "href": "",
+      "id": "",
+      "name": "",
+      "parent": {
+        "className": "",
+        "id": "",
+        "tagName": "C4D-BUTTON-GROUP-ITEM"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "div#mbox-leadspace_cta > c4d-button-group > a:nth-of-type(2) > c4d-button-group-item > span",
+        "xpath": "//*[@id=\"mbox-leadspace_cta\"]/c4d-button-group[1]/a[2]/c4d-button-group-item[1]/span[1]"
+      },
+      "siblingsCount": 1,
+      "src": "",
+      "tagName": "SPAN",
+      "target": "",
+      "text": "AI Agents Buyer's Guide",
+      "textContent": "AI Agents Buyer's Guide",
+      "timestamp": "2025-10-17T07:49:49.282Z",
+      "title": "",
+      "type": "",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(15, 98, 254)",
+        "color": "rgb(15, 98, 254)",
+        "cursor": "pointer",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "height": "44px",
+        "margin": "0px",
+        "opacity": "1",
+        "padding": "0px",
+        "position": "static",
+        "width": "174.391px",
+        "zIndex": "auto"
+      }
+    },
+    "screenshot": {
+      "filename": "screenshot_4_20251017_131949.png",
+      "path": "screenshots/screenshot_4_20251017_131949.png",
+      "element_bounds": {
+        "left": 488.5,
+        "top": 432.65625,
+        "width": 174.390625,
+        "height": 44
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 909
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-17T13:19:52.504469",
+    "action": "click",
+    "details": {
+      "alt": "close icon",
+      "ariaLabel": "",
+      "ariaRole": "button",
+      "attributes": {
+        "alt": "close icon",
+        "id": "truste-consent-close",
+        "role": "button",
+        "src": "https://consent.trustarc.com/get?name=ibm_close_icon.svg"
+      },
+      "className": "",
+      "coordinates": {
+        "clickX": 1890,
+        "clickY": 746,
+        "elementBottom": 752,
+        "elementCenterX": 1890,
+        "elementCenterY": 746,
+        "elementHeight": 12,
+        "elementLeft": 1884,
+        "elementRight": 1896,
+        "elementTop": 740,
+        "elementWidth": 12,
+        "pageX": 1890,
+        "pageY": 836,
+        "relativeX": 6,
+        "relativeY": 6,
+        "scrollX": 0,
+        "scrollY": 90,
+        "viewportHeight": 909,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {},
+      "href": "",
+      "id": "truste-consent-close",
+      "name": "",
+      "parent": {
+        "className": "truste-icon-box",
+        "id": "",
+        "tagName": "DIV"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "#truste-consent-close",
+        "xpath": "//*[@id=\"truste-consent-close\"]"
+      },
+      "siblingsCount": 1,
+      "src": "https://consent.trustarc.com/get?name=ibm_close_icon.svg",
+      "tagName": "IMG",
+      "target": "",
+      "text": "",
+      "textContent": "",
+      "timestamp": "2025-10-17T07:49:52.312Z",
+      "title": "",
+      "type": "",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(22, 22, 22)",
+        "color": "rgb(22, 22, 22)",
+        "cursor": "pointer",
+        "display": "inline",
+        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "height": "12px",
+        "margin": "0px",
+        "opacity": "1",
+        "padding": "0px",
+        "position": "static",
+        "width": "12px",
+        "zIndex": "auto"
+      }
+    },
+    "screenshot": {
+      "filename": "screenshot_5_20251017_131952.png",
+      "path": "screenshots/screenshot_5_20251017_131952.png",
+      "element_bounds": {
+        "left": 1884,
+        "top": 740,
+        "width": 12,
+        "height": 12
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 909
+      }
+    }
+  }
+]

@@ -1,0 +1,11 @@
+# Phase 2 Implementation Requirements
+# Uses Ollama (free, self-hosted) with Granite model
+
+requests>=2.31.0
+pillow>=10.0.0
+
+# To install:
+# 1. Install Ollama from https://ollama.ai/
+# 2. Pull the Granite model: ollama pull granite3.1-dense:8b
+# 3. Start Ollama: ollama serve
+# 4. Install Python dependencies: pip install -r requirements_phase2.txt

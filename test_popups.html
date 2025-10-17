@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop-up Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+        h2 {
+            color: #333;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            min-height: 50px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 30px;
+            border: 1px solid #888;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .modal-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .modal-close:hover {
+            color: black;
+        }
+        .modal-buttons {
+            margin-top: 20px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔔 Pop-up Test Page</h1>
+    <p>This page contains various types of pop-ups to test browser automation pop-up handling.</p>
+
+    <!-- Alert Tests -->
+    <div class="section">
+        <h2>1. Alert Dialogs (OK only)</h2>
+        <button onclick="showAlert()">Show Alert</button>
+        <button onclick="showMultipleAlerts()">Show Multiple Alerts</button>
+    </div>
+
+    <!-- Confirm Tests -->
+    <div class="section">
+        <h2>2. Confirm Dialogs (OK / Cancel)</h2>
+        <button onclick="showConfirm()">Show Confirm</button>
+        <button onclick="showConfirmChain()">Show Confirm Chain</button>
+    </div>
+
+    <!-- Prompt Tests -->
+    <div class="section">
+        <h2>3. Prompt Dialogs (Text input)</h2>
+        <button onclick="showPrompt()">Show Prompt</button>
+        <button onclick="showPromptWithDefault()">Show Prompt with Default</button>
+    </div>
+
+    <!-- Mixed Tests -->
+    <div class="section">
+        <h2>4. Mixed Pop-ups</h2>
+        <button onclick="showMixedPopups()">Show Mixed Pop-ups</button>
+        <button onclick="delayedPopup()">Delayed Pop-up (2s)</button>
+    </div>
+
+    <!-- Custom Modal Tests -->
+    <div class="section">
+        <h2>5. Custom Modal Dialog (HTML/CSS)</h2>
+        <button onclick="showCustomModal()">Show Custom Modal</button>
+    </div>
+
+    <!-- Result Display -->
+    <div id="result"></div>
+
+    <!-- Custom Modal -->
+    <div id="customModal" class="modal" role="dialog" aria-modal="true">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeCustomModal()">&times;</span>
+            <h3>Custom Modal Dialog</h3>
+            <p>This is a custom HTML modal, not a browser alert.</p>
+            <div class="modal-buttons">
+                <button onclick="closeCustomModal()">Close</button>
+                <button onclick="closeCustomModal()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showResult(message) {
+            document.getElementById('result').innerHTML = '<strong>Result:</strong> ' + message;
+        }
+
+        // Alert tests
+        function showAlert() {
+            alert('This is a simple alert message!');
+            showResult('Alert was shown and closed.');
+        }
+
+        function showMultipleAlerts() {
+            alert('First alert');
+            alert('Second alert');
+            alert('Third alert');
+            showResult('Three alerts were shown in sequence.');
+        }
+
+        // Confirm tests
+        function showConfirm() {
+            let result = confirm('Do you want to continue?');
+            if (result) {
+                showResult('Confirm: User clicked OK');
+            } else {
+                showResult('Confirm: User clicked Cancel');
+            }
+        }
+
+        function showConfirmChain() {
+            let result1 = confirm('First question: Continue?');
+            if (result1) {
+                let result2 = confirm('Second question: Are you sure?');
+                if (result2) {
+                    showResult('Confirm Chain: Both confirmed');
+                } else {
+                    showResult('Confirm Chain: Second cancelled');
+                }
+            } else {
+                showResult('Confirm Chain: First cancelled');
+            }
+        }
+
+        // Prompt tests
+        function showPrompt() {
+            let name = prompt('What is your name?');
+            if (name !== null) {
+                showResult('Prompt: You entered "' + name + '"');
+            } else {
+                showResult('Prompt: Cancelled');
+            }
+        }
+
+        function showPromptWithDefault() {
+            let city = prompt('What is your city?', 'San Francisco');
+            if (city !== null) {
+                showResult('Prompt: You entered "' + city + '"');
+            } else {
+                showResult('Prompt: Cancelled');
+            }
+        }
+
+        // Mixed tests
+        function showMixedPopups() {
+            alert('Step 1: This is an alert');
+            
+            let continueProcess = confirm('Step 2: Do you want to continue?');
+            if (continueProcess) {
+                let userName = prompt('Step 3: Enter your name:', 'John Doe');
+                if (userName) {
+                    alert('Step 4: Thank you, ' + userName + '!');
+                    showResult('Mixed Pop-ups: All completed with name "' + userName + '"');
+                } else {
+                    showResult('Mixed Pop-ups: Name prompt cancelled');
+                }
+            } else {
+                showResult('Mixed Pop-ups: Confirm cancelled');
+            }
+        }
+
+        function delayedPopup() {
+            showResult('Waiting 2 seconds for delayed pop-up...');
+            setTimeout(function() {
+                alert('This is a delayed pop-up!');
+                showResult('Delayed pop-up was shown after 2 seconds.');
+            }, 2000);
+        }
+
+        // Custom modal
+        function showCustomModal() {
+            document.getElementById('customModal').style.display = 'block';
+            showResult('Custom modal dialog opened.');
+        }
+
+        function closeCustomModal() {
+            document.getElementById('customModal').style.display = 'none';
+            showResult('Custom modal dialog closed.');
+        }
+
+        // Close modal if clicked outside
+        window.onclick = function(event) {
+            let modal = document.getElementById('customModal');
+            if (event.target == modal) {
+                closeCustomModal();
+            }
+        }
+    </script>
+</body>
+</html>
