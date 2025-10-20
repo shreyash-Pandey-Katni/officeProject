@@ -4,9 +4,9 @@ Replays recorded browser activities using VLM for element detection
 """
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from activity_executor import ActivityExecutor
+from core.executors.activity_executor import ActivityExecutor
 from llm_helpers import OllamaLLM
-from test_database import TestDatabase
+from core.database.test_database import TestDatabase
 import json
 import time
 import os
@@ -598,18 +598,20 @@ class BrowserActivityReplayer:
 
 def main():
     """Entry point"""
-    import sys
+    import argparse
     
-    log_path = sys.argv[1] if len(sys.argv) > 1 else "activity_log.json"
+    parser = argparse.ArgumentParser(description="Browser Activity Replayer with VLM Detection")
+    parser.add_argument("--log_path", default="activity_log.json", help="Path to the activity log JSON file.")
+    args = parser.parse_args()
     
     print("="*80)
     print("Browser Activity Replayer with VLM Detection")
     print("="*80)
-    print(f"Activity log: {log_path}")
+    print(f"Activity log: {args.log_path}")
     print("="*80)
     print()
     
-    replayer = BrowserActivityReplayer(log_path)
+    replayer = BrowserActivityReplayer(args.log_path)
     replayer.run()
 
 

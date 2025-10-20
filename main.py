@@ -16,7 +16,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import queue
 import threading
 from llm_helpers import OllamaVLM
-from element_locator import ElementLocator, LocatorStrategy
+from core.locators.element_locator import ElementLocator, LocatorStrategy
 
 # Placeholder for LLM integration
 def convert_to_natural_language(activity_log):

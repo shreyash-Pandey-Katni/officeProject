@@ -6,10 +6,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from typing import Dict, Any, Optional, List, Tuple
-from element_finder import VisualElementFinder
+from core.locators.element_finder import VisualElementFinder
 from llm_helpers import OllamaVLM
-from element_locator import ElementLocator, create_locator_from_activity, LocatorStrategy
-from assertions import Assertion, AssertionResult, AssertionBuilder
+from core.locators.element_locator import ElementLocator, create_locator_from_activity, LocatorStrategy
+from core.analyzers.assertions import Assertion, AssertionResult, AssertionBuilder
 from PIL import Image
 import time
 import os
