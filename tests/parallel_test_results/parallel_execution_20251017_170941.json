@@ -1,0 +1,26 @@
+{
+  "timestamp": "20251017_170941",
+  "summary": {
+    "total_tests": 1,
+    "successful_tests": 0,
+    "failed_tests": 1,
+    "error_tests": 0,
+    "total_duration_seconds": 2.154941,
+    "sequential_estimated_time": 2.154438,
+    "time_saved_seconds": -0.0005030000000001422,
+    "speedup_factor": 0.9997665829366094
+  },
+  "test_results": [
+    {
+      "test_file": "example_generated_test.json",
+      "status": "failed",
+      "start_time": "2025-10-17T17:09:39.306152",
+      "end_time": "2025-10-17T17:09:41.460590",
+      "duration_seconds": 2.154438,
+      "activities_executed": 1,
+      "activities_failed": 1,
+      "error_message": "Activity 1 failed: Could not find element with locators: {}",
+      "screenshots_captured": []
+    }
+  ]
+}

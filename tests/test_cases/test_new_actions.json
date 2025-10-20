@@ -1,0 +1,40 @@
+{
+  "name": "Test New Actions - Tab/Window/Scroll",
+  "description": "Test case to demonstrate new tab switching, window switching, and scroll to element features",
+  "activities": [
+    {
+      "action": "navigation",
+      "details": {
+        "url": "https://www.google.com"
+      }
+    },
+    {
+      "action": "scroll_to_element",
+      "details": {
+        "text": "Search button",
+        "locators": {
+          "css": "input[name='btnK']"
+        }
+      }
+    },
+    {
+      "action": "click",
+      "details": {
+        "text": "Search box"
+      },
+      "locators": {
+        "css": "textarea[name='q']"
+      }
+    },
+    {
+      "action": "text_input",
+      "details": {
+        "value": "Selenium WebDriver",
+        "text": "Search box"
+      },
+      "locators": {
+        "css": "textarea[name='q']"
+      }
+    }
+  ]
+}

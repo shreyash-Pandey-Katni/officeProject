@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>✍️ Create Test from Natural Language</h2>
+    <p>Describe your test in plain English. Our AI will convert it to an executable test!</p>
+    
+    <form id="nlForm">
+        <label for="testName"><strong>Test Name:</strong></label>
+        <input type="text" id="testName" name="testName" placeholder="e.g., User Login Flow" required>
+        
+        <label for="testDescription"><strong>Test Description:</strong></label>
+        <textarea id="testDescription" name="testDescription" placeholder="Example:&#10;&#10;Test: User Login Flow&#10;&#10;1. Go to https://example.com&#10;2. Click the login button in top right corner&#10;3. Enter email: test@example.com&#10;4. Enter password: Password123&#10;5. Click submit button&#10;6. Verify dashboard appears" required></textarea>
+        
+        <button type="submit" class="btn">🚀 Generate Test</button>
+    </form>
+    
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Generating test... This may take 10-30 seconds.</p>
+    </div>
+    
+    <div id="result"></div>
+</div>
+
+<div class="card">
+    <h3>💡 Tips for Best Results:</h3>
+    <ul style="list-style-position: inside; line-height: 2;">
+        <li>Be specific about element locations (e.g., "button in top right corner")</li>
+        <li>Include verification steps to check results</li>
+        <li>Number your steps clearly</li>
+        <li>Mention any wait times if needed</li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('nlForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('testName').value;
+    const description = document.getElementById('testDescription').value;
+    
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('result').innerHTML = '';
+    
+    try {
+        const response = await fetch('/api/generate-from-text', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({name, description})
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            document.getElementById('result').innerHTML = `
+                <div class="alert alert-success">
+                    <h3>✅ Test Generated Successfully!</h3>
+                    <p><strong>Test Name:</strong> ${data.test_name}</p>
+                    <p><strong>Steps:</strong> ${data.steps}</p>
+                    <p><strong>Confidence:</strong> ${(data.confidence * 100).toFixed(0)}%</p>
+                    <p><strong>File:</strong> ${data.filename}</p>
+                    <a href="/api/test/${data.filename}/download" class="btn">📥 Download</a>
+                    <a href="/test-library" class="btn btn-secondary">📚 View in Library</a>
+                </div>
+            `;
+        } else {
+            document.getElementById('result').innerHTML = `
+                <div class="alert alert-error">
+                    <h3>❌ Generation Failed</h3>
+                    <p>${data.error}</p>
+                </div>
+            `;
+        }
+    } catch (error) {
+        document.getElementById('result').innerHTML = `
+            <div class="alert alert-error">
+                <h3>❌ Error</h3>
+                <p>${error.message}</p>
+            </div>
+        `;
+    } finally {
+        document.getElementById('loading').style.display = 'none';
+    }
+});
+</script>
+{% endblock %}

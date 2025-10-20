@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>Welcome to Test Generation UI! 🎉</h2>
+    <p>Create automated browser tests in three easy ways:</p>
+</div>
+
+<div class="feature-grid">
+    <div class="card feature">
+        <div class="feature-icon">✍️</div>
+        <h3>Natural Language</h3>
+        <p>Write your test in plain English. No coding required!</p>
+        <a href="/natural-language" class="btn">Start Writing</a>
+    </div>
+    
+    <div class="card feature">
+        <div class="feature-icon">📸</div>
+        <h3>Upload Screenshots</h3>
+        <p>Upload workflow screenshots. AI generates the test automatically!</p>
+        <a href="/screenshot-upload" class="btn">Upload Screenshots</a>
+    </div>
+    
+    <div class="card feature">
+        <div class="feature-icon">📚</div>
+        <h3>Test Library</h3>
+        <p>View, download, and manage all your generated tests.</p>
+        <a href="/test-library" class="btn">View Library</a>
+    </div>
+</div>
+
+<div class="card" style="margin-top: 30px;">
+    <h2>✨ Key Features</h2>
+    <ul style="list-style-position: inside; line-height: 2;">
+        <li>✅ <strong>No Coding Required</strong> - Anyone can create tests</li>
+        <li>✅ <strong>AI-Powered</strong> - Uses advanced vision language models</li>
+        <li>✅ <strong>Instant Results</strong> - Generate tests in seconds</li>
+        <li>✅ <strong>100% Free</strong> - Uses local Ollama (no cloud costs)</li>
+        <li>✅ <strong>Export Ready</strong> - Download tests as JSON</li>
+    </ul>
+</div>
+{% endblock %}

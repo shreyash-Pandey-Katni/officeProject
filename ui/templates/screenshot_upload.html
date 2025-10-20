@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>📸 Generate Test from Screenshots</h2>
+    <p>Upload screenshots of your workflow. AI will analyze them and generate a test!</p>
+    
+    <form id="screenshotForm" enctype="multipart/form-data">
+        <label for="testNameScreenshot"><strong>Test Name:</strong></label>
+        <input type="text" id="testNameScreenshot" name="testName" placeholder="e.g., Search Workflow" required>
+        
+        <label for="screenshots"><strong>Upload Screenshots (in order):</strong></label>
+        <input type="file" id="screenshots" name="screenshots" multiple accept="image/*" required>
+        <p style="color: #6c757d; font-size: 0.9em; margin-top: -10px;">Select multiple files (hold Ctrl/Cmd)</p>
+        
+        <label for="annotations"><strong>Annotations (optional, one per line):</strong></label>
+        <textarea id="annotations" name="annotations" placeholder="Screenshot 1: Homepage loaded&#10;Screenshot 2: Clicked search button&#10;Screenshot 3: Entered search query&#10;Screenshot 4: Results displayed"></textarea>
+        
+        <button type="submit" class="btn">🚀 Generate Test</button>
+    </form>
+    
+    <div id="loadingScreenshot" class="loading">
+        <div class="spinner"></div>
+        <p>Analyzing screenshots... This may take 30-60 seconds.</p>
+    </div>
+    
+    <div id="resultScreenshot"></div>
+</div>
+
+<div class="card">
+    <h3>💡 Tips for Best Results:</h3>
+    <ul style="list-style-position: inside; line-height: 2;">
+        <li>Upload screenshots in chronological order</li>
+        <li>Include all important steps in your workflow</li>
+        <li>Use clear, high-resolution screenshots</li>
+        <li>Add annotations to help AI understand context</li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('screenshotForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    
+    document.getElementById('loadingScreenshot').style.display = 'block';
+    document.getElementById('resultScreenshot').innerHTML = '';
+    
+    try {
+        const response = await fetch('/api/generate-from-screenshots', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            document.getElementById('resultScreenshot').innerHTML = `
+                <div class="alert alert-success">
+                    <h3>✅ Test Generated Successfully!</h3>
+                    <p><strong>Test Name:</strong> ${data.test_name}</p>
+                    <p><strong>Steps:</strong> ${data.steps}</p>
+                    <p><strong>Confidence:</strong> ${(data.confidence * 100).toFixed(0)}%</p>
+                    <p><strong>Screenshots Analyzed:</strong> ${data.screenshots}</p>
+                    <p><strong>File:</strong> ${data.filename}</p>
+                    <a href="/api/test/${data.filename}/download" class="btn">📥 Download</a>
+                    <a href="/test-library" class="btn btn-secondary">📚 View in Library</a>
+                </div>
+            `;
+        } else {
+            document.getElementById('resultScreenshot').innerHTML = `
+                <div class="alert alert-error">
+                    <h3>❌ Generation Failed</h3>
+                    <p>${data.error}</p>
+                </div>
+            `;
+        }
+    } catch (error) {
+        document.getElementById('resultScreenshot').innerHTML = `
+            <div class="alert alert-error">
+                <h3>❌ Error</h3>
+                <p>${error.message}</p>
+            </div>
+        `;
+    } finally {
+        document.getElementById('loadingScreenshot').style.display = 'none';
+    }
+});
+</script>
+{% endblock %}

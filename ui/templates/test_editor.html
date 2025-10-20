@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>✏️ Edit Test: {{ filename }}</h2>
+    <p>Modify your test case directly. Changes are saved in JSON format.</p>
+</div>
+
+<div class="card">
+    <form id="editorForm">
+        <label for="testData"><strong>Test JSON:</strong></label>
+        <textarea id="testData" name="testData" style="font-family: monospace; min-height: 400px;">{{ test_data }}</textarea>
+        
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button type="submit" class="btn btn-primary">💾 Save Changes</button>
+            <button type="button" onclick="formatJSON()" class="btn btn-secondary">🔧 Format JSON</button>
+            <button type="button" onclick="validateJSON()" class="btn btn-secondary">✓ Validate</button>
+            <a href="/test-library" class="btn">← Back to Library</a>
+        </div>
+    </form>
+    
+    <div id="result" style="margin-top: 20px;"></div>
+</div>
+
+<div class="card" style="background: #f8f9fa;">
+    <h3>📘 Editing Guide</h3>
+    <div style="margin-top: 15px;">
+        <h4>Common Actions:</h4>
+        <ul style="line-height: 1.8;">
+            <li><strong>navigation</strong>: Navigate to a URL
+                <pre style="background: white; padding: 10px; border-radius: 4px; margin-top: 5px;">{
+  "action": "navigation",
+  "details": {"url": "https://example.com"}
+}</pre>
+            </li>
+            <li><strong>click</strong>: Click an element
+                <pre style="background: white; padding: 10px; border-radius: 4px; margin-top: 5px;">{
+  "action": "click",
+  "details": {"text": "Login"},
+  "locators": {"css": "#login-btn"}
+}</pre>
+            </li>
+            <li><strong>text_input</strong>: Enter text
+                <pre style="background: white; padding: 10px; border-radius: 4px; margin-top: 5px;">{
+  "action": "text_input",
+  "details": {"value": "test@example.com"},
+  "locators": {"name": "email"}
+}</pre>
+            </li>
+            <li><strong>wait</strong>: Pause execution
+                <pre style="background: white; padding: 10px; border-radius: 4px; margin-top: 5px;">{
+  "action": "wait",
+  "details": {"duration": 3}
+}</pre>
+            </li>
+        </ul>
+        
+        <h4 style="margin-top: 20px;">Locator Types:</h4>
+        <ul>
+            <li><code>css</code>: CSS selector (#id, .class, tag)</li>
+            <li><code>xpath</code>: XPath expression</li>
+            <li><code>id</code>: Element ID</li>
+            <li><code>name</code>: Element name attribute</li>
+            <li><code>text</code>: Element text content</li>
+            <li><code>placeholder</code>: Input placeholder</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const filename = '{{ filename }}';
+
+document.getElementById('editorForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const testData = document.getElementById('testData').value;
+    const resultDiv = document.getElementById('result');
+    
+    // Validate JSON first
+    try {
+        const parsed = JSON.parse(testData);
+        
+        // Send update request
+        const response = await fetch(`/api/test/${filename}/update`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(parsed)
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            resultDiv.innerHTML = `
+                <div class="alert alert-success">
+                    <h3>✅ Test Saved Successfully!</h3>
+                    <p>${data.message}</p>
+                    <a href="/test-library" class="btn">← Back to Library</a>
+                    <button onclick="location.reload()" class="btn btn-secondary">🔄 Reload</button>
+                </div>
+            `;
+        } else {
+            resultDiv.innerHTML = `
+                <div class="alert alert-error">
+                    <h3>❌ Save Failed</h3>
+                    <p>${data.error}</p>
+                </div>
+            `;
+        }
+    } catch (error) {
+        resultDiv.innerHTML = `
+            <div class="alert alert-error">
+                <h3>❌ Invalid JSON</h3>
+                <p>${error.message}</p>
+                <p>Please fix the JSON syntax before saving.</p>
+            </div>
+        `;
+    }
+});
+
+function formatJSON() {
+    const textarea = document.getElementById('testData');
+    try {
+        const parsed = JSON.parse(textarea.value);
+        textarea.value = JSON.stringify(parsed, null, 2);
+        document.getElementById('result').innerHTML = `
+            <div class="alert alert-success">
+                <p>✅ JSON formatted successfully!</p>
+            </div>
+        `;
+    } catch (error) {
+        document.getElementById('result').innerHTML = `
+            <div class="alert alert-error">
+                <p>❌ Invalid JSON: ${error.message}</p>
+            </div>
+        `;
+    }
+}
+
+function validateJSON() {
+    const textarea = document.getElementById('testData');
+    try {
+        const parsed = JSON.parse(textarea.value);
+        const stepCount = Array.isArray(parsed) ? parsed.length : parsed.activities?.length || 0;
+        document.getElementById('result').innerHTML = `
+            <div class="alert alert-success">
+                <h3>✅ Valid JSON</h3>
+                <p><strong>Format:</strong> ${Array.isArray(parsed) ? 'Array' : 'Object'}</p>
+                <p><strong>Steps:</strong> ${stepCount}</p>
+            </div>
+        `;
+    } catch (error) {
+        document.getElementById('result').innerHTML = `
+            <div class="alert alert-error">
+                <h3>❌ Invalid JSON</h3>
+                <p>${error.message}</p>
+            </div>
+        `;
+    }
+}
+</script>
+{% endblock %}

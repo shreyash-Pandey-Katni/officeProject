@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "timestamp": "2025-10-17T17:12:33.892000",
+  "statistics": {
+    "total_requests": 3,
+    "cache_hits": 1,
+    "cache_misses": 2,
+    "api_calls_saved": 1
+  },
+  "entries": [
+    {
+      "cache_key": "eaeb2026c3f715ec_48aafa3d55aa43e5",
+      "prompt_hash": "48aafa3d55aa43e558284299cf77b56d",
+      "screenshot_hash": "eaeb2026c3f715ec6541f86f7e51e839",
+      "response": "VLM Response for prompt: Analyze this screenshot and identify clickable ele... (screenshot size: 2200 bytes)",
+      "timestamp": "2025-10-17T17:12:33.391319",
+      "ttl_seconds": 3600,
+      "access_count": 2,
+      "last_accessed": "2025-10-17T17:12:33.391567"
+    },
+    {
+      "cache_key": "9835e7a48f54f42f_48aafa3d55aa43e5",
+      "prompt_hash": "48aafa3d55aa43e558284299cf77b56d",
+      "screenshot_hash": "9835e7a48f54f42f66eacd6b6334be40",
+      "response": "VLM Response for prompt: Analyze this screenshot and identify clickable ele... (screenshot size: 2200 bytes)",
+      "timestamp": "2025-10-17T17:12:33.891974",
+      "ttl_seconds": 3600,
+      "access_count": 1,
+      "last_accessed": "2025-10-17T17:12:33.891982"
+    }
+  ]
+}
