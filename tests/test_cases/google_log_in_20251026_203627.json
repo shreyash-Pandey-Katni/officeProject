@@ -1,0 +1,45 @@
+[
+  {
+    "action": "navigation",
+    "details": {
+      "url": "https://google.com",
+      "description": "Navigate to 'google.com'"
+    }
+  },
+  {
+    "action": "click",
+    "details": {
+      "tagName": "BUTTON",
+      "text": null,
+      "description": "Click the username label",
+      "vlm_description": null
+    },
+    "locators": {
+      "text": null,
+      "description": null
+    }
+  },
+  {
+    "action": "text_input",
+    "details": {
+      "tagName": "INPUT",
+      "value": "Administrator",
+      "placeholder": null,
+      "description": "Type 'Administrator' in the textfield following the username label",
+      "vlm_description": null
+    },
+    "locators": {
+      "placeholder": null,
+      "description": null,
+      "value": "Administrator"
+    }
+  },
+  {
+    "action": "verification",
+    "details": {
+      "type": "content_check",
+      "criteria": "Administrator",
+      "description": "Verify that 'Administrator' is entered in the textfield following the username label"
+    }
+  }
+]

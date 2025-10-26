@@ -1,30 +1,22 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import WebDriverException
 import time
 import json
 import os
-import base64
 from datetime import datetime
 from PIL import Image
 from io import BytesIO
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
 import queue
 import threading
 from llm_helpers import OllamaVLM
-from core.locators.element_locator import ElementLocator, LocatorStrategy
 
 # Placeholder for LLM integration
 def convert_to_natural_language(activity_log):
-    # This function will use an LLM to convert activity logs to natural language
+    """Placeholder: convert activity logs to natural language (LLM hook)."""
     print("\n=== Activity Log ===")
     for activity in activity_log:
         print(json.dumps(activity, indent=2))
-    pass
 
 class BrowserActivityRecorder:
     def __init__(self, driver):
@@ -63,7 +55,7 @@ class BrowserActivityRecorder:
             self.use_cdp = True
             self.network_monitoring_enabled = True
             print("[INFO] Chrome DevTools Protocol enabled for enhanced tracking")
-        except:
+        except Exception:
             print("[INFO] CDP not available, using JavaScript injection method")
         
         # Setup DOM mutation observer for loading detection
@@ -77,9 +69,20 @@ class BrowserActivityRecorder:
             "action": action_type,
             "details": details
         }
+
+        # Attach window/tab context so replay can properly switch
+        try:
+            current_handle = self.driver.current_window_handle
+            handles = list(self.driver.window_handles)
+            activity["window_handle"] = current_handle
+            activity["tab_index"] = handles.index(current_handle) if current_handle in handles else 0
+            activity["total_tabs"] = len(handles)
+        except Exception:
+            # If driver context not available, skip adding tab metadata
+            pass
         
-        # Capture multiple locators for click and input events (Phase 1 enhancement)
-        if action_type in ["click", "text_input"]:
+        # Capture multiple locators for click, input, and hover events (Phase 1 enhancement)
+        if action_type in ["click", "text_input", "hover"]:
             locators = self.capture_multiple_locators(details)
             if locators:
                 activity["locators"] = locators
@@ -88,13 +91,11 @@ class BrowserActivityRecorder:
         activity_index = len(self.activity_log)
         self.activity_log.append(activity)
         
-        # Capture screenshot for click and input events
+        # Capture screenshot & trigger VLM for click and text input events
         if action_type in ["click", "text_input"]:
             screenshot_info = self.capture_screenshot_with_highlight(details)
             if screenshot_info:
                 activity["screenshot"] = screenshot_info
-                
-                # Trigger async VLM description generation
                 screenshot_path = screenshot_info.get('path')
                 if screenshot_path:
                     self.trigger_async_vlm_description(
@@ -103,87 +104,74 @@ class BrowserActivityRecorder:
                         details,
                         action_type
                     )
-        
-        # Create a concise summary for console output
-        if action_type == "click":
-            summary = f"Element: {details.get('tagName', 'N/A')}"
+            # Print concise summary
+            if action_type == "click":
+                summary = f"Element: {details.get('tagName', 'N/A')}"
+                if details.get('id'):
+                    summary += f", ID: {details['id']}"
+                if details.get('text'):
+                    summary += f", Text: {details['text'][:30]}"
+                coords = details.get('coordinates', {})
+                if coords:
+                    summary += f", Position: ({coords.get('clickX', 0):.0f}, {coords.get('clickY', 0):.0f})"
+                print(f"[{action_type}] {summary}")
+            else:  # text_input
+                summary = f"Field: {details.get('tagName', 'N/A')}"
+                if details.get('id'):
+                    summary += f", ID: {details['id']}"
+                elif details.get('name'):
+                    summary += f", Name: {details['name']}"
+                if details.get('label'):
+                    summary += f", Label: {details['label'][:30]}"
+                if details.get('value'):
+                    value = details['value'][:30] + "..." if len(details['value']) > 30 else details['value']
+                    summary += f", Value: {value}"
+                print(f"[{action_type}] {summary}")
+        elif action_type == "hover":
+            # Add a synthesized description for VLM hover fallback
+            txt = details.get('text') or details.get('title') or details.get('ariaLabel') or ''
+            tag = details.get('tagName','element')
+            description_parts = [tag]
+            if txt:
+                description_parts.append(f"with text '{txt[:60]}'")
             if details.get('id'):
-                summary += f", ID: {details['id']}"
-            if details.get('text'):
-                summary += f", Text: {details['text'][:30]}"
-            coords = details.get('coordinates', {})
-            if coords:
-                summary += f", Position: ({coords.get('clickX', 0):.0f}, {coords.get('clickY', 0):.0f})"
+                description_parts.append(f"id '{details['id']}'")
+            if details.get('className'):
+                # keep only first class token to avoid noise
+                first_class = str(details.get('className')).split()[0]
+                description_parts.append(f"class '{first_class}'")
+            synthesized = ' '.join(description_parts)
+            details['vlm_description'] = synthesized  # mutate details so executor receives it
+            summary = f"Hover: {synthesized[:100]}"
             print(f"[{action_type}] {summary}")
-        elif action_type == "text_input":
-            summary = f"Field: {details.get('tagName', 'N/A')}"
-            if details.get('id'):
-                summary += f", ID: {details['id']}"
-            elif details.get('name'):
-                summary += f", Name: {details['name']}"
-            if details.get('label'):
-                summary += f", Label: {details['label'][:30]}"
-            if details.get('value'):
-                value = details['value'][:30] + "..." if len(details['value']) > 30 else details['value']
-                summary += f", Value: {value}"
-            print(f"[{action_type}] {summary}")
-        else:
-            # For other actions (navigation, tab switch, etc.)
-            print(f"[{action_type}] {details}")
+            # (No screenshot captured for hover events)
     
     def capture_multiple_locators(self, element_details):
-        """
-        Capture multiple locator strategies for an element to enable robust replay.
-        Returns a dict with various locator types that can be used in priority order.
-        """
+        """Return a dictionary of multiple locator strategies for robust replay."""
         locators = {}
-        
         try:
-            # 1. ID locator (highest priority - most stable)
             if element_details.get('id'):
                 locators['id'] = element_details['id']
-            
-            # 2. Name attribute
             if element_details.get('name'):
                 locators['name'] = element_details['name']
-            
-            # 3. Class names
             if element_details.get('className'):
                 locators['class'] = element_details['className']
-            
-            # 4. Tag name
             if element_details.get('tagName'):
                 locators['tag_name'] = element_details['tagName']
-            
-            # 5. Text content (for links, buttons, etc.)
             if element_details.get('text'):
-                locators['text'] = element_details['text'][:100]  # Limit length
-            
-            # 6. Placeholder (for input fields)
+                locators['text'] = element_details['text'][:100]
             if element_details.get('placeholder'):
                 locators['placeholder'] = element_details['placeholder']
-            
-            # 7. Type attribute (for inputs)
             if element_details.get('type'):
                 locators['type'] = element_details['type']
-            
-            # 8. ARIA label
             if element_details.get('ariaLabel'):
                 locators['aria_label'] = element_details['ariaLabel']
-            
-            # 9. Value attribute
             if element_details.get('value'):
                 locators['value'] = element_details['value']
-            
-            # 10. CSS selector (if available)
             if element_details.get('cssSelector'):
                 locators['css_selector'] = element_details['cssSelector']
-            
-            # 11. XPath (if available)
             if element_details.get('xpath'):
                 locators['xpath'] = element_details['xpath']
-            
-            # 12. Coordinates (lowest priority - least stable but always works)
             coords = element_details.get('coordinates', {})
             if coords and all(k in coords for k in ['clickX', 'clickY', 'width', 'height']):
                 locators['coordinates'] = {
@@ -192,20 +180,14 @@ class BrowserActivityRecorder:
                     'width': coords['width'],
                     'height': coords['height']
                 }
-            
-            # 13. Context information
             if element_details.get('inShadowRoot'):
                 locators['in_shadow_root'] = True
             if element_details.get('inIframe'):
                 locators['in_iframe'] = True
-            
-            # 14. Label text (for form fields)
             if element_details.get('label'):
                 locators['label'] = element_details['label']
-            
         except Exception as e:
             print(f"[WARNING] Error capturing locators: {e}")
-        
         return locators
     
     def capture_screenshot_with_highlight(self, details):
@@ -226,7 +208,7 @@ class BrowserActivityRecorder:
                 image = Image.open(BytesIO(screenshot_png))
                 
                 # Add visual marker for VLM focus (optional but helpful)
-                from PIL import ImageDraw, ImageFont
+                from PIL import ImageDraw
                 draw = ImageDraw.Draw(image)
                 
                 # Get element bounds
@@ -474,7 +456,8 @@ class BrowserActivityRecorder:
         coordinates = details.get('coordinates', {})
         
         # Submit to thread pool
-        future = self.vlm_executor.submit(
+        # Fire-and-forget; joined later during finalize_vlm_processing
+        _vlm_future = self.vlm_executor.submit(
             self._process_vlm_description,
             activity_index,
             screenshot_path,
@@ -661,14 +644,13 @@ class BrowserActivityRecorder:
                 prev_time = prev_activity.get('timestamp', '')
                 
                 try:
-                    from datetime import datetime
                     current_dt = datetime.fromisoformat(current_time)
                     prev_dt = datetime.fromisoformat(prev_time)
                     time_diff = (current_dt - prev_dt).total_seconds()
                     
                     if time_diff < 2:  # Clicks within 2 seconds
                         return True  # Redundant
-                except:
+                except Exception:
                     pass
         
         return False
@@ -708,32 +690,94 @@ class BrowserActivityRecorder:
             
     def track_tab_switching(self):
         """Track tab/window switching"""
-        current_handles = self.driver.window_handles
-        
-        if len(current_handles) != len(self.previous_window_handles):
-            if len(current_handles) > len(self.previous_window_handles):
+        # Initialization
+        if not hasattr(self, 'tab_metadata'):
+            self.tab_metadata = {}
+        if not hasattr(self, 'previous_handle'):
+            try:
+                self.previous_handle = self.driver.current_window_handle
+            except Exception:
+                self.previous_handle = None
+        if not self.previous_window_handles:
+            try:
+                self.previous_window_handles = list(self.driver.window_handles)
+            except Exception:
+                self.previous_window_handles = []
+
+        try:
+            current_handles = list(self.driver.window_handles)
+        except Exception:
+            return False
+
+        switched = False
+
+        # Detect added/removed tabs without switching context (avoid forcing focus)
+        if current_handles != self.previous_window_handles:
+            added = [h for h in current_handles if h not in self.previous_window_handles]
+            removed = [h for h in self.previous_window_handles if h not in current_handles]
+
+            for h in added:
+                # Don't switch; metadata will be enriched on first activation
+                self.tab_metadata[h] = {"first_title": None, "first_url": None, "created_at": datetime.now().isoformat()}
                 self.record_activity("new_tab", {
-                    "total_tabs": len(current_handles),
-                    "new_tab_handle": list(set(current_handles) - set(self.previous_window_handles))[0]
-                })
-            else:
-                self.record_activity("tab_closed", {
+                    "handle": h,
+                    "title": None,
+                    "url": None,
                     "total_tabs": len(current_handles)
                 })
+            for h in removed:
+                self.record_activity("tab_closed", {"handle": h, "total_tabs": len(current_handles)})
+                if h in self.tab_metadata:
+                    del self.tab_metadata[h]
             self.previous_window_handles = current_handles.copy()
-        
-        # Track active window switch
+
+        # Current active handle as reported by driver
         try:
             current_handle = self.driver.current_window_handle
-            if hasattr(self, 'previous_handle') and current_handle != self.previous_handle:
-                self.record_activity("tab_switch", {
-                    "to_window": current_handle,
-                    "current_url": self.driver.current_url,
-                    "current_title": self.driver.title
-                })
-            self.previous_handle = current_handle
-        except:
-            pass
+        except Exception:
+            current_handle = None
+
+        # If no change, nothing to do
+        if current_handle is None or current_handle == self.previous_handle:
+            return False
+
+        # Update metadata for newly active tab
+        try:
+            cur_title = self.driver.title
+            cur_url = self.driver.current_url
+        except Exception:
+            cur_title = ""
+            cur_url = ""
+        if current_handle in self.tab_metadata:
+            meta = self.tab_metadata[current_handle]
+            if meta.get('first_title') is None:
+                meta['first_title'] = cur_title
+            if meta.get('first_url') is None:
+                meta['first_url'] = cur_url
+        else:
+            self.tab_metadata[current_handle] = {"first_title": cur_title, "first_url": cur_url, "created_at": datetime.now().isoformat()}
+
+        # Record switch
+        self.record_activity("switch_tab", {
+            "from_window": self.previous_handle,
+            "to_window": current_handle,
+            "title": cur_title,
+            "url": cur_url,
+            "pattern": cur_title[:80],
+            "match_type": "title",
+            "use_regex": False
+        })
+        switched = True
+
+        # Re-inject trackers in the now-active context (safe; no tab iteration)
+        try:
+            self.inject_click_tracker()
+            self.inject_input_tracker()
+        except Exception as reinject_err:
+            print(f"[TAB] Reinjection failed after switch: {reinject_err}")
+
+        self.previous_handle = current_handle
+        return switched
             
     def is_page_loading(self):
         """
@@ -908,7 +952,7 @@ class BrowserActivityRecorder:
                 
             return None
             
-        except Exception as e:
+        except Exception:
             return None
     
     def _check_dom_mutations(self):
@@ -944,7 +988,7 @@ class BrowserActivityRecorder:
             
             return result
             
-        except Exception as e:
+        except Exception:
             return None
     
     def _check_visual_loaders(self):
@@ -1112,7 +1156,7 @@ class BrowserActivityRecorder:
             
             return None
             
-        except Exception as e:
+        except Exception:
             return None
     
     def _check_framework_loading(self):
@@ -1164,7 +1208,7 @@ class BrowserActivityRecorder:
             
             return None
             
-        except Exception as e:
+        except Exception:
             return None
     
     def get_loading_details(self):
@@ -1175,10 +1219,14 @@ class BrowserActivityRecorder:
         details = {
             'document_ready': False,
             'network_activity': False,
-            'dom_mutations': False,
-            'visual_loaders': False,
-            'framework_loading': False,
-            'overall_loading': False
+            'dom_mutations': False,            # bool
+            'dom_mutations_reason': '',        # textual reason
+            'visual_loaders': False,           # bool
+            'visual_loaders_reason': '',       # textual reason
+            'framework_loading': False,        # bool
+            'framework_loading_reason': '',    # textual reason
+            'overall_loading': False,
+            'error': ''
         }
         
         try:
@@ -1187,9 +1235,17 @@ class BrowserActivityRecorder:
             details['document_ready'] = (doc_state == "complete")
             # details['network_activity'] = self._check_network_activity()  # COMMENTED OUT
             details['network_activity'] = False  # Always false (network check disabled)
-            details['dom_mutations'] = self._check_dom_mutations()
-            details['visual_loaders'] = self._check_visual_loaders()
-            details['framework_loading'] = self._check_framework_loading()
+            dom_mut = self._check_dom_mutations()
+            details['dom_mutations'] = bool(dom_mut)
+            details['dom_mutations_reason'] = dom_mut or ''
+
+            vis_load = self._check_visual_loaders()
+            details['visual_loaders'] = bool(vis_load)
+            details['visual_loaders_reason'] = vis_load or ''
+
+            fw_load = self._check_framework_loading()
+            details['framework_loading'] = bool(fw_load)
+            details['framework_loading_reason'] = fw_load or ''
             
             # Overall status
             details['overall_loading'] = (
@@ -1228,12 +1284,9 @@ class BrowserActivityRecorder:
                 screenshot_filename = f"popup_{self.screenshot_counter}_{timestamp}.png"
                 screenshot_path = os.path.join(self.screenshots_dir, screenshot_filename)
                 self.driver.save_screenshot(screenshot_path)
-                screenshot_info = {
-                    "filename": screenshot_filename,
-                    "path": screenshot_path
-                }
-            except:
-                pass
+                screenshot_info = {"filename": screenshot_filename, "path": screenshot_path}
+            except Exception:
+                print("[POPUP] Failed capturing popup screenshot")
             
             # Record the popup
             popup_details = {
@@ -1250,8 +1303,8 @@ class BrowserActivityRecorder:
                 try:
                     alert.send_keys("")  # Send empty or default value
                     popup_details["input_value"] = ""
-                except:
-                    pass
+                except Exception:
+                    print("[POPUP] Prompt input send failed")
             
             # Accept the alert/confirm/prompt
             alert.accept()
@@ -1283,10 +1336,7 @@ class BrowserActivityRecorder:
             # Try to send keys - only prompts accept input
             alert.send_keys("")
             return "prompt"
-        except:
-            # Not a prompt, could be alert or confirm
-            # We'll default to "confirm" as it's more common and has accept/dismiss
-            # In practice, both alert and confirm are handled the same way
+        except Exception:
             return "confirm"
     
     def check_modal_dialogs(self):
@@ -1325,12 +1375,12 @@ class BrowserActivityRecorder:
                                 # Just record detection if no button found
                                 self._record_modal_detection(modal, selector)
                                 return True
-                except Exception as e:
+                except Exception:
                     continue
             
             return False
             
-        except:
+        except Exception:
             return False
     
     def _find_and_click_dialog_button(self, modal, modal_selector):
@@ -1378,7 +1428,7 @@ class BrowserActivityRecorder:
                 try:
                     buttons = modal.find_elements(By.CSS_SELECTOR, btn_selector)
                     all_buttons.extend(buttons)
-                except:
+                except Exception:
                     continue
             
             if not all_buttons:
@@ -1395,7 +1445,7 @@ class BrowserActivityRecorder:
                     if loc not in seen and btn.is_displayed():
                         seen.add(loc)
                         unique_buttons.append(btn)
-                except:
+                except Exception:
                     continue
             
             print(f"[MODAL] Found {len(unique_buttons)} unique button(s)")
@@ -1425,7 +1475,7 @@ class BrowserActivityRecorder:
                             # Click the button
                             try:
                                 button.click()
-                            except:
+                            except Exception:
                                 # Fallback to JavaScript click
                                 self.driver.execute_script("arguments[0].click();", button)
                             
@@ -1438,7 +1488,7 @@ class BrowserActivityRecorder:
                             time.sleep(0.5)
                             
                             return True
-                    except Exception as e:
+                    except Exception:
                         continue
             
             # If no text match, click the first visible button (fallback)
@@ -1455,7 +1505,7 @@ class BrowserActivityRecorder:
                     
                     try:
                         button.click()
-                    except:
+                    except Exception:
                         self.driver.execute_script("arguments[0].click();", button)
                     
                     print(f"[MODAL] Clicked first available button")
@@ -1464,14 +1514,14 @@ class BrowserActivityRecorder:
                     time.sleep(0.5)
                     
                     return True
-                except Exception as e:
-                    print(f"[MODAL] Error clicking button: {e}")
+                except Exception as click_err:
+                    print(f"[MODAL] Error clicking button: {click_err}")
                     return False
             
             return False
             
-        except Exception as e:
-            print(f"[MODAL] Error finding/clicking button: {e}")
+        except Exception as modal_err:
+            print(f"[MODAL] Error finding/clicking button: {modal_err}")
             return False
     
     def _capture_button_details(self, button, modal_selector, matched_text):
@@ -1508,7 +1558,7 @@ class BrowserActivityRecorder:
                     }
                     return getXPath(arguments[0]);
                 """, button)
-            except:
+            except Exception:
                 btn_xpath = ''
             
             details = {
@@ -1544,7 +1594,6 @@ class BrowserActivityRecorder:
                 details["screenshot"] = screenshot_path
             except Exception as screenshot_err:
                 print(f"[MODAL] Screenshot capture failed: {screenshot_err}")
-                pass
             
             return details
             
@@ -1576,7 +1625,7 @@ class BrowserActivityRecorder:
                     if modal.find_elements(By.CSS_SELECTOR, close_sel):
                         has_close_button = True
                         break
-                except:
+                except Exception:
                     continue
             
             # Record modal detection
@@ -1899,6 +1948,158 @@ class BrowserActivityRecorder:
             self.injection_failed_count += 1
             if self.injection_failed_count <= 2:
                 print(f"[WARNING] Click tracker injection failed: {str(e)[:100]}")
+            return False
+
+    def inject_hover_tracker(self):
+        """Inject JavaScript to track hover (mouseover) events with debounce to avoid noise"""
+        script = """
+        function getXPath(element) {
+            if (element.id !== '') {
+                return '//*[@id="' + element.id + '"]';
+            }
+            if (element === document.body) {
+                return '/html/body';
+            }
+            var ix = 0;
+            var siblings = element.parentNode ? element.parentNode.childNodes : [];
+            for (var i = 0; i < siblings.length; i++) {
+                var sibling = siblings[i];
+                if (sibling === element) {
+                    var tagName = element.tagName.toLowerCase();
+                    return getXPath(element.parentNode) + '/' + tagName + '[' + (ix + 1) + ']';
+                }
+                if (sibling.nodeType === 1 && sibling.tagName === element.tagName) {
+                    ix++;
+                }
+            }
+        }
+        function getCssSelector(element) {
+            if (element.id) {
+                return '#' + element.id;
+            }
+            var path = [];
+            while (element.nodeType === Node.ELEMENT_NODE) {
+                var selector = element.nodeName.toLowerCase();
+                if (element.id) {
+                    selector += '#' + element.id;
+                    path.unshift(selector);
+                    break;
+                } else {
+                    var sibling = element; var nth = 1;
+                    while (sibling.previousElementSibling) {
+                        sibling = sibling.previousElementSibling;
+                        if (sibling.nodeName.toLowerCase() === selector) nth++;
+                    }
+                    if (nth !== 1) selector += ':nth-of-type(' + nth + ')';
+                }
+                path.unshift(selector);
+                element = element.parentNode;
+            }
+            return path.join(' > ');
+        }
+        if (!window.hoverTrackerInjected) {
+            window.hoverEvents = [];
+            window.lastHover = { selector: null, ts: 0 };
+            function captureHover(e) {
+                var el = e.target;
+                if (!el) return;
+                var now = Date.now();
+                var selector = getCssSelector(el);
+                // Debounce same element within 400ms
+                if (window.lastHover.selector === selector && (now - window.lastHover.ts) < 400) return;
+                window.lastHover.selector = selector; window.lastHover.ts = now;
+                var rect = el.getBoundingClientRect();
+                var data = {
+                    tagName: el.tagName,
+                    id: el.id || '',
+                    className: el.className || '',
+                    text: el.innerText ? el.innerText.substring(0,100) : '',
+                    title: el.title || '',
+                    href: el.href || '',
+                    type: el.type || '',
+                    coordinates: {
+                        elementLeft: rect.left,
+                        elementTop: rect.top,
+                        elementWidth: rect.width,
+                        elementHeight: rect.height,
+                        elementCenterX: rect.left + rect.width/2,
+                        elementCenterY: rect.top + rect.height/2,
+                        viewportWidth: window.innerWidth || document.documentElement.clientWidth,
+                        viewportHeight: window.innerHeight || document.documentElement.clientHeight,
+                        scrollX: window.scrollX || window.pageXOffset,
+                        scrollY: window.scrollY || window.pageYOffset
+                    },
+                    selectors: {
+                        xpath: getXPath(el),
+                        cssSelector: selector
+                    },
+                    inIframe: false,
+                    inShadowRoot: false,
+                    timestamp: new Date().toISOString()
+                };
+                window.hoverEvents.push(data);
+            }
+            document.addEventListener('mouseover', captureHover, true);
+            // Iframes
+            try {
+                var iframes = document.querySelectorAll('iframe');
+                for (var i=0;i<iframes.length;i++) {
+                    try {
+                        var idoc = iframes[i].contentDocument || iframes[i].contentWindow.document;
+                        if (idoc && !idoc._hoverTrackerInjected) {
+                            idoc.addEventListener('mouseover', function(e){
+                                var el = e.target; if(!el) return; var rect = el.getBoundingClientRect();
+                                var data = {
+                                    tagName: el.tagName,
+                                    id: el.id || '',
+                                    className: el.className || '',
+                                    text: el.innerText ? el.innerText.substring(0,100) : '',
+                                    inIframe: true,
+                                    iframeIndex: i,
+                                    selectors: { xpath: getXPath(el), cssSelector: getCssSelector(el) },
+                                    timestamp: new Date().toISOString()
+                                };
+                                window.hoverEvents.push(data);
+                            }, true);
+                            idoc._hoverTrackerInjected = true;
+                        }
+                    } catch(_e) {}
+                }
+            } catch(_e) {}
+            // Shadow roots
+            try {
+                function injectShadow(root){
+                    var all = root.querySelectorAll('*');
+                    for (var j=0;j<all.length;j++){
+                        var sr = all[j].shadowRoot;
+                        if (sr && !sr._hoverTrackerInjected){
+                            sr.addEventListener('mouseover', function(e){
+                                var el = e.target; if(!el) return; var rect = el.getBoundingClientRect();
+                                var data = {
+                                    tagName: el.tagName,
+                                    id: el.id || '',
+                                    className: el.className || '',
+                                    text: el.innerText ? el.innerText.substring(0,100) : '',
+                                    inShadowRoot: true,
+                                    selectors: { xpath: getXPath(el), cssSelector: getCssSelector(el) },
+                                    timestamp: new Date().toISOString()
+                                };
+                                window.hoverEvents.push(data);
+                            }, true);
+                            sr._hoverTrackerInjected = true;
+                            injectShadow(sr);
+                        }
+                    }
+                }
+                injectShadow(document);
+            } catch(_e) {}
+            window.hoverTrackerInjected = true;
+        }
+        return window.hoverTrackerInjected;
+        """
+        try:
+            return self.driver.execute_script(script)
+        except Exception:
             return False
             
     def inject_input_tracker(self):
@@ -2249,7 +2450,7 @@ class BrowserActivityRecorder:
                     reinjectShadowRoots(document);
                 } catch(e) {}
             """)
-        except:
+        except Exception:
             pass
     
     def collect_click_events(self):
@@ -2270,7 +2471,7 @@ class BrowserActivityRecorder:
                     elif click.get('inShadowRoot'):
                         context = " (in shadow DOM)"
                     print(f"[CLICK] Captured click on {click.get('tagName', 'unknown')} element{context}")
-        except:
+        except Exception:
             pass
             
     def collect_input_events(self):
@@ -2280,7 +2481,7 @@ class BrowserActivityRecorder:
             if inputs:
                 for inp in inputs:
                     self.record_activity("text_input", inp)
-        except:
+        except Exception:
             pass
     
     def fallback_track_dom_changes(self):
@@ -2316,7 +2517,7 @@ class BrowserActivityRecorder:
                             "placeholder": active_element['placeholder'],
                             "value": active_element['value'][:50] + "..." if len(active_element['value']) > 50 else active_element['value']
                         })
-        except:
+        except Exception:
             pass
     
     def fallback_track_clicks(self):
@@ -2327,7 +2528,7 @@ class BrowserActivityRecorder:
             if '#' in current_url or '?' in current_url:
                 # Potential click detected through URL change
                 pass
-        except:
+        except Exception:
             pass
             
     def monitor_activities(self):
@@ -2374,8 +2575,12 @@ class BrowserActivityRecorder:
                     last_injection_url = ""
                     print("[INFO] Page navigated, re-injecting trackers...")
                 
-                # Track tab switching
-                self.track_tab_switching()
+                # Track tab switching; if switch occurred, force tracker reinjection
+                tab_switched = self.track_tab_switching()
+                if tab_switched:
+                    trackers_injected = False
+                    last_injection_url = ""
+                    print("[INFO] Tab switch detected – reinjecting trackers in new tab context")
                 
                 # Check for pop-ups (alerts, confirms, prompts)
                 self.check_and_handle_popup()
@@ -2388,7 +2593,8 @@ class BrowserActivityRecorder:
                 if not trackers_injected and current_url != last_injection_url and not use_fallback:
                     click_ok = self.inject_click_tracker()
                     input_ok = self.inject_input_tracker()
-                    trackers_injected = click_ok and input_ok
+                    hover_ok = self.inject_hover_tracker()
+                    trackers_injected = click_ok and input_ok and hover_ok
                     
                     if trackers_injected:
                         last_injection_url = current_url
@@ -2405,6 +2611,14 @@ class BrowserActivityRecorder:
                         continue
                 
                 # Use fallback methods if trackers not injected
+                if trackers_injected:
+                    # Collect hover events when trackers active
+                    try:
+                        hover_events = self.driver.execute_script("return window.hoverEvents ? window.hoverEvents.splice(0, window.hoverEvents.length) : [];")
+                        for he in hover_events:
+                            self.record_activity("hover", he)
+                    except Exception:
+                        pass
                 if not trackers_injected and use_fallback:
                     # Use fallback methods
                     self.fallback_track_dom_changes()

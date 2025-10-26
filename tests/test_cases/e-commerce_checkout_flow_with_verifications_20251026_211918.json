@@ -1,0 +1,38 @@
+[
+  {
+    "action": "navigation",
+    "details": {
+      "url": "https://www.amazon.in",
+      "description": ""
+    }
+  },
+  {
+    "action": "verification",
+    "details": {
+      "type": "content_check",
+      "criteria": "Continue Shopping button is visible",
+      "description": "Check if the 'Continue Shopping' button is visible on the page."
+    }
+  },
+  {
+    "action": "click",
+    "details": {
+      "tagName": "BUTTON",
+      "text": "Login button",
+      "description": "",
+      "vlm_description": "Login button"
+    },
+    "locators": {
+      "text": "Login button",
+      "description": "Login button"
+    }
+  },
+  {
+    "action": "verification",
+    "details": {
+      "type": "content_check",
+      "criteria": "Login form appears",
+      "description": "Verify that the login form appears after clicking 'Login' button."
+    }
+  }
+]

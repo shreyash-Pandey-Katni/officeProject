@@ -1,0 +1,83 @@
+[
+  {
+    "action": "navigation",
+    "details": {
+      "url": "https://${URL}",
+      "description": ""
+    }
+  },
+  {
+    "action": "click",
+    "details": {
+      "tagName": "BUTTON",
+      "text": null,
+      "description": "Click username label",
+      "vlm_description": null
+    },
+    "locators": {
+      "text": null,
+      "description": null
+    }
+  },
+  {
+    "action": "text_input",
+    "details": {
+      "tagName": "INPUT",
+      "value": "Administrator",
+      "placeholder": "Username field",
+      "description": "",
+      "vlm_description": "Username field"
+    },
+    "locators": {
+      "placeholder": "Username field",
+      "description": "Username field",
+      "value": "Administrator"
+    }
+  },
+  {
+    "action": "verification",
+    "details": {
+      "type": "content_check",
+      "criteria": "Administrator",
+      "description": ""
+    }
+  },
+  {
+    "action": "text_input",
+    "details": {
+      "tagName": "INPUT",
+      "value": "ABC DEFG",
+      "placeholder": "Location field",
+      "description": "",
+      "vlm_description": "Location field"
+    },
+    "locators": {
+      "placeholder": "Location field",
+      "description": "Location field",
+      "value": "ABC DEFG"
+    }
+  },
+  {
+    "action": "text_input",
+    "details": {
+      "tagName": "INPUT",
+      "value": "IJKL",
+      "placeholder": "Location field",
+      "description": "",
+      "vlm_description": "Location field"
+    },
+    "locators": {
+      "placeholder": "Location field",
+      "description": "Location field",
+      "value": "IJKL"
+    }
+  },
+  {
+    "action": "verification",
+    "details": {
+      "type": "content_check",
+      "criteria": "\"ABC DEFGIJKL\" is present",
+      "description": ""
+    }
+  }
+]

@@ -1,1326 +1,846 @@
 [
   {
-    "timestamp": "2025-10-20T22:14:58.073829",
+    "timestamp": "2025-10-22T18:00:28.015952",
     "action": "navigation",
     "details": {
-      "url": "https://www.ibm.com/in-en",
+      "url": "https://www.ibm.com/us-en",
       "title": "IBM",
       "previous_url": ""
-    }
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1
   },
   {
-    "timestamp": "2025-10-20T22:15:36.502952",
-    "action": "click",
+    "timestamp": "2025-10-22T18:00:30.123449",
+    "action": "hover",
     "details": {
-      "alt": "close icon",
-      "ariaLabel": "",
-      "ariaRole": "button",
-      "attributes": {
-        "alt": "close icon",
-        "id": "truste-consent-close",
-        "role": "button",
-        "src": "https://consent.trustarc.com/get?name=ibm_close_icon.svg"
-      },
       "className": "",
       "coordinates": {
-        "clickX": 1888,
-        "clickY": 802,
-        "elementBottom": 804,
-        "elementCenterX": 1890,
-        "elementCenterY": 798,
-        "elementHeight": 12,
-        "elementLeft": 1884,
-        "elementRight": 1896,
-        "elementTop": 792,
-        "elementWidth": 12,
-        "pageX": 1888,
-        "pageY": 802,
-        "relativeX": 4,
-        "relativeY": 10,
-        "scrollX": 0,
-        "scrollY": 0,
-        "viewportHeight": 961,
-        "viewportWidth": 1920
-      },
-      "dataAttributes": {},
-      "href": "",
-      "id": "truste-consent-close",
-      "name": "",
-      "parent": {
-        "className": "truste-icon-box",
-        "id": "",
-        "tagName": "DIV"
-      },
-      "placeholder": "",
-      "selectors": {
-        "cssSelector": "#truste-consent-close",
-        "xpath": "//*[@id=\"truste-consent-close\"]"
-      },
-      "siblingsCount": 1,
-      "src": "https://consent.trustarc.com/get?name=ibm_close_icon.svg",
-      "tagName": "IMG",
-      "target": "",
-      "text": "",
-      "textContent": "",
-      "timestamp": "2025-10-20T16:45:36.398Z",
-      "title": "",
-      "type": "",
-      "value": "",
-      "visualProperties": {
-        "backgroundColor": "rgba(0, 0, 0, 0)",
-        "border": "0px none rgb(22, 22, 22)",
-        "color": "rgb(22, 22, 22)",
-        "cursor": "pointer",
-        "display": "inline",
-        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
-        "fontSize": "16px",
-        "fontWeight": "400",
-        "height": "12px",
-        "margin": "0px",
-        "opacity": "1",
-        "padding": "0px",
-        "position": "static",
-        "width": "12px",
-        "zIndex": "auto"
-      }
-    },
-    "locators": {
-      "id": "truste-consent-close",
-      "tag_name": "IMG"
-    },
-    "screenshot": {
-      "filename": "screenshot_1_20251020_221536.png",
-      "path": "screenshots/screenshot_1_20251020_221536.png",
-      "element_bounds": {
-        "left": 1884,
-        "top": 792,
-        "width": 12,
-        "height": 12
-      },
-      "viewport_size": {
-        "width": 1920,
-        "height": 961
-      }
-    },
-    "vlm_description": "This is an image of a webpage, specifically the bottom right corner where there's a button labeled \"Accept all\" in blue text against a white background. The button has rounded corners and a shadow effect, giving it a three-dimensional appearance. There are no other elements immediately adjacent to this button within 50px.",
-    "element_html": null
-  },
-  {
-    "timestamp": "2025-10-20T22:15:41.977550",
-    "action": "click",
-    "details": {
-      "alt": "",
-      "ariaLabel": "",
-      "ariaRole": "",
-      "attributes": {
-        "data-autoid": "c4d--masthead__l0-nav--nav2",
-        "menu-label": "Products",
-        "style": "--c4d-ce--viewport-width: 1905px;",
-        "trigger-content": "Products"
-      },
-      "className": "",
-      "coordinates": {
-        "clickX": 648,
-        "clickY": 31,
-        "elementBottom": 48,
-        "elementCenterX": 610.34375,
-        "elementCenterY": 24,
-        "elementHeight": 48,
-        "elementLeft": 548.28125,
-        "elementRight": 672.40625,
-        "elementTop": 0,
-        "elementWidth": 124.125,
-        "pageX": 648,
-        "pageY": 31,
-        "relativeX": 99.71875,
-        "relativeY": 31,
-        "scrollX": 0,
-        "scrollY": 0,
-        "viewportHeight": 961,
-        "viewportWidth": 1920
-      },
-      "dataAttributes": {
-        "data-autoid": "c4d--masthead__l0-nav--nav2"
-      },
-      "href": "",
-      "id": "",
-      "name": "",
-      "parent": {
-        "className": "",
-        "id": "",
-        "tagName": "C4D-TOP-NAV"
-      },
-      "placeholder": "",
-      "selectors": {
-        "cssSelector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-top-nav > c4d-megamenu-top-nav-menu:nth-of-type(3)",
-        "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-top-nav[1]/c4d-megamenu-top-nav-menu[3]"
-      },
-      "siblingsCount": 6,
-      "src": "",
-      "tagName": "C4D-MEGAMENU-TOP-NAV-MENU",
-      "target": "",
-      "text": "",
-      "textContent": "\n          \n        ",
-      "timestamp": "2025-10-20T16:45:41.786Z",
-      "title": "",
-      "type": "",
-      "value": "",
-      "visualProperties": {
-        "backgroundColor": "rgba(0, 0, 0, 0)",
-        "border": "0px none rgb(22, 22, 22)",
-        "color": "rgb(22, 22, 22)",
-        "cursor": "auto",
-        "display": "block",
-        "fontFamily": "\"IBM Plex Sans\", system-ui, -apple-system, BlinkMacSystemFont, \".SFNSText-Regular\", sans-serif",
-        "fontSize": "16px",
-        "fontWeight": "400",
-        "height": "48px",
-        "margin": "0px",
-        "opacity": "1",
-        "padding": "0px",
-        "position": "relative",
-        "width": "124.125px",
-        "zIndex": "auto"
-      }
-    },
-    "locators": {
-      "tag_name": "C4D-MEGAMENU-TOP-NAV-MENU"
-    },
-    "screenshot": {
-      "filename": "screenshot_2_20251020_221541.png",
-      "path": "screenshots/screenshot_2_20251020_221541.png",
-      "element_bounds": {
-        "left": 548.28125,
-        "top": 0,
-        "width": 124.125,
-        "height": 48
-      },
-      "viewport_size": {
-        "width": 1920,
-        "height": 961
-      }
-    },
-    "vlm_description": "This is an image of a screenshot, specifically the top-left corner of a web browser window displaying a list of features. The background color is white, and there are no visible borders or shadows on the elements within this section. The text content reads \"HTML not available\" in bold, black font. There are no icons or images present. The immediate surrounding context includes other elements such as navigation links and a search bar, but they are not the focus of this description.",
-    "element_html": null
-  },
-  {
-    "timestamp": "2025-10-20T22:15:46.011160",
-    "action": "click",
-    "details": {
-      "alt": "",
-      "ariaLabel": "",
-      "ariaRole": "",
-      "attributes": {
-        "aria-label": "",
-        "data-autoid": "c4d--search-with-typeahead",
-        "direction": "bottom",
-        "input-timeout": "200",
-        "language": "en-in",
-        "placeholder": "Search all of IBM",
-        "size": "md",
-        "slot": "search",
-        "type": "",
-        "value": ""
-      },
-      "className": "",
-      "coordinates": {
-        "clickX": 1555,
-        "clickY": 18,
-        "elementBottom": 48,
-        "elementCenterX": 1596.5,
-        "elementCenterY": 24,
-        "elementHeight": 48,
-        "elementLeft": 1596.5,
-        "elementRight": 1596.5,
-        "elementTop": 0,
-        "elementWidth": 0,
-        "pageX": 1555,
-        "pageY": 18,
-        "relativeX": -41.5,
-        "relativeY": 18,
-        "scrollX": 0,
-        "scrollY": 0,
-        "viewportHeight": 961,
-        "viewportWidth": 1920
-      },
-      "dataAttributes": {
-        "data-autoid": "c4d--search-with-typeahead"
-      },
-      "href": "",
-      "id": "",
-      "name": "",
-      "parent": {
-        "className": "",
-        "id": "",
-        "tagName": "C4D-MASTHEAD"
-      },
-      "placeholder": "",
-      "selectors": {
-        "cssSelector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
-        "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-search-with-typeahead[1]"
-      },
-      "siblingsCount": 6,
-      "src": "",
-      "tagName": "C4D-SEARCH-WITH-TYPEAHEAD",
-      "target": "",
-      "text": "",
-      "textContent": "",
-      "timestamp": "2025-10-20T16:45:45.922Z",
-      "title": "",
-      "type": "",
-      "value": "",
-      "visualProperties": {
-        "backgroundColor": "rgba(0, 0, 0, 0)",
-        "border": "0px none rgb(22, 22, 22)",
-        "color": "rgb(22, 22, 22)",
-        "cursor": "auto",
-        "display": "block",
-        "fontFamily": "\"IBM Plex Sans\", system-ui, -apple-system, BlinkMacSystemFont, \".SFNSText-Regular\", sans-serif",
-        "fontSize": "16px",
-        "fontWeight": "400",
-        "height": "48px",
-        "margin": "0px 0px 0px 48px",
-        "opacity": "1",
-        "padding": "0px",
-        "position": "relative",
-        "width": "0px",
-        "zIndex": "auto"
-      }
-    },
-    "locators": {
-      "tag_name": "C4D-SEARCH-WITH-TYPEAHEAD"
-    },
-    "screenshot": {
-      "filename": "screenshot_4_20251020_221546.png",
-      "path": "screenshots/screenshot_4_20251020_221546.png",
-      "element_bounds": {
-        "left": 1596.5,
-        "top": 0,
-        "width": 0,
-        "height": 48
-      },
-      "viewport_size": {
-        "width": 1920,
-        "height": 961
-      }
-    },
-    "vlm_description": "This is an image of a webpage, specifically the top right corner where there's a small button labeled \"HTML not available.\" The button has rounded corners and a shadow effect, with a blue background and white text. There are no icons or images visible on the button.",
-    "element_html": null
-  },
-  {
-    "timestamp": "2025-10-20T22:15:51.110056",
-    "action": "text_input",
-    "details": {
-      "id": "",
-      "inShadowRoot": true,
-      "name": "q",
-      "placeholder": "Search all of IBM",
-      "tagName": "INPUT",
-      "timestamp": "2025-10-20T16:45:50.862Z",
-      "type": "text",
-      "value": "Shreyash"
-    },
-    "locators": {
-      "name": "q",
-      "tag_name": "INPUT",
-      "placeholder": "Search all of IBM",
-      "type": "text",
-      "value": "Shreyash",
-      "in_shadow_root": true
-    },
-    "screenshot": {
-      "filename": "screenshot_5_20251020_221551.png",
-      "path": "screenshots/screenshot_5_20251020_221551.png"
-    },
-    "vlm_description": "This is an image of a webpage, specifically the top-left corner where there's a placeholder for text content. The placeholder has a white background with blue borders and contains the text \"HTML not available\" in bold, black font. There are no distinctive visual elements or icons visible within this placeholder.",
-    "element_html": null
-  },
-  {
-    "timestamp": "2025-10-20T22:15:56.735982",
-    "action": "click",
-    "details": {
-      "alt": "",
-      "ariaLabel": "",
-      "ariaRole": "",
-      "attributes": {
-        "active": "",
-        "aria-label": "",
-        "data-autoid": "c4d--search-with-typeahead",
-        "direction": "bottom",
-        "input-timeout": "200",
-        "language": "en-in",
-        "open": "",
-        "placeholder": "Search all of IBM",
-        "size": "md",
-        "slot": "search",
-        "type": "",
-        "unfocused": "",
-        "value": "Shreyash"
-      },
-      "className": "",
-      "coordinates": {
-        "clickX": 1569,
-        "clickY": 21,
-        "elementBottom": 48,
-        "elementCenterX": 949.5,
+        "elementCenterX": 925.5,
         "elementCenterY": 24,
         "elementHeight": 48,
         "elementLeft": 302.5,
-        "elementRight": 1596.5,
         "elementTop": 0,
-        "elementWidth": 1294,
-        "pageX": 1569,
-        "pageY": 21,
-        "relativeX": 1266.5,
-        "relativeY": 21,
+        "elementWidth": 1246,
         "scrollX": 0,
         "scrollY": 0,
         "viewportHeight": 961,
         "viewportWidth": 1920
       },
-      "dataAttributes": {
-        "data-autoid": "c4d--search-with-typeahead"
-      },
       "href": "",
       "id": "",
-      "name": "",
-      "parent": {
-        "className": "",
-        "id": "",
-        "tagName": "C4D-MASTHEAD"
-      },
-      "placeholder": "",
+      "inIframe": false,
+      "inShadowRoot": false,
       "selectors": {
-        "cssSelector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
-        "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-search-with-typeahead[1]"
+        "cssSelector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-top-nav",
+        "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-top-nav[1]"
       },
-      "siblingsCount": 6,
-      "src": "",
-      "tagName": "C4D-SEARCH-WITH-TYPEAHEAD",
-      "target": "",
+      "tagName": "C4D-TOP-NAV",
       "text": "",
-      "textContent": "",
-      "timestamp": "2025-10-20T16:45:56.457Z",
+      "timestamp": "2025-10-22T12:30:29.924Z",
       "title": "",
-      "type": "",
-      "value": "Shreyash",
-      "visualProperties": {
-        "backgroundColor": "rgba(0, 0, 0, 0)",
-        "border": "0px none rgb(22, 22, 22)",
-        "color": "rgb(22, 22, 22)",
-        "cursor": "auto",
-        "display": "block",
-        "fontFamily": "\"IBM Plex Sans\", system-ui, -apple-system, BlinkMacSystemFont, \".SFNSText-Regular\", sans-serif",
-        "fontSize": "16px",
-        "fontWeight": "400",
-        "height": "48px",
-        "margin": "0px",
-        "opacity": "1",
-        "padding": "0px",
-        "position": "relative",
-        "width": "1294px",
-        "zIndex": "999"
-      }
+      "type": ""
     },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
     "locators": {
-      "tag_name": "C4D-SEARCH-WITH-TYPEAHEAD",
-      "value": "Shreyash"
-    },
-    "screenshot": {
-      "filename": "screenshot_6_20251020_221556.png",
-      "path": "screenshots/screenshot_6_20251020_221556.png",
-      "element_bounds": {
-        "left": 302.5,
-        "top": 0,
-        "width": 1294,
-        "height": 48
-      },
-      "viewport_size": {
-        "width": 1920,
-        "height": 961
-      }
-    },
-    "vlm_description": "This is an image of a webpage, specifically the top-center section where the text \"HTML not available\" is displayed in bold, white font against a black background. The button has rounded corners and a shadow effect, with a size of approximately 1294 pixels by 48 pixels. There are no icons or images visible on the button.",
-    "element_html": null
+      "tag_name": "C4D-TOP-NAV"
+    }
   },
   {
-    "timestamp": "2025-10-20T22:15:57.818581",
-    "action": "click",
+    "timestamp": "2025-10-22T18:00:30.124912",
+    "action": "hover",
     "details": {
-      "alt": "",
-      "ariaLabel": "",
-      "ariaRole": "",
-      "attributes": {
-        "data-autoid": "c4d--masthead-profile",
-        "data-di-id": "di-id-8af43f48-8904df08"
+      "className": "",
+      "id": "",
+      "inShadowRoot": true,
+      "selectors": {
+        "cssSelector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-top-nav",
+        "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-top-nav[1]"
       },
+      "tagName": "C4D-TOP-NAV",
+      "text": "",
+      "timestamp": "2025-10-22T12:30:29.925Z"
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "C4D-TOP-NAV",
+      "in_shadow_root": true
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:00:30.125939",
+    "action": "hover",
+    "details": {
+      "className": "",
+      "id": "",
+      "inShadowRoot": true,
+      "selectors": {
+        "cssSelector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-top-nav",
+        "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-top-nav[1]"
+      },
+      "tagName": "C4D-TOP-NAV",
+      "text": "",
+      "timestamp": "2025-10-22T12:30:29.925Z"
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "C4D-TOP-NAV",
+      "in_shadow_root": true
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:00:30.126664",
+    "action": "hover",
+    "details": {
+      "className": "c4d-ce--header__nav-content-container",
+      "id": "",
+      "inShadowRoot": true,
+      "selectors": {
+        "cssSelector": "div:nth-of-type(2)",
+        "xpath": "//*[@id=\"undefined\"]/div[2]"
+      },
+      "tagName": "DIV",
+      "text": "",
+      "timestamp": "2025-10-22T12:30:29.925Z"
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "class": "c4d-ce--header__nav-content-container",
+      "tag_name": "DIV",
+      "in_shadow_root": true
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:01:00.900189",
+    "action": "navigation",
+    "details": {
+      "url": "https://www.w3schools.com/cssref/tryit.php?filename=trycss_sel_hover2",
+      "title": "W3Schools Tryit Editor",
+      "previous_url": "https://www.ibm.com/us-en"
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1
+  },
+  {
+    "timestamp": "2025-10-22T18:01:07.611137",
+    "action": "hover",
+    "details": {
       "className": "",
       "coordinates": {
-        "clickX": 1710,
-        "clickY": 22,
-        "elementBottom": 48,
-        "elementCenterX": 1720.5,
-        "elementCenterY": 24,
-        "elementHeight": 48,
-        "elementLeft": 1696.5,
-        "elementRight": 1744.5,
+        "elementCenterX": 952.5,
+        "elementCenterY": 47.5,
+        "elementHeight": 95,
+        "elementLeft": 0,
         "elementTop": 0,
-        "elementWidth": 48,
-        "pageX": 1710,
-        "pageY": 22,
-        "relativeX": 13.5,
-        "relativeY": 22,
+        "elementWidth": 1905,
         "scrollX": 0,
         "scrollY": 0,
         "viewportHeight": 961,
         "viewportWidth": 1920
-      },
-      "dataAttributes": {
-        "data-autoid": "c4d--masthead-profile",
-        "data-di-id": "di-id-8af43f48-8904df08"
       },
       "href": "",
       "id": "",
-      "name": "",
-      "parent": {
-        "className": "",
-        "id": "",
-        "tagName": "C4D-MASTHEAD-GLOBAL-BAR"
-      },
-      "placeholder": "",
+      "inIframe": false,
+      "inShadowRoot": false,
       "selectors": {
-        "cssSelector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-masthead-global-bar > c4d-masthead-profile",
-        "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-masthead-global-bar[1]/c4d-masthead-profile[1]"
+        "cssSelector": "html",
+        "xpath": "//*[@id=\"undefined\"]/html[1]"
       },
-      "siblingsCount": 4,
-      "src": "",
-      "tagName": "C4D-MASTHEAD-PROFILE",
-      "target": "",
+      "tagName": "HTML",
+      "text": "Run \u276f\nGet your own website\nResult Size: 938 x 806\n<!DOCTYPE html>\n<html>\n<head>\n<style>\ndiv {\n \u00a0back",
+      "timestamp": "2025-10-22T12:31:07.484Z",
+      "title": "",
+      "type": ""
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "HTML",
+      "text": "Run \u276f\nGet your own website\nResult Size: 938 x 806\n<!DOCTYPE html>\n<html>\n<head>\n<style>\ndiv {\n \u00a0back"
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:01:07.612043",
+    "action": "hover",
+    "details": {
+      "className": "",
+      "coordinates": {
+        "elementCenterX": 952.5,
+        "elementCenterY": 50,
+        "elementHeight": 90,
+        "elementLeft": 0,
+        "elementTop": 5,
+        "elementWidth": 1905,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "href": "",
+      "id": "tryitLeaderboard",
+      "inIframe": false,
+      "inShadowRoot": false,
+      "selectors": {
+        "cssSelector": "#tryitLeaderboard",
+        "xpath": "//*[@id=\"tryitLeaderboard\"]"
+      },
+      "tagName": "DIV",
       "text": "",
-      "textContent": "\n            \n                  \n                    My IBM\n                  \n                \n    ",
-      "timestamp": "2025-10-20T16:45:57.757Z",
+      "timestamp": "2025-10-22T12:31:07.505Z",
       "title": "",
-      "type": "",
-      "value": "",
-      "visualProperties": {
-        "backgroundColor": "rgb(255, 255, 255)",
-        "border": "0px none rgb(22, 22, 22)",
-        "color": "rgb(22, 22, 22)",
-        "cursor": "auto",
-        "display": "block",
-        "fontFamily": "\"IBM Plex Sans\", system-ui, -apple-system, BlinkMacSystemFont, \".SFNSText-Regular\", sans-serif",
-        "fontSize": "16px",
-        "fontWeight": "400",
-        "height": "48px",
-        "margin": "0px",
-        "opacity": "1",
-        "padding": "0px",
-        "position": "relative",
-        "width": "48px",
-        "zIndex": "auto"
-      }
+      "type": ""
     },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
     "locators": {
-      "tag_name": "C4D-MASTHEAD-PROFILE"
-    },
-    "screenshot": {
-      "filename": "screenshot_7_20251020_221557.png",
-      "path": "screenshots/screenshot_7_20251020_221557.png",
-      "element_bounds": {
-        "left": 1696.5,
-        "top": 0,
-        "width": 48,
-        "height": 48
-      },
-      "viewport_size": {
-        "width": 1920,
-        "height": 961
-      }
-    },
-    "vlm_description": "This is an image of a webpage, specifically the top right corner where there's a button labeled \"My IBM\" with a question mark icon next to it. The button has rounded corners and a shadow effect, indicating it might be clickable. There are no distinctive text labels or images on this button.",
-    "element_html": null
-  },
-  {
-    "timestamp": "2025-10-20T22:16:02.113915",
-    "action": "navigation",
-    "details": {
-      "url": "https://login.ibm.com/authsvc/mtfim/sps/authsvc?PolicyId=urn:ibm:security:authentication:asf:basicldapuser&Target=https%3A%2F%2Flogin.ibm.com%2Foidc%2Fendpoint%2Fdefault%2Fauthorize%3FqsId%3D4df7b03f-3b19-4f4b-bf1b-abe9b26dd0f9%26client_id%3DMyIBMLondonProdCI",
-      "title": "IBMid - Sign in or create an IBMid",
-      "previous_url": "https://www.ibm.com/in-en"
+      "id": "tryitLeaderboard",
+      "tag_name": "DIV"
     }
   },
   {
-    "timestamp": "2025-10-20T22:16:08.196751",
-    "action": "text_input",
+    "timestamp": "2025-10-22T18:01:08.108923",
+    "action": "hover",
     "details": {
-      "ariaDescribedBy": "",
-      "ariaLabel": "",
-      "ariaRequired": "",
-      "attributes": {
-        "class": "bx--text-input bx--text-input--lg",
-        "id": "username",
-        "name": "username",
-        "type": "text",
-        "value": "test@ibm.com"
-      },
-      "autocomplete": "",
-      "className": "bx--text-input bx--text-input--lg",
+      "className": "",
       "coordinates": {
-        "elementBottom": 275,
-        "elementCenterX": 416,
-        "elementCenterY": 251,
-        "elementHeight": 48,
-        "elementLeft": 208,
-        "elementRight": 624,
-        "elementTop": 227,
-        "elementWidth": 416,
+        "elementCenterX": 952.5,
+        "elementCenterY": 47.5,
+        "elementHeight": 95,
+        "elementLeft": 0,
+        "elementTop": 0,
+        "elementWidth": 1905,
         "scrollX": 0,
         "scrollY": 0,
         "viewportHeight": 961,
         "viewportWidth": 1920
       },
-      "dataAttributes": {},
-      "disabled": false,
-      "form": {
-        "action": "https://login.ibm.com/authsvc/mtfim/sps/authsvc?StateId=9cb2a334-2f9a-44ed-81c2-aec52a983efe",
-        "id": "",
-        "method": "post",
-        "name": "loginForm"
-      },
-      "id": "username",
-      "label": "IBMid",
-      "maxLength": -1,
-      "minLength": -1,
-      "name": "username",
-      "parent": {
-        "className": "bx--text-input__field-wrapper",
-        "id": "",
-        "tagName": "DIV"
-      },
-      "placeholder": "",
-      "readOnly": false,
-      "required": false,
-      "selectionEnd": 12,
-      "selectionStart": 12,
-      "selectors": {
-        "cssSelector": "#username",
-        "xpath": "//*[@id=\"username\"]"
-      },
-      "tagName": "INPUT",
-      "timestamp": "2025-10-20T16:46:08.130Z",
-      "type": "text",
-      "value": "test@ibm.com",
-      "visualProperties": {
-        "backgroundColor": "rgb(238, 238, 238)",
-        "border": "",
-        "borderRadius": "0px",
-        "boxShadow": "none",
-        "color": "rgb(22, 22, 22)",
-        "display": "block",
-        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
-        "fontSize": "16px",
-        "fontWeight": "400",
-        "height": "48px",
-        "margin": "0px",
-        "padding": "0px 16px",
-        "width": "416px"
-      },
-      "consolidated_from": 5
-    },
-    "locators": {
-      "id": "username",
-      "name": "username",
-      "class": "bx--text-input bx--text-input--lg",
-      "tag_name": "INPUT",
-      "type": "text",
-      "value": "test@ibm.com",
-      "label": "IBMid"
-    },
-    "screenshot": {
-      "filename": "screenshot_12_20251020_221608.png",
-      "path": "screenshots/screenshot_12_20251020_221608.png",
-      "element_bounds": {
-        "left": 208,
-        "top": 227,
-        "width": 416,
-        "height": 48
-      },
-      "viewport_size": {
-        "width": 1920,
-        "height": 961
-      }
-    },
-    "vlm_description": "This is an image of a webpage interface, specifically focusing on the area around the coordinates (416, 251). The element at these coordinates appears to be a text input field with a red border. The background color of this field is white, and the text content reads \"HTML not available\". The size of the field is medium, and it has rounded corners. There are no icons or images visible within the field. The immediate surrounding context includes other elements such as buttons and links, but they are not in focus.",
-    "element_html": null
-  },
-  {
-    "timestamp": "2025-10-20T22:16:13.459990",
-    "action": "click",
-    "details": {
-      "alt": "",
-      "ariaLabel": "",
-      "ariaRole": "",
-      "attributes": {
-        "class": "submit-button bx--btn bx--btn--primary",
-        "id": "continue-button",
-        "tabindex": "0",
-        "type": "submit"
-      },
-      "className": "submit-button bx--btn bx--btn--primary",
-      "coordinates": {
-        "clickX": 0,
-        "clickY": 0,
-        "elementBottom": 339,
-        "elementCenterX": 416,
-        "elementCenterY": 315,
-        "elementHeight": 48,
-        "elementLeft": 208,
-        "elementRight": 624,
-        "elementTop": 291,
-        "elementWidth": 416,
-        "pageX": 0,
-        "pageY": 0,
-        "relativeX": -208,
-        "relativeY": -291,
-        "scrollX": 0,
-        "scrollY": 0,
-        "viewportHeight": 961,
-        "viewportWidth": 1920
-      },
-      "dataAttributes": {},
       "href": "",
-      "id": "continue-button",
-      "name": "",
-      "parent": {
-        "className": "fields-container button-container",
-        "id": "",
-        "tagName": "DIV"
-      },
-      "placeholder": "",
+      "id": "",
+      "inIframe": false,
+      "inShadowRoot": false,
       "selectors": {
-        "cssSelector": "#continue-button",
-        "xpath": "//*[@id=\"continue-button\"]"
+        "cssSelector": "html",
+        "xpath": "//*[@id=\"undefined\"]/html[1]"
       },
-      "siblingsCount": 1,
-      "src": "",
-      "tagName": "BUTTON",
-      "target": "",
-      "text": "Continue",
-      "textContent": "Continue",
-      "timestamp": "2025-10-20T16:46:13.398Z",
+      "tagName": "HTML",
+      "text": "Run \u276f\nGet your own website\nResult Size: 938 x 806\n<!DOCTYPE html>\n<html>\n<head>\n<style>\ndiv {\n \u00a0back",
+      "timestamp": "2025-10-22T12:31:07.972Z",
       "title": "",
-      "type": "submit",
-      "value": "",
-      "visualProperties": {
-        "backgroundColor": "rgb(15, 98, 254)",
-        "border": "1px solid rgba(0, 0, 0, 0)",
-        "color": "rgb(255, 255, 255)",
-        "cursor": "pointer",
-        "display": "inline-flex",
-        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
-        "fontSize": "14px",
-        "fontWeight": "400",
-        "height": "48px",
-        "margin": "0px",
-        "opacity": "1",
-        "padding": "11px 63px 11px 15px",
-        "position": "relative",
-        "width": "416px",
-        "zIndex": "auto"
-      }
+      "type": ""
     },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
     "locators": {
-      "id": "continue-button",
-      "class": "submit-button bx--btn bx--btn--primary",
-      "tag_name": "BUTTON",
-      "text": "Continue",
-      "type": "submit"
-    },
-    "screenshot": {
-      "filename": "screenshot_13_20251020_221613.png",
-      "path": "screenshots/screenshot_13_20251020_221613.png",
-      "element_bounds": {
-        "left": 208,
-        "top": 291,
-        "width": 416,
-        "height": 48
-      },
-      "viewport_size": {
-        "width": 1920,
-        "height": 961
-      }
-    },
-    "vlm_description": "This is an image of a screenshot, specifically the top-left corner of the screen where there's a button or field with rounded corners and shadows. The button has a white background with blue text content that reads \"HTML not available\". There are no icons or images visible on this element.",
-    "element_html": null
-  },
-  {
-    "timestamp": "2025-10-20T22:16:20.532159",
-    "action": "navigation",
-    "details": {
-      "url": "https://login.w3.ibm.com/idaas/mtfim/sps/idaas/login?runtime=true&Target=https%3A%2F%2Flogin.w3.ibm.com%2Fsaml%2Fsps%2Fauth",
-      "title": "w3id",
-      "previous_url": "https://login.ibm.com/authsvc/mtfim/sps/authsvc?PolicyId=urn:ibm:security:authentication:asf:basicldapuser&Target=https%3A%2F%2Flogin.ibm.com%2Foidc%2Fendpoint%2Fdefault%2Fauthorize%3FqsId%3D4df7b03f-3b19-4f4b-bf1b-abe9b26dd0f9%26client_id%3DMyIBMLondonProdCI"
+      "tag_name": "HTML",
+      "text": "Run \u276f\nGet your own website\nResult Size: 938 x 806\n<!DOCTYPE html>\n<html>\n<head>\n<style>\ndiv {\n \u00a0back"
     }
   },
   {
-    "timestamp": "2025-10-20T22:16:24.217362",
-    "action": "navigation",
+    "timestamp": "2025-10-22T18:01:08.109698",
+    "action": "hover",
     "details": {
-      "url": "https://login.w3.ibm.com/authsvc/mtfim/sps/authsvc?PolicyId=urn:ibm:security:authentication:asf:onpremldap&identity_source_id=7fdde1e3-ba89-44ab-820b-275718128bb4&Target=https%3A%2F%2Flogin.w3.ibm.com%2Fsaml%2Fsps%2Fauth",
-      "title": "w3id",
-      "previous_url": "https://login.w3.ibm.com/idaas/mtfim/sps/idaas/login?runtime=true&Target=https%3A%2F%2Flogin.w3.ibm.com%2Fsaml%2Fsps%2Fauth"
-    }
-  },
-  {
-    "timestamp": "2025-10-20T22:16:28.601909",
-    "action": "text_input",
-    "details": {
-      "ariaDescribedBy": "",
-      "ariaLabel": "IBM email address (e.g. jdoe@ibm.com)",
-      "ariaRequired": "",
-      "attributes": {
-        "aria-label": "IBM email address (e.g. jdoe@ibm.com)",
-        "carbon-text-input": "false",
-        "class": "user-name ds-input",
-        "id": "user-name-input",
-        "name": "username",
-        "onblur": "inputBlur(event)",
-        "onclick": "inputClick(event)",
-        "onkeyup": "checkDomain()",
-        "placeholder": "IBM email address (e.g. jdoe@ibm.com)",
-        "tabindex": "0",
-        "type": "email"
-      },
-      "autocomplete": "",
-      "className": "user-name ds-input",
+      "className": "w3-bar",
       "coordinates": {
-        "elementBottom": 310.296875,
-        "elementCenterX": 499.984375,
-        "elementCenterY": 285.296875,
-        "elementHeight": 50,
-        "elementLeft": 198.65625,
-        "elementRight": 801.3125,
-        "elementTop": 260.296875,
-        "elementWidth": 602.65625,
+        "elementCenterX": 952.5,
+        "elementCenterY": 122,
+        "elementHeight": 46,
+        "elementLeft": 0,
+        "elementTop": 99,
+        "elementWidth": 1905,
         "scrollX": 0,
         "scrollY": 0,
         "viewportHeight": 961,
         "viewportWidth": 1920
       },
-      "dataAttributes": {},
-      "disabled": false,
-      "form": {
-        "action": "https://login.w3.ibm.com/authsvc/mtfim/sps/authsvc?StateId=8d8fd2d7-fd7c-409e-b81b-45f5aa1eb8ac",
-        "id": "login-main-form",
-        "method": "post",
-        "name": ""
-      },
-      "id": "user-name-input",
-      "label": "",
-      "maxLength": -1,
-      "minLength": -1,
-      "name": "username",
-      "parent": {
-        "className": "ds-input-container",
-        "id": "",
-        "tagName": "DIV"
-      },
-      "placeholder": "IBM email address (e.g. jdoe@ibm.com)",
-      "readOnly": false,
-      "required": false,
-      "selectionEnd": 0,
-      "selectionStart": 0,
-      "selectors": {
-        "cssSelector": "#user-name-input",
-        "xpath": "//*[@id=\"user-name-input\"]"
-      },
-      "tagName": "INPUT",
-      "timestamp": "2025-10-20T16:46:28.478Z",
-      "type": "email",
-      "value": "test",
-      "visualProperties": {
-        "backgroundColor": "rgb(255, 255, 255)",
-        "border": "2px solid rgb(111, 111, 111)",
-        "borderRadius": "2px",
-        "boxShadow": "none",
-        "color": "rgb(38, 38, 38)",
-        "display": "block",
-        "fontFamily": "IBMPlexSans, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "16px",
-        "fontWeight": "400",
-        "height": "50px",
-        "margin": "0px",
-        "padding": "0px 8px",
-        "width": "602.656px"
-      }
-    },
-    "locators": {
-      "id": "user-name-input",
-      "name": "username",
-      "class": "user-name ds-input",
-      "tag_name": "INPUT",
-      "placeholder": "IBM email address (e.g. jdoe@ibm.com)",
-      "type": "email",
-      "aria_label": "IBM email address (e.g. jdoe@ibm.com)",
-      "value": "test"
-    },
-    "screenshot": {
-      "filename": "screenshot_14_20251020_221628.png",
-      "path": "screenshots/screenshot_14_20251020_221628.png",
-      "element_bounds": {
-        "left": 198.65625,
-        "top": 260.296875,
-        "width": 602.65625,
-        "height": 50
-      },
-      "viewport_size": {
-        "width": 1920,
-        "height": 961
-      }
-    },
-    "vlm_description": "This is an error message indicating that HTML is not available for the specified element at the coordinates (499, 285). The text content of the error message is displayed in bold font on a white background with a blue border. The size of the error message is medium and it has rounded corners. There are no icons or images visible within this error message.",
-    "element_html": null
-  },
-  {
-    "timestamp": "2025-10-20T22:16:38.693542",
-    "action": "click",
-    "details": {
-      "alt": "",
-      "ariaLabel": "Password",
-      "ariaRole": "",
-      "attributes": {
-        "aria-label": "Password",
-        "autocomplete": "off",
-        "class": "password ds-input",
-        "id": "password-input",
-        "name": "password",
-        "onblur": "inputBlur(event)",
-        "onclick": "inputClick(event)",
-        "onkeyup": "inputKeyup(event)",
-        "placeholder": "Password",
-        "tabindex": "0",
-        "type": "password"
-      },
-      "className": "password ds-input",
-      "coordinates": {
-        "clickX": 253,
-        "clickY": 370,
-        "elementBottom": 389.5625,
-        "elementCenterX": 499.984375,
-        "elementCenterY": 364.5625,
-        "elementHeight": 50,
-        "elementLeft": 198.65625,
-        "elementRight": 801.3125,
-        "elementTop": 339.5625,
-        "elementWidth": 602.65625,
-        "pageX": 253,
-        "pageY": 370,
-        "relativeX": 54.34375,
-        "relativeY": 30.4375,
-        "scrollX": 0,
-        "scrollY": 0,
-        "viewportHeight": 961,
-        "viewportWidth": 1920
-      },
-      "dataAttributes": {},
       "href": "",
-      "id": "password-input",
-      "name": "password",
-      "parent": {
-        "className": "ds-input-container",
-        "id": "",
-        "tagName": "DIV"
-      },
-      "placeholder": "Password",
+      "id": "",
+      "inIframe": false,
+      "inShadowRoot": false,
       "selectors": {
-        "cssSelector": "#password-input",
-        "xpath": "//*[@id=\"password-input\"]"
+        "cssSelector": "html > body > div:nth-of-type(2) > div",
+        "xpath": "/html/body/div[2]/div[1]"
       },
-      "siblingsCount": 5,
-      "src": "",
-      "tagName": "INPUT",
-      "target": "",
+      "tagName": "DIV",
+      "text": "Run \u276f\nGet your own website\nResult Size: 938 x 806",
+      "timestamp": "2025-10-22T12:31:07.989Z",
+      "title": "",
+      "type": ""
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "class": "w3-bar",
+      "tag_name": "DIV",
+      "text": "Run \u276f\nGet your own website\nResult Size: 938 x 806"
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:01:10.076534",
+    "action": "hover",
+    "details": {
+      "className": "",
+      "coordinates": {
+        "elementCenterX": 1428.75,
+        "elementCenterY": 552.5,
+        "elementHeight": 817,
+        "elementLeft": 952.5,
+        "elementTop": 144,
+        "elementWidth": 952.5,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "href": "",
+      "id": "iframe",
+      "inIframe": false,
+      "inShadowRoot": false,
+      "selectors": {
+        "cssSelector": "#iframe",
+        "xpath": "//*[@id=\"iframe\"]"
+      },
+      "tagName": "DIV",
       "text": "",
-      "textContent": "",
-      "timestamp": "2025-10-20T16:46:38.565Z",
+      "timestamp": "2025-10-22T12:31:09.838Z",
       "title": "",
-      "type": "password",
-      "value": "",
-      "visualProperties": {
-        "backgroundColor": "rgb(255, 255, 255)",
-        "border": "2px solid rgb(135, 135, 135)",
-        "color": "rgb(38, 38, 38)",
-        "cursor": "text",
-        "display": "block",
-        "fontFamily": "IBMPlexSans, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "16px",
-        "fontWeight": "400",
-        "height": "50px",
-        "margin": "0px",
-        "opacity": "1",
-        "padding": "0px 8px",
-        "position": "relative",
-        "width": "602.656px",
-        "zIndex": "auto"
-      }
+      "type": ""
     },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
     "locators": {
-      "id": "password-input",
-      "name": "password",
-      "class": "password ds-input",
-      "tag_name": "INPUT",
-      "placeholder": "Password",
-      "type": "password",
-      "aria_label": "Password"
-    },
-    "screenshot": {
-      "filename": "screenshot_15_20251020_221638.png",
-      "path": "screenshots/screenshot_15_20251020_221638.png",
-      "element_bounds": {
-        "left": 198.65625,
-        "top": 339.5625,
-        "width": 602.65625,
-        "height": 50
-      },
-      "viewport_size": {
-        "width": 1920,
-        "height": 961
-      }
-    },
-    "vlm_description": "This is an error message indicating that HTML is not available for the specified element at the coordinates (499, 364). The text content of the error message is displayed in bold font on a white background with a blue border. The size of the error message is medium and it has rounded corners. There are no icons or images visible within this error message.",
-    "element_html": null
+      "id": "iframe",
+      "tag_name": "DIV"
+    }
   },
   {
-    "timestamp": "2025-10-20T22:16:42.764544",
-    "action": "text_input",
+    "timestamp": "2025-10-22T18:01:10.077490",
+    "action": "hover",
     "details": {
-      "ariaDescribedBy": "",
-      "ariaLabel": "Password",
-      "ariaRequired": "",
-      "attributes": {
-        "aria-label": "Password",
-        "autocomplete": "off",
-        "class": "password ds-input active",
-        "id": "password-input",
-        "name": "password",
-        "onblur": "inputBlur(event)",
-        "onclick": "inputClick(event)",
-        "onkeyup": "inputKeyup(event)",
-        "placeholder": "Password",
-        "tabindex": "0",
-        "type": "password"
-      },
-      "autocomplete": "off",
-      "className": "password ds-input active",
+      "className": "iframeResult",
       "coordinates": {
-        "elementBottom": 389.5625,
-        "elementCenterX": 499.984375,
-        "elementCenterY": 364.5625,
-        "elementHeight": 50,
-        "elementLeft": 198.65625,
-        "elementRight": 801.3125,
-        "elementTop": 339.5625,
-        "elementWidth": 602.65625,
+        "elementCenterX": 1426.25,
+        "elementCenterY": 548,
+        "elementHeight": 806,
+        "elementLeft": 957.5,
+        "elementTop": 145,
+        "elementWidth": 937.5,
         "scrollX": 0,
         "scrollY": 0,
         "viewportHeight": 961,
         "viewportWidth": 1920
       },
-      "dataAttributes": {},
-      "disabled": false,
-      "form": {
-        "action": "https://login.w3.ibm.com/authsvc/mtfim/sps/authsvc?StateId=8d8fd2d7-fd7c-409e-b81b-45f5aa1eb8ac",
-        "id": "login-main-form",
-        "method": "post",
-        "name": ""
-      },
-      "id": "password-input",
-      "label": "",
-      "maxLength": -1,
-      "minLength": -1,
-      "name": "password",
-      "parent": {
-        "className": "ds-input-container",
-        "id": "",
-        "tagName": "DIV"
-      },
-      "placeholder": "Password",
-      "readOnly": false,
-      "required": false,
-      "selectionEnd": 6,
-      "selectionStart": 6,
+      "href": "",
+      "id": "iframeResult_0",
+      "inIframe": false,
+      "inShadowRoot": false,
       "selectors": {
-        "cssSelector": "#password-input",
-        "xpath": "//*[@id=\"password-input\"]"
+        "cssSelector": "#iframeResult_0",
+        "xpath": "//*[@id=\"iframeResult_0\"]"
       },
-      "tagName": "INPUT",
-      "timestamp": "2025-10-20T16:46:42.657Z",
-      "type": "password",
-      "value": "123456",
-      "visualProperties": {
-        "backgroundColor": "rgb(255, 255, 255)",
-        "border": "2px solid rgb(111, 111, 111)",
-        "borderRadius": "2px",
-        "boxShadow": "none",
-        "color": "rgb(38, 38, 38)",
-        "display": "block",
-        "fontFamily": "IBMPlexSans, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "16px",
-        "fontWeight": "400",
-        "height": "50px",
-        "margin": "0px",
-        "padding": "0px 8px",
-        "width": "602.656px"
-      }
+      "tagName": "IFRAME",
+      "text": "",
+      "timestamp": "2025-10-22T12:31:09.855Z",
+      "title": "",
+      "type": ""
     },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
     "locators": {
-      "id": "password-input",
-      "name": "password",
-      "class": "password ds-input active",
-      "tag_name": "INPUT",
-      "placeholder": "Password",
-      "type": "password",
-      "aria_label": "Password",
-      "value": "123456"
-    },
-    "screenshot": {
-      "filename": "screenshot_16_20251020_221642.png",
-      "path": "screenshots/screenshot_16_20251020_221642.png",
-      "element_bounds": {
-        "left": 198.65625,
-        "top": 339.5625,
-        "width": 602.65625,
-        "height": 50
-      },
-      "viewport_size": {
-        "width": 1920,
-        "height": 961
-      }
-    },
-    "vlm_description": "This is an error message indicating that HTML is not available for the specified element at the coordinates (499, 364). The text content of the error message is displayed in bold font and has a white background with black text. The size of the error message is medium, and it is positioned to the right of the element. There are no icons or images visible within the error message.",
-    "element_html": null
+      "id": "iframeResult_0",
+      "class": "iframeResult",
+      "tag_name": "IFRAME"
+    }
   },
   {
-    "timestamp": "2025-10-20T22:16:45.829032",
+    "timestamp": "2025-10-22T18:01:10.078247",
+    "action": "hover",
+    "details": {
+      "className": "",
+      "id": "",
+      "iframeIndex": 1,
+      "inIframe": true,
+      "selectors": {
+        "cssSelector": "html",
+        "xpath": "//*[@id=\"undefined\"]/html[1]"
+      },
+      "tagName": "HTML",
+      "text": "Hover over me!",
+      "timestamp": "2025-10-22T12:31:09.855Z"
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "HTML",
+      "text": "Hover over me!",
+      "in_iframe": true
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:01:10.079012",
+    "action": "hover",
+    "details": {
+      "className": "",
+      "id": "",
+      "iframeIndex": 1,
+      "inIframe": true,
+      "selectors": {
+        "cssSelector": "html > body > span",
+        "xpath": "//*[@id=\"undefined\"]/html[1]/body[1]/span[1]"
+      },
+      "tagName": "SPAN",
+      "text": "Hover over me!",
+      "timestamp": "2025-10-22T12:31:09.912Z"
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "SPAN",
+      "text": "Hover over me!",
+      "in_iframe": true
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:01:12.041825",
+    "action": "hover",
+    "details": {
+      "className": "",
+      "id": "",
+      "iframeIndex": 1,
+      "inIframe": true,
+      "selectors": {
+        "cssSelector": "html",
+        "xpath": "//*[@id=\"undefined\"]/html[1]"
+      },
+      "tagName": "HTML",
+      "text": "Hover over me!",
+      "timestamp": "2025-10-22T12:31:11.822Z"
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "HTML",
+      "text": "Hover over me!",
+      "in_iframe": true
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:01:12.042545",
+    "action": "hover",
+    "details": {
+      "className": "",
+      "coordinates": {
+        "elementCenterX": 1428.75,
+        "elementCenterY": 552.5,
+        "elementHeight": 817,
+        "elementLeft": 952.5,
+        "elementTop": 144,
+        "elementWidth": 952.5,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "href": "",
+      "id": "iframe",
+      "inIframe": false,
+      "inShadowRoot": false,
+      "selectors": {
+        "cssSelector": "#iframe",
+        "xpath": "//*[@id=\"iframe\"]"
+      },
+      "tagName": "DIV",
+      "text": "",
+      "timestamp": "2025-10-22T12:31:11.855Z",
+      "title": "",
+      "type": ""
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "iframe",
+      "tag_name": "DIV"
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:01:12.043205",
+    "action": "hover",
+    "details": {
+      "className": "w3-bar",
+      "coordinates": {
+        "elementCenterX": 952.5,
+        "elementCenterY": 122,
+        "elementHeight": 46,
+        "elementLeft": 0,
+        "elementTop": 99,
+        "elementWidth": 1905,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "href": "",
+      "id": "",
+      "inIframe": false,
+      "inShadowRoot": false,
+      "selectors": {
+        "cssSelector": "html > body > div:nth-of-type(2) > div",
+        "xpath": "/html/body/div[2]/div[1]"
+      },
+      "tagName": "DIV",
+      "text": "Run \u276f\nGet your own website\nResult Size: 938 x 806",
+      "timestamp": "2025-10-22T12:31:11.872Z",
+      "title": "",
+      "type": ""
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "class": "w3-bar",
+      "tag_name": "DIV",
+      "text": "Run \u276f\nGet your own website\nResult Size: 938 x 806"
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:01:15.483215",
+    "action": "hover",
+    "details": {
+      "className": "iframeResult",
+      "coordinates": {
+        "elementCenterX": 1426.25,
+        "elementCenterY": 548,
+        "elementHeight": 806,
+        "elementLeft": 957.5,
+        "elementTop": 145,
+        "elementWidth": 937.5,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "href": "",
+      "id": "iframeResult_0",
+      "inIframe": false,
+      "inShadowRoot": false,
+      "selectors": {
+        "cssSelector": "#iframeResult_0",
+        "xpath": "//*[@id=\"iframeResult_0\"]"
+      },
+      "tagName": "IFRAME",
+      "text": "",
+      "timestamp": "2025-10-22T12:31:15.455Z",
+      "title": "",
+      "type": ""
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "iframeResult_0",
+      "class": "iframeResult",
+      "tag_name": "IFRAME"
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:01:15.484015",
+    "action": "hover",
+    "details": {
+      "className": "",
+      "id": "",
+      "iframeIndex": 1,
+      "inIframe": true,
+      "selectors": {
+        "cssSelector": "html > body > span",
+        "xpath": "//*[@id=\"undefined\"]/html[1]/body[1]/span[1]"
+      },
+      "tagName": "SPAN",
+      "text": "Hover over me!",
+      "timestamp": "2025-10-22T12:31:15.455Z"
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "SPAN",
+      "text": "Hover over me!",
+      "in_iframe": true
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:01:15.729360",
+    "action": "hover",
+    "details": {
+      "className": "",
+      "id": "",
+      "iframeIndex": 1,
+      "inIframe": true,
+      "selectors": {
+        "cssSelector": "html > body",
+        "xpath": "//*[@id=\"undefined\"]/html[1]/body[1]"
+      },
+      "tagName": "BODY",
+      "text": "Hover over me!",
+      "timestamp": "2025-10-22T12:31:15.668Z"
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "BODY",
+      "text": "Hover over me!",
+      "in_iframe": true
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:01:16.462333",
+    "action": "hover",
+    "details": {
+      "className": "",
+      "id": "",
+      "iframeIndex": 1,
+      "inIframe": true,
+      "selectors": {
+        "cssSelector": "html > body > span",
+        "xpath": "//*[@id=\"undefined\"]/html[1]/body[1]/span[1]"
+      },
+      "tagName": "SPAN",
+      "text": "Hover over me!",
+      "timestamp": "2025-10-22T12:31:16.348Z"
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "SPAN",
+      "text": "Hover over me!",
+      "in_iframe": true
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:01:16.911753",
     "action": "click",
     "details": {
-      "alt": "",
-      "ariaLabel": "",
-      "ariaRole": "button",
-      "attributes": {
-        "aria-pressed": "false",
-        "class": "ds-clickable ds-button ds-col-xs-8 ds-col-sm-5 ds-col-xl-4 ds-mar-b-1 ds-mar-b-lg-0",
-        "id": "login-button",
-        "role": "button",
-        "type": "submit",
-        "value": "login"
+      "id": "",
+      "inIframe": true,
+      "tagName": "SPAN",
+      "text": "Hover over me!",
+      "timestamp": "2025-10-22T12:31:16.876Z"
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "SPAN",
+      "text": "Hover over me!",
+      "in_iframe": true
+    },
+    "screenshot": {
+      "filename": "screenshot_1_20251022_180116.png",
+      "path": "screenshots/screenshot_1_20251022_180116.png"
+    },
+    "vlm_description": "This is an HTML not available error message displayed at the top-left corner of the screen, indicating that the HTML code cannot be processed or rendered. The text is white on a black background, and there are no distinctive colors, shapes, or styling elements visible in this specific element.",
+    "element_html": null
+  },
+  {
+    "timestamp": "2025-10-22T18:01:18.618785",
+    "action": "hover",
+    "details": {
+      "className": "",
+      "id": "",
+      "iframeIndex": 1,
+      "inIframe": true,
+      "selectors": {
+        "cssSelector": "html",
+        "xpath": "//*[@id=\"undefined\"]/html[1]"
       },
-      "className": "ds-clickable ds-button ds-col-xs-8 ds-col-sm-5 ds-col-xl-4 ds-mar-b-1 ds-mar-b-lg-0",
+      "tagName": "HTML",
+      "text": "Hover over me!",
+      "timestamp": "2025-10-22T12:31:18.488Z"
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "HTML",
+      "text": "Hover over me!",
+      "in_iframe": true
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:01:18.619555",
+    "action": "hover",
+    "details": {
+      "className": "",
       "coordinates": {
-        "clickX": 327,
-        "clickY": 569,
-        "elementBottom": 596.796875,
-        "elementCenterX": 293.7578125,
-        "elementCenterY": 571.8046875,
-        "elementHeight": 49.984375,
-        "elementLeft": 190.65625,
-        "elementRight": 396.859375,
-        "elementTop": 546.8125,
-        "elementWidth": 206.203125,
-        "pageX": 327,
-        "pageY": 569,
-        "relativeX": 136.34375,
-        "relativeY": 22.1875,
+        "elementCenterX": 1428.75,
+        "elementCenterY": 552.5,
+        "elementHeight": 817,
+        "elementLeft": 952.5,
+        "elementTop": 144,
+        "elementWidth": 952.5,
         "scrollX": 0,
         "scrollY": 0,
         "viewportHeight": 961,
         "viewportWidth": 1920
       },
-      "dataAttributes": {},
       "href": "",
-      "id": "login-button",
-      "name": "",
-      "parent": {
-        "className": "ds-button-group-h ds-row",
-        "id": "submit",
-        "tagName": "DIV"
-      },
-      "placeholder": "",
+      "id": "iframe",
+      "inIframe": false,
+      "inShadowRoot": false,
       "selectors": {
-        "cssSelector": "#login-button",
-        "xpath": "//*[@id=\"login-button\"]"
+        "cssSelector": "#iframe",
+        "xpath": "//*[@id=\"iframe\"]"
       },
-      "siblingsCount": 4,
-      "src": "",
-      "tagName": "BUTTON",
-      "target": "",
-      "text": "Sign in",
-      "textContent": "Sign in",
-      "timestamp": "2025-10-20T16:46:45.581Z",
+      "tagName": "DIV",
+      "text": "",
+      "timestamp": "2025-10-22T12:31:18.505Z",
       "title": "",
-      "type": "submit",
-      "value": "login",
-      "visualProperties": {
-        "backgroundColor": "rgb(4, 48, 82)",
-        "border": "",
-        "color": "rgb(255, 255, 255)",
-        "cursor": "pointer",
-        "display": "inline-block",
-        "fontFamily": "IBMPlexSans, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "16px",
-        "fontWeight": "500",
-        "height": "49.9844px",
-        "margin": "0px",
-        "opacity": "1",
-        "padding": "15.8px 8px",
-        "position": "relative",
-        "width": "206.203px",
-        "zIndex": "100"
-      }
+      "type": ""
     },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
     "locators": {
-      "id": "login-button",
-      "class": "ds-clickable ds-button ds-col-xs-8 ds-col-sm-5 ds-col-xl-4 ds-mar-b-1 ds-mar-b-lg-0",
-      "tag_name": "BUTTON",
-      "text": "Sign in",
-      "type": "submit",
-      "value": "login"
-    },
-    "screenshot": {
-      "filename": "screenshot_17_20251020_221645.png",
-      "path": "screenshots/screenshot_17_20251020_221645.png",
-      "element_bounds": {
-        "left": 190.65625,
-        "top": 546.8125,
-        "width": 206.203125,
-        "height": 49.984375
-      },
-      "viewport_size": {
-        "width": 1920,
-        "height": 961
-      }
-    },
-    "vlm_description": "This is an error message indicating that HTML is not available for the specified element at the coordinates (293, 571). The text content of the error message is displayed in bold font on a white background with a blue border. The size of the error message is medium and it has rounded corners. There are no icons or images visible within this error message.",
-    "element_html": null
+      "id": "iframe",
+      "tag_name": "DIV"
+    }
   },
   {
-    "timestamp": "2025-10-20T22:16:58.924706",
-    "action": "text_input",
+    "timestamp": "2025-10-22T18:01:18.620269",
+    "action": "hover",
     "details": {
-      "ariaDescribedBy": "",
-      "ariaLabel": "IBM email address (e.g. jdoe@ibm.com)",
-      "ariaRequired": "",
-      "attributes": {
-        "aria-label": "IBM email address (e.g. jdoe@ibm.com)",
-        "carbon-text-input": "false",
-        "class": "user-name ds-input",
-        "id": "user-name-input",
-        "name": "username",
-        "onblur": "inputBlur(event)",
-        "onclick": "inputClick(event)",
-        "onkeyup": "checkDomain()",
-        "placeholder": "IBM email address (e.g. jdoe@ibm.com)",
-        "tabindex": "0",
-        "type": "email"
-      },
-      "autocomplete": "",
-      "className": "user-name ds-input",
+      "className": "w3-bar",
       "coordinates": {
-        "elementBottom": 310.296875,
-        "elementCenterX": 499.984375,
-        "elementCenterY": 285.296875,
-        "elementHeight": 50,
-        "elementLeft": 198.65625,
-        "elementRight": 801.3125,
-        "elementTop": 260.296875,
-        "elementWidth": 602.65625,
+        "elementCenterX": 952.5,
+        "elementCenterY": 122,
+        "elementHeight": 46,
+        "elementLeft": 0,
+        "elementTop": 99,
+        "elementWidth": 1905,
         "scrollX": 0,
         "scrollY": 0,
         "viewportHeight": 961,
         "viewportWidth": 1920
       },
-      "dataAttributes": {},
-      "disabled": false,
-      "form": {
-        "action": "https://login.w3.ibm.com/authsvc/mtfim/sps/authsvc?StateId=8d8fd2d7-fd7c-409e-b81b-45f5aa1eb8ac",
-        "id": "login-main-form",
-        "method": "post",
-        "name": ""
-      },
-      "id": "user-name-input",
-      "label": "",
-      "maxLength": -1,
-      "minLength": -1,
-      "name": "username",
-      "parent": {
-        "className": "ds-input-container",
-        "id": "",
-        "tagName": "DIV"
-      },
-      "placeholder": "IBM email address (e.g. jdoe@ibm.com)",
-      "readOnly": false,
-      "required": false,
-      "selectionEnd": 0,
-      "selectionStart": 0,
+      "href": "",
+      "id": "",
+      "inIframe": false,
+      "inShadowRoot": false,
       "selectors": {
-        "cssSelector": "#user-name-input",
-        "xpath": "//*[@id=\"user-name-input\"]"
+        "cssSelector": "html > body > div:nth-of-type(2) > div",
+        "xpath": "/html/body/div[2]/div[1]"
       },
-      "tagName": "INPUT",
-      "timestamp": "2025-10-20T16:46:58.686Z",
-      "type": "email",
-      "value": "test@ibm.com",
-      "visualProperties": {
-        "backgroundColor": "rgb(255, 255, 255)",
-        "border": "2px solid rgb(111, 111, 111)",
-        "borderRadius": "2px",
-        "boxShadow": "none",
-        "color": "rgb(38, 38, 38)",
-        "display": "block",
-        "fontFamily": "IBMPlexSans, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "16px",
-        "fontWeight": "400",
-        "height": "50px",
-        "margin": "0px",
-        "padding": "0px 8px",
-        "width": "602.656px"
-      },
-      "consolidated_from": 8
+      "tagName": "DIV",
+      "text": "Run \u276f\nGet your own website\nResult Size: 938 x 806",
+      "timestamp": "2025-10-22T12:31:18.522Z",
+      "title": "",
+      "type": ""
     },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
     "locators": {
-      "id": "user-name-input",
-      "name": "username",
-      "class": "user-name ds-input",
-      "tag_name": "INPUT",
-      "placeholder": "IBM email address (e.g. jdoe@ibm.com)",
-      "type": "email",
-      "aria_label": "IBM email address (e.g. jdoe@ibm.com)",
-      "value": "test@ibm.com"
-    },
-    "screenshot": {
-      "filename": "screenshot_25_20251020_221658.png",
-      "path": "screenshots/screenshot_25_20251020_221658.png",
-      "element_bounds": {
-        "left": 198.65625,
-        "top": 260.296875,
-        "width": 602.65625,
-        "height": 50
-      },
-      "viewport_size": {
-        "width": 1920,
-        "height": 961
-      }
-    },
-    "vlm_description": "This is an error message indicating that HTML is not available for the specified element at the coordinates (499, 285). The text content of the error message is displayed in bold font on a white background with a blue border. The size of the error message is medium and it has rounded corners. There are no icons or images visible within this error message.",
-    "element_html": null
+      "class": "w3-bar",
+      "tag_name": "DIV",
+      "text": "Run \u276f\nGet your own website\nResult Size: 938 x 806"
+    }
   },
   {
-    "timestamp": "2025-10-20T22:17:00.074015",
-    "action": "navigation",
+    "timestamp": "2025-10-22T18:01:18.867412",
+    "action": "hover",
     "details": {
-      "url": "https://login.w3.ibm.com/authsvc/mtfim/sps/authsvc?StateId=8d8fd2d7-fd7c-409e-b81b-45f5aa1eb8ac",
-      "title": "w3id",
-      "previous_url": "https://login.w3.ibm.com/authsvc/mtfim/sps/authsvc?PolicyId=urn:ibm:security:authentication:asf:onpremldap&identity_source_id=7fdde1e3-ba89-44ab-820b-275718128bb4&Target=https%3A%2F%2Flogin.w3.ibm.com%2Fsaml%2Fsps%2Fauth"
+      "className": "",
+      "coordinates": {
+        "elementCenterX": 952.5,
+        "elementCenterY": 50,
+        "elementHeight": 90,
+        "elementLeft": 0,
+        "elementTop": 5,
+        "elementWidth": 1905,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "href": "",
+      "id": "tryitLeaderboard",
+      "inIframe": false,
+      "inShadowRoot": false,
+      "selectors": {
+        "cssSelector": "#tryitLeaderboard",
+        "xpath": "//*[@id=\"tryitLeaderboard\"]"
+      },
+      "tagName": "DIV",
+      "text": "",
+      "timestamp": "2025-10-22T12:31:18.672Z",
+      "title": "",
+      "type": ""
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "tryitLeaderboard",
+      "tag_name": "DIV"
+    }
+  },
+  {
+    "timestamp": "2025-10-22T18:01:19.607741",
+    "action": "hover",
+    "details": {
+      "className": "",
+      "coordinates": {
+        "elementCenterX": 952.5,
+        "elementCenterY": 47.5,
+        "elementHeight": 95,
+        "elementLeft": 0,
+        "elementTop": 0,
+        "elementWidth": 1905,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "href": "",
+      "id": "",
+      "inIframe": false,
+      "inShadowRoot": false,
+      "selectors": {
+        "cssSelector": "html",
+        "xpath": "//*[@id=\"undefined\"]/html[1]"
+      },
+      "tagName": "HTML",
+      "text": "Run \u276f\nGet your own website\nResult Size: 938 x 806\n<!DOCTYPE html>\n<html>\n<head>\n<style>\ndiv {\n \u00a0back",
+      "timestamp": "2025-10-22T12:31:19.487Z",
+      "title": "",
+      "type": ""
+    },
+    "window_handle": "529A1599D336F4A92A9B2B88290A6C05",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "HTML",
+      "text": "Run \u276f\nGet your own website\nResult Size: 938 x 806\n<!DOCTYPE html>\n<html>\n<head>\n<style>\ndiv {\n \u00a0back"
     }
   }
 ]

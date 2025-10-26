@@ -8,12 +8,10 @@ from selenium.webdriver.common.keys import Keys
 from typing import Dict, Any, Optional, List, Tuple
 from core.locators.element_finder import VisualElementFinder
 from llm_helpers import OllamaVLM
-from core.locators.element_locator import ElementLocator, create_locator_from_activity, LocatorStrategy
-from core.analyzers.assertions import Assertion, AssertionResult, AssertionBuilder
-from PIL import Image
+from core.locators.element_locator import ElementLocator
+from core.analyzers.assertions import Assertion
 import time
 import os
-import traceback
 
 # Phase 2: VLM imports (optional - graceful degradation if Ollama not available)
 try:
@@ -36,6 +34,9 @@ class ActivityExecutor:
         self.step_counter = 0
         self.use_enhanced_locators = True  # Enable multi-strategy locators
         self.assertions: List[Assertion] = []  # Assertions to check after step
+        # Basic locator + iframe context placeholders used by some helper methods
+        self.element_locator = ElementLocator("generic")
+        self.current_iframe_context = None
         
         # Create screenshots directory
         os.makedirs(screenshots_dir, exist_ok=True)
@@ -65,6 +66,25 @@ class ActivityExecutor:
         
         # Track failure analysis results
         self.last_failure_analysis = None
+
+    def _ensure_window_context(self, activity: Dict[str, Any]):
+        """Switch to the window/tab recorded for this activity if metadata present."""
+        try:
+            target_handle = activity.get('window_handle')
+            target_index = activity.get('tab_index')
+            handles = self.driver.window_handles
+            # Prefer handle match
+            if target_handle and target_handle in handles:
+                if self.driver.current_window_handle != target_handle:
+                    self.driver.switch_to.window(target_handle)
+                return
+            # Fallback to index
+            if target_index is not None and isinstance(target_index, int):
+                if 0 <= target_index < len(handles):
+                    if self.driver.current_window_handle != handles[target_index]:
+                        self.driver.switch_to.window(handles[target_index])
+        except Exception:
+            pass
     
     def _create_locator_from_details(self, details: Dict[str, Any]) -> ElementLocator:
         """Create ElementLocator from activity details with locators field"""
@@ -284,7 +304,7 @@ class ActivityExecutor:
                     if element:
                         print(f"[EXECUTOR] ✓ Found {tag_name} in iframe by ID")
                         return element
-                except:
+                except Exception:
                     pass
             
             # Try by name
@@ -294,7 +314,7 @@ class ActivityExecutor:
                     if element:
                         print(f"[EXECUTOR] ✓ Found {tag_name} in iframe by name")
                         return element
-                except:
+                except Exception:
                     pass
             
             # Try by tag name
@@ -316,7 +336,7 @@ class ActivityExecutor:
                     if element:
                         print(f"[EXECUTOR] ✓ Found {tag_name} in iframe by tag name")
                         return element
-            except:
+            except Exception:
                 pass
             
             print(f"[EXECUTOR] ✗ Element not found in iframe")
@@ -328,7 +348,7 @@ class ActivityExecutor:
             try:
                 self.driver.switch_to.default_content()
                 self.current_iframe = None
-            except:
+            except Exception:
                 pass
             return None
     
@@ -338,7 +358,7 @@ class ActivityExecutor:
             if self.current_iframe is not None:
                 self.driver.switch_to.default_content()
                 self.current_iframe = None
-        except:
+        except Exception:
             pass
     
     def _wait_for_page_ready(self, timeout: int = 15) -> bool:
@@ -631,6 +651,9 @@ class ActivityExecutor:
             # Capture screenshot before action
             result['screenshot_before'] = self._capture_screenshot('before')
             
+            # Ensure correct tab/window context before executing (if metadata present)
+            self._ensure_window_context(activity)
+
             # Execute based on action type (pass enhanced_details with VLM data)
             if action == 'navigation':
                 success, method, error = self._execute_navigation(enhanced_details)
@@ -645,12 +668,22 @@ class ActivityExecutor:
             elif action == 'modal_detected':
                 success, method, error = True, 'modal_noted', ''  # Just log modal detection
                 print(f"[EXECUTOR] Modal detected: {details.get('text', '')[:100]}")
-            elif action == 'switch_tab':
+            elif action in ('switch_tab', 'tab_switch'):
                 success, method, error = self._execute_switch_tab(enhanced_details)
             elif action == 'switch_window':
                 success, method, error = self._execute_switch_window(enhanced_details)
+            elif action == 'hover':
+                # Pass original screenshot (may be empty) so hover fallback can capture context for VLM
+                success, method, error = self._execute_hover(enhanced_details, original_screenshot)
+            elif action == 'new_tab':
+                # No direct action required – context should already reflect this
+                success, method, error = True, 'new_tab_noted', ''
+            elif action == 'tab_closed':
+                success, method, error = True, 'tab_closed_noted', ''
             elif action == 'scroll_to_element':
                 success, method, error = self._execute_scroll_to_element(enhanced_details, original_screenshot)
+            elif action == 'verification':
+                success, method, error = self._execute_verification(enhanced_details)
             else:
                 success, method, error = False, 'unknown_action', f'Unknown action type: {action}'
             
@@ -728,7 +761,7 @@ class ActivityExecutor:
         Returns:
             Failure analysis result or None if VLM not available
         """
-        if not self.vlm_enabled or not self.failure_analyzer:
+        if not self.vlm_enabled or not self.failure_analyzer or not hasattr(self.failure_analyzer, 'analyze_failure'):
             return None
         
         try:
@@ -750,13 +783,13 @@ class ActivityExecutor:
                 try:
                     with open(before_screenshot, 'rb') as f:
                         before_bytes = f.read()
-                except:
+                except Exception:
                     pass
             if after_screenshot:
                 try:
                     with open(after_screenshot, 'rb') as f:
                         after_bytes = f.read()
-                except:
+                except Exception:
                     pass
             
             # Analyze the failure
@@ -831,7 +864,7 @@ class ActivityExecutor:
             
             try:
                 WebDriverWait(self.driver, 5).until(EC.alert_is_present())
-            except:
+            except Exception:
                 return False, 'popup_timeout', 'Popup did not appear within timeout'
             
             # Get the alert
@@ -893,7 +926,7 @@ class ActivityExecutor:
                         print(f"[EXECUTOR] Found button by XPath")
                         button.click()
                         return True, 'modal_button_xpath', ''
-                except:
+                except Exception:
                     pass
             
             # Strategy 2: Try by ID
@@ -904,7 +937,7 @@ class ActivityExecutor:
                         print(f"[EXECUTOR] Found button by ID: {button_id}")
                         button.click()
                         return True, 'modal_button_id', ''
-                except:
+                except Exception:
                     pass
             
             # Strategy 3: Try by text content
@@ -928,9 +961,9 @@ class ActivityExecutor:
                                     print(f"[EXECUTOR] Found button by text: '{btn_text or btn_value}'")
                                     btn.click()
                                     return True, 'modal_button_text', ''
-                        except:
+                        except Exception:
                             continue
-                except:
+                except Exception:
                     pass
             
             # Strategy 4: Try by modal selector + button class
@@ -944,7 +977,7 @@ class ActivityExecutor:
                                 print(f"[EXECUTOR] Found button by class in modal")
                                 btn.click()
                                 return True, 'modal_button_class', ''
-                except:
+                except Exception:
                     pass
             
             # Strategy 5: Try by coordinates (fallback)
@@ -954,7 +987,7 @@ class ActivityExecutor:
                     y = coordinates['y']
                     print(f"[EXECUTOR] Trying to click at coordinates: ({x}, {y})")
                     
-                    from selenium.webdriver.common.action_chains import ActionChains
+                    # Reuse globally imported ActionChains (removed local reimport)
                     actions = ActionChains(self.driver)
                     actions.move_by_offset(x, y).click().perform()
                     
@@ -989,7 +1022,7 @@ class ActivityExecutor:
             if self.use_enhanced_locators and 'locators' in details:
                 print("[EXECUTOR] Attempting multi-strategy element location...")
                 locator = self._create_locator_from_details(details)
-                element, method_used, error_msg = locator.find_element(self.driver, timeout=5.0)
+                element, method_used, _unused_error = locator.find_element(self.driver, timeout=5.0)
                 
                 if element:
                     method = method_used
@@ -1023,23 +1056,40 @@ class ActivityExecutor:
                         desc_parts.append(f"placeholder '{details['placeholder']}'")
                     if details.get('ariaLabel'):
                         desc_parts.append(f"aria-label '{details['ariaLabel']}'")
-                    
                     description = " with ".join(desc_parts) if desc_parts else "clickable element"
-                    
-                    # Try VLM-based element finding
-                    success, message = self.vlm_finder.click_element_by_description(
-                        self.driver,
-                        description,
-                        screenshot_path=original_screenshot
-                    )
-                    
-                    if success:
-                        method = 'vlm_finder'
-                        print(f"[EXECUTOR] ✓ VLM clicked element: {message}")
-                        # VLM already clicked, so return success
-                        return True, method, ''
-                    else:
-                        print(f"[EXECUTOR] VLM click failed: {message}")
+
+                    # Prefer direct click helper if provided by concrete implementation
+                    if hasattr(self.vlm_finder, 'click_element_by_description'):
+                        success, message = self.vlm_finder.click_element_by_description(  # type: ignore
+                            self.driver,
+                            description,
+                            screenshot_path=original_screenshot
+                        )
+                        if success:
+                            method = 'vlm_finder'
+                            print(f"[EXECUTOR] ✓ VLM clicked element: {message}")
+                            return True, method, ''
+                        else:
+                            print(f"[EXECUTOR] VLM click failed: {message}")
+                    elif hasattr(self.vlm_finder, 'find_element_by_description'):
+                        # Generic coordinate-based fallback
+                        vlm_result = self.vlm_finder.find_element_by_description(  # type: ignore
+                            self.driver,
+                            description,
+                            screenshot_path=original_screenshot
+                        )
+                        if getattr(vlm_result, 'found', False) and getattr(vlm_result, 'coordinates', None):
+                            x, y = vlm_result.coordinates  # type: ignore
+                            print(f"[EXECUTOR] ✓ VLM located element at ({x},{y}) - performing coordinate click")
+                            actions = ActionChains(self.driver)
+                            actions.move_by_offset(x, y).click().perform()
+                            # Reset pointer to avoid offset accumulation
+                            actions = ActionChains(self.driver)
+                            actions.move_by_offset(-x, -y).perform()
+                            method = 'vlm_coordinates'
+                            return True, method, ''
+                        else:
+                            print("[EXECUTOR] VLM did not locate element coordinates")
                 except Exception as vlm_error:
                     print(f"[EXECUTOR] VLM fallback failed: {vlm_error}")
             
@@ -1066,8 +1116,11 @@ class ActivityExecutor:
                 return True, method, ''
             
             # Normal element click
-            if hasattr(element, 'tag_name'):
-                print(f"[EXECUTOR] Clicking element: {element.tag_name}")
+            if hasattr(element, 'tag_name') and not isinstance(element, dict):
+                try:
+                    print(f"[EXECUTOR] Clicking element: {element.tag_name}")
+                except Exception:
+                    print("[EXECUTOR] Clicking element (tag unavailable)")
             else:
                 print(f"[EXECUTOR] Clicking element")
             
@@ -1083,7 +1136,7 @@ class ActivityExecutor:
                 WebDriverWait(self.driver, 3).until(
                     EC.element_to_be_clickable(element)  # type: ignore
                 )
-            except:
+            except Exception:
                 print("[EXECUTOR] Warning: Selenium wait timeout, but VLM approved - trying anyway...")
             
             # Highlight element briefly
@@ -1161,7 +1214,7 @@ class ActivityExecutor:
             if self.use_enhanced_locators and 'locators' in details:
                 print("[EXECUTOR] Attempting multi-strategy element location...")
                 locator = self._create_locator_from_details(details)
-                element, method_used, error_msg = locator.find_element(self.driver, timeout=5.0)
+                element, method_used, _unused_error = locator.find_element(self.driver, timeout=5.0)
                 
                 if element:
                     method = method_used
@@ -1254,8 +1307,11 @@ class ActivityExecutor:
             
             # Normal input
             text = details.get('value', '')
-            if hasattr(element, 'tag_name'):
-                print(f"[EXECUTOR] Typing into {element.tag_name}: '{text}'")
+            if hasattr(element, 'tag_name') and not isinstance(element, dict):
+                try:
+                    print(f"[EXECUTOR] Typing into {element.tag_name}: '{text}'")
+                except Exception:
+                    print(f"[EXECUTOR] Typing text: '{text}' (tag unavailable)")
             else:
                 print(f"[EXECUTOR] Typing text: '{text}'")
             
@@ -1271,7 +1327,7 @@ class ActivityExecutor:
                 WebDriverWait(self.driver, 3).until(
                     EC.element_to_be_clickable(element)  # type: ignore
                 )
-            except:
+            except Exception:
                 print("[EXECUTOR] Warning: Selenium wait timeout, but VLM approved - trying anyway...")
             
             # Highlight element for input action
@@ -1280,7 +1336,7 @@ class ActivityExecutor:
             # Click to focus
             try:
                 element.click()  # type: ignore
-            except:
+            except Exception:
                 self.driver.execute_script("arguments[0].click();", element)
             
             time.sleep(0.3)
@@ -1288,12 +1344,12 @@ class ActivityExecutor:
             # Clear existing text
             try:
                 element.clear()  # type: ignore
-            except:
+            except Exception:
                 # If clear fails, try selecting all and deleting
                 try:
                     element.send_keys(Keys.CONTROL + "a")  # type: ignore
                     element.send_keys(Keys.DELETE)  # type: ignore
-                except:
+                except Exception:
                     pass  # If all fails, just type
             
             # Type text
@@ -1336,7 +1392,7 @@ class ActivityExecutor:
                 element,
                 original_style
             )
-        except:
+        except Exception:
             pass
     
     def _execute_switch_tab(self, details: Dict[str, Any]) -> Tuple[bool, str, str]:
@@ -1446,14 +1502,13 @@ class ActivityExecutor:
             
             # Try to find element using locators
             if locators:
-                result = self.element_locator.find_element(
-                    self.driver, 
-                    locators, 
-                    self.current_iframe_context
-                )
-                if result['success']:
-                    element = result['element']
-                    method = result['method']
+                try:
+                    result = self.element_locator.find_element(self.driver, locators)
+                    if isinstance(result, dict) and result.get('success'):
+                        element = result.get('element')
+                        method = result.get('method', 'unknown')
+                except Exception:
+                    pass
             
             # Fallback to VLM if available and no element found
             if not element and self.vlm_finder and visual_description and screenshot:
@@ -1462,15 +1517,11 @@ class ActivityExecutor:
                     screenshot, 
                     visual_description
                 )
-                if vlm_result['success'] and 'locators' in vlm_result:
-                    result = self.element_locator.find_element(
-                        self.driver, 
-                        vlm_result['locators'], 
-                        self.current_iframe_context
-                    )
-                    if result['success']:
-                        element = result['element']
-                        method = 'vlm_' + result['method']
+                # stub result object has attributes, not dict
+                if getattr(vlm_result, 'found', False) and getattr(vlm_result, 'coordinates', None):
+                    # We'll treat coordinates click later, no locator resolution
+                    element = {'click_at_coords': vlm_result.coordinates}
+                    method = 'vlm_coordinates'
             
             if not element:
                 return False, 'scroll_error', 'Could not find element to scroll to'
@@ -1484,6 +1535,201 @@ class ActivityExecutor:
             
         except Exception as e:
             return False, 'scroll_error', str(e)
+
+    def _execute_verification(self, details: Dict[str, Any]) -> Tuple[bool, str, str]:
+        """Verify presence of element or text based on criteria/locators.
+
+        Strategies:
+        1. Direct DOM text exact/contains search
+        2. Locator-based lookup (text, placeholder)
+        3. VLM fallback (if enabled) using screenshot + description
+        """
+        criteria = details.get('criteria') or details.get('value') or details.get('description') or ''
+        if not criteria:
+            return False, 'verification_skipped', 'No verification criteria provided'
+        print(f"[EXECUTOR] Verifying presence of: {criteria}")
+
+        # Strategy 1: DOM text search
+        try:
+            script = """
+            const needle = arguments[0].trim().toLowerCase();
+            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+            while (walker.nextNode()) {
+                const t = walker.currentNode.nodeValue.trim().toLowerCase();
+                if (t && t === needle) { return {found:true, method:'text_node'}; }
+            }
+            const allElems = document.querySelectorAll('*');
+            for (const el of allElems) {
+                const txt = (el.innerText || '').trim().toLowerCase();
+                if (txt && txt.includes(needle)) { return {found:true, method:'contains_text'}; }
+            }
+            return {found:false};
+            """
+            dom_result = self.driver.execute_script(script, criteria)
+            if dom_result and dom_result.get('found'):
+                return True, f"verification_{dom_result.get('method','text')}", ''
+        except Exception as e:
+            print(f"[EXECUTOR] DOM verification failed: {e}")
+
+        # Strategy 2: Locator-based
+        locators = details.get('locators') or {}
+        try:
+            if locators.get('text'):
+                elems = self.driver.find_elements(By.XPATH, f"//*[contains(normalize-space(text()), '{locators['text']}')]")
+                if elems:
+                    return True, 'verification_locator_text', ''
+            if locators.get('placeholder'):
+                elems = self.driver.find_elements(By.CSS_SELECTOR, f"[placeholder='{locators['placeholder']}']")
+                if elems:
+                    return True, 'verification_locator_placeholder', ''
+        except Exception as e:
+            print(f"[EXECUTOR] Locator verification failed: {e}")
+
+        # Strategy 3: VLM fallback
+        if getattr(self, 'vlm_enabled', False) and getattr(self, 'vlm_finder', None):
+            try:
+                screenshot_path = self._capture_screenshot('verification')
+                vlm_result = self.vlm_finder.find_element_by_description(screenshot_path, criteria)
+                if getattr(vlm_result, 'found', False):
+                    # Conditional follow-up actions
+                    self._execute_conditional_followups(True, details)
+                    return True, 'verification_vlm', ''
+            except Exception as e:
+                print(f"[EXECUTOR] VLM verification failed: {e}")
+
+        # Failure path conditional follow-ups
+        self._execute_conditional_followups(False, details)
+        return False, 'verification_failed', f"Criteria not found: {criteria[:80]}"
+
+    def _execute_conditional_followups(self, passed: bool, details: Dict[str, Any]):
+        """Execute on_pass or on_fail sub-activities embedded in a verification step."""
+        key = 'on_pass' if passed else 'on_fail'
+        followups = details.get(key)
+        if not followups:
+            return
+        if not isinstance(followups, list):
+            print(f"[EXECUTOR] Conditional follow-ups must be a list, got {type(followups)}")
+            return
+        print(f"[EXECUTOR] Executing {len(followups)} conditional follow-up action(s) for {key}")
+        for idx, sub_activity in enumerate(followups, 1):
+            if not isinstance(sub_activity, dict):
+                print(f"[EXECUTOR] Skipping invalid sub-activity #{idx}: not a dict")
+                continue
+            try:
+                sub_result = self.execute_activity(sub_activity)
+                status = '✓' if sub_result.get('success') else '✗'
+                print(f"[EXECUTOR] {status} Conditional sub-activity #{idx}: {sub_activity.get('action')} method={sub_result.get('method')}")
+            except Exception as e:
+                print(f"[EXECUTOR] ✗ Error executing sub-activity #{idx}: {e}")
+
+    def _execute_hover(self, details: Dict[str, Any], original_screenshot: Optional[str] = None) -> Tuple[bool, str, str]:
+        """Hover over an element.
+
+        Resolution order:
+        1. Multi-strategy locators (if provided)
+        2. Recorded coordinates (elementCenterX/Y)
+        3. VLM fallback (description -> coordinates)
+        4. Failure
+        """
+        try:
+            locators = details.get('locators', {})
+            element = None
+            method = 'unknown'
+
+            # 1. Try locator-based resolution (ElementLocator style interface)
+            if locators:
+                try:
+                    result = self.element_locator.find_element(self.driver, locators)
+                    if isinstance(result, dict) and result.get('success'):
+                        element = result.get('element')
+                        method = result.get('method', 'locators')
+                except Exception:
+                    pass
+
+            # 2. Coordinate fallback from recorded metadata
+            if not element and isinstance(details.get('coordinates'), dict):
+                coords = details['coordinates']
+                x = int(coords.get('elementCenterX', 0))
+                y = int(coords.get('elementCenterY', 0))
+                if x or y:  # Only attempt if non-zero
+                    try:
+                        actions = ActionChains(self.driver)
+                        actions.move_by_offset(x, y).perform()
+                        # Small pause to allow hover-driven menus to appear
+                        time.sleep(0.3)
+                        actions.move_by_offset(-x, -y).perform()
+                        return True, 'hover_coordinates', ''
+                    except Exception as coord_err:
+                        print(f"[EXECUTOR] Coordinate hover failed: {coord_err}")
+
+            # 3. VLM fallback if enabled
+            if not element and self.vlm_enabled and self.vlm_finder:
+                # Build description
+                tag_part = f"{details.get('tagName')} element" if details.get('tagName') else None
+                description = details.get('vlm_description') or details.get('text') or tag_part or 'target element'
+                # Ensure we have a screenshot for the model
+                context_shot = original_screenshot
+                if not context_shot:
+                    context_shot = self._capture_screenshot('hover_context')
+                try:
+                    if hasattr(self.vlm_finder, 'find_element_by_description'):
+                        vlm_result = self.vlm_finder.find_element_by_description(  # type: ignore
+                            self.driver,
+                            description,
+                            screenshot_path=context_shot
+                        )
+                        if getattr(vlm_result, 'found', False) and getattr(vlm_result, 'coordinates', None):
+                            x, y = vlm_result.coordinates  # type: ignore
+                            print(f"[EXECUTOR] ✓ VLM provided hover coordinates ({x},{y}) for '{description[:60]}'")
+                            # Dispatch synthetic hover via JS to avoid offset drift
+                            try:
+                                js = """
+                                    const x = arguments[0];
+                                    const y = arguments[1];
+                                    const el = document.elementFromPoint(x, y);
+                                    if (el) {
+                                        const evOpts = {bubbles:true,cancelable:true,clientX:x,clientY:y};
+                                        el.dispatchEvent(new MouseEvent('mousemove', evOpts));
+                                        el.dispatchEvent(new MouseEvent('mouseover', evOpts));
+                                        el.dispatchEvent(new MouseEvent('mouseenter', evOpts));
+                                        return true;
+                                    }
+                                    return false;
+                                """
+                                dispatched = self.driver.execute_script(js, x, y)
+                                if dispatched:
+                                    time.sleep(0.3)
+                                    return True, 'hover_vlm_coordinates', ''
+                            except Exception as js_err:
+                                print(f"[EXECUTOR] JS hover dispatch failed: {js_err}")
+                            # Fallback: move pointer physically
+                            try:
+                                actions = ActionChains(self.driver)
+                                actions.move_by_offset(x, y).perform()
+                                time.sleep(0.3)
+                                actions.move_by_offset(-x, -y).perform()
+                                return True, 'hover_vlm_coordinates', ''
+                            except Exception as act_err:
+                                print(f"[EXECUTOR] ActionChains hover failed after VLM coords: {act_err}")
+                except Exception as vlm_err:
+                    print(f"[EXECUTOR] VLM hover fallback error: {vlm_err}")
+
+            if not element:
+                return False, 'hover_not_found', 'No element/coordinates/VLM result for hover'
+
+            # 4. Element-based hover
+            try:
+                self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
+            except Exception:
+                pass
+            try:
+                ActionChains(self.driver).move_to_element(element).perform()
+                time.sleep(0.3)
+                return True, f'hover_{method}', ''
+            except Exception as move_err:
+                return False, 'hover_error', f'Move to element failed: {move_err}'
+        except Exception as e:
+            return False, 'hover_error', str(e)
     
     def _capture_screenshot(self, suffix: str) -> str:
         """Capture screenshot and return path"""
