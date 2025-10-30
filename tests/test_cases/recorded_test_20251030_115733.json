@@ -1,0 +1,26 @@
+[
+  {
+    "timestamp": "2025-10-30T11:57:09.133043",
+    "action": "navigation",
+    "details": {
+      "url": "https://www.ibm.com/in-en",
+      "title": "IBM",
+      "previous_url": ""
+    },
+    "window_handle": "580E117CB36D2ABFD04ED01B450A9D7D",
+    "tab_index": 0,
+    "total_tabs": 1
+  },
+  {
+    "timestamp": "2025-10-30T11:57:23.885494",
+    "action": "navigation",
+    "details": {
+      "url": "https://www.ibm.com/search?lang=en&cc=in&q=test",
+      "title": "IBM Search",
+      "previous_url": "https://www.ibm.com/in-en"
+    },
+    "window_handle": "580E117CB36D2ABFD04ED01B450A9D7D",
+    "tab_index": 0,
+    "total_tabs": 1
+  }
+]

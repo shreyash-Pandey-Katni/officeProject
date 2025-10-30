@@ -10,13 +10,17 @@ from core.locators.element_finder import VisualElementFinder
 from llm_helpers import OllamaVLM
 from core.locators.element_locator import ElementLocator
 from core.analyzers.assertions import Assertion
+from logging_config import setup_logger, log_exception
 import time
 import os
 
+# Setup logger
+logger = setup_logger('executor', 'executor.log')
+
 # Phase 2: VLM imports (optional - graceful degradation if Ollama not available)
 try:
-    from vlm_element_finder import VLMElementFinder
-    from intelligent_failure_analyzer import IntelligentFailureAnalyzer
+    from core.locators.vlm_element_finder import VLMElementFinder
+    from core.analyzers.intelligent_failure_analyzer import IntelligentFailureAnalyzer
     VLM_AVAILABLE = True
 except ImportError:
     VLM_AVAILABLE = False
@@ -141,6 +145,156 @@ class ActivityExecutor:
         })
         
         return locator
+    
+    def _traverse_dom_path(self, dom_path: List[Dict[str, Any]]) -> Optional[Any]:
+        """
+        Traverse the DOM path array to find the target element.
+        DOM path format: [
+            {"type": "iframe", "selector": "...", "index": 0},
+            {"type": "shadow", "host": "...", "hostSelector": "..."},
+            {"type": "element", "selector": "...", "xpath": "..."}
+        ]
+        """
+        if not dom_path:
+            return None
+            
+        print(f"[EXECUTOR] Traversing DOM path with {len(dom_path)} steps...")
+        
+        # Reset to top-level context
+        try:
+            self.driver.switch_to.default_content()
+        except Exception:
+            pass
+        
+        current_root = self.driver
+        
+        for i, path_step in enumerate(dom_path):
+            step_type = path_step.get('type')
+            
+            if step_type == 'iframe':
+                # Switch to iframe
+                try:
+                    selector = path_step.get('selector')
+                    index = path_step.get('index', 0)
+                    iframe_id = path_step.get('id')
+                    iframe_name = path_step.get('name')
+                    
+                    print(f"[EXECUTOR] Step {i+1}: Switching to iframe (selector: {selector}, index: {index})")
+                    
+                    # Try multiple methods to find iframe
+                    iframe_element = None
+                    if iframe_id:
+                        try:
+                            iframe_element = self.driver.find_element(By.ID, iframe_id)
+                        except Exception:
+                            pass
+                    
+                    if not iframe_element and iframe_name:
+                        try:
+                            iframe_element = self.driver.find_element(By.NAME, iframe_name)
+                        except Exception:
+                            pass
+                    
+                    if not iframe_element and selector:
+                        try:
+                            iframe_element = self.driver.find_element(By.CSS_SELECTOR, selector)
+                        except Exception:
+                            pass
+                    
+                    if not iframe_element and isinstance(index, int):
+                        try:
+                            iframes = self.driver.find_elements(By.TAG_NAME, 'iframe')
+                            if 0 <= index < len(iframes):
+                                iframe_element = iframes[index]
+                        except Exception:
+                            pass
+                    
+                    if iframe_element:
+                        self.driver.switch_to.frame(iframe_element)
+                        print(f"[EXECUTOR] ✓ Switched to iframe")
+                    else:
+                        print(f"[EXECUTOR] ✗ Failed to find iframe")
+                        return None
+                        
+                except Exception as e:
+                    print(f"[EXECUTOR] ✗ Failed to switch to iframe: {e}")
+                    return None
+                    
+            elif step_type == 'shadow':
+                # Access shadow DOM
+                try:
+                    host_selector = path_step.get('hostSelector')
+                    print(f"[EXECUTOR] Step {i+1}: Accessing shadow DOM (host: {host_selector})")
+                    
+                    # Find the shadow host element
+                    shadow_host = self.driver.find_element(By.CSS_SELECTOR, host_selector)
+                    
+                    # Access shadow root via JavaScript
+                    shadow_root = self.driver.execute_script("return arguments[0].shadowRoot", shadow_host)
+                    
+                    if shadow_root:
+                        # Store shadow root reference for next steps
+                        current_root = shadow_root
+                        print(f"[EXECUTOR] ✓ Accessed shadow DOM")
+                    else:
+                        print(f"[EXECUTOR] ✗ Shadow root not found")
+                        return None
+                        
+                except Exception as e:
+                    print(f"[EXECUTOR] ✗ Failed to access shadow DOM: {e}")
+                    return None
+                    
+            elif step_type == 'element':
+                # Find the target element
+                try:
+                    selector = path_step.get('selector')
+                    xpath = path_step.get('xpath')
+                    element_id = path_step.get('id')
+                    
+                    print(f"[EXECUTOR] Step {i+1}: Finding target element (selector: {selector})")
+                    
+                    element = None
+                    
+                    # If we're in a shadow root, use JavaScript to query
+                    if current_root != self.driver:
+                        if selector:
+                            element = self.driver.execute_script(
+                                "return arguments[0].querySelector(arguments[1])", 
+                                current_root, 
+                                selector
+                            )
+                    else:
+                        # Standard document queries
+                        if element_id:
+                            try:
+                                element = self.driver.find_element(By.ID, element_id)
+                            except Exception:
+                                pass
+                        
+                        if not element and selector:
+                            try:
+                                element = self.driver.find_element(By.CSS_SELECTOR, selector)
+                            except Exception:
+                                pass
+                        
+                        if not element and xpath:
+                            try:
+                                element = self.driver.find_element(By.XPATH, xpath)
+                            except Exception:
+                                pass
+                    
+                    if element:
+                        print(f"[EXECUTOR] ✓ Found target element")
+                        return element
+                    else:
+                        print(f"[EXECUTOR] ✗ Target element not found")
+                        return None
+                        
+                except Exception as e:
+                    print(f"[EXECUTOR] ✗ Failed to find element: {e}")
+                    return None
+        
+        return None
     
     def _find_element_in_shadow_dom(self, details: Dict[str, Any], max_retries: int = 3) -> Optional[Any]:
         """Find element inside shadow DOM using JavaScript with retry logic"""
@@ -649,7 +803,9 @@ class ActivityExecutor:
         
         try:
             # Capture screenshot before action
+            print(f"[EXECUTOR] Capturing 'before' screenshot for step {self.step_counter}...")
             result['screenshot_before'] = self._capture_screenshot('before')
+            print(f"[EXECUTOR] Before screenshot path: {result['screenshot_before']}")
             
             # Ensure correct tab/window context before executing (if metadata present)
             self._ensure_window_context(activity)
@@ -695,7 +851,9 @@ class ActivityExecutor:
             time.sleep(0.5)
             
             # Capture screenshot after action
+            print(f"[EXECUTOR] Capturing 'after' screenshot for step {self.step_counter}...")
             result['screenshot_after'] = self._capture_screenshot('after')
+            print(f"[EXECUTOR] After screenshot path: {result['screenshot_after']}")
             
             # Execute assertions if any
             assertion_results = []
@@ -808,24 +966,24 @@ class ActivityExecutor:
             print(f"[EXECUTOR] Failure Analysis:")
             print(f"  Root Cause: {analysis.root_cause.value}")
             print(f"  Confidence: {analysis.confidence:.2f}")
-            print(f"  Suggested Fixes ({len(analysis.fixes)}):")
-            for i, fix in enumerate(analysis.fixes[:3], 1):  # Show top 3
+            print(f"  Suggested Fixes ({len(analysis.suggested_fixes)}):")
+            for i, fix in enumerate(analysis.suggested_fixes[:3], 1):  # Show top 3
                 print(f"    {i}. {fix.description} (confidence: {fix.confidence:.2f})")
             
             return {
                 'root_cause': analysis.root_cause.value,
-                'description': analysis.description,
+                'diagnosis': analysis.diagnosis,
                 'confidence': analysis.confidence,
                 'fixes': [
                     {
                         'description': fix.description,
                         'code_change': fix.code_change,
-                        'priority': fix.priority.value,
+                        'priority': fix.priority,
                         'confidence': fix.confidence
                     }
-                    for fix in analysis.fixes
+                    for fix in analysis.suggested_fixes
                 ],
-                'visual_analysis': analysis.visual_analysis
+                'what_changed': analysis.what_changed
             }
         except Exception as e:
             print(f"[EXECUTOR] Failure analysis error: {e}")
@@ -1018,15 +1176,33 @@ class ActivityExecutor:
             element = None
             method = 'not_found'
             
+            # Phase 0: Try DOM path traversal if available (most reliable for iframe/shadow DOM)
+            locators_data = details.get('locators', {})
+            dom_path = locators_data.get('dom_path')
+            if dom_path and isinstance(dom_path, list) and len(dom_path) > 0:
+                print("[EXECUTOR] Attempting DOM path traversal...")
+                try:
+                    element = self._traverse_dom_path(dom_path)
+                    if element:
+                        method = 'dom_path'
+                        print(f"[EXECUTOR] ✓ Found element using DOM path traversal")
+                except Exception as e:
+                    print(f"[EXECUTOR] DOM path traversal failed: {e}")
+                    element = None
+            
             # Phase 1: Try multi-strategy ElementLocator if locators available
-            if self.use_enhanced_locators and 'locators' in details:
+            if not element and self.use_enhanced_locators and 'locators' in details:
                 print("[EXECUTOR] Attempting multi-strategy element location...")
-                locator = self._create_locator_from_details(details)
-                element, method_used, _unused_error = locator.find_element(self.driver, timeout=5.0)
-                
-                if element:
-                    method = method_used
-                    print(f"[EXECUTOR] ✓ Found element using: {method_used}")
+                try:
+                    locator = self._create_locator_from_details(details)
+                    element, method_used, _unused_error = locator.find_element(self.driver, timeout=5.0)
+                    
+                    if element:
+                        method = method_used
+                        print(f"[EXECUTOR] ✓ Found element using: {method_used}")
+                except Exception as e:
+                    print(f"[EXECUTOR] Multi-strategy locator failed: {e}")
+                    element = None
             
             # Fallback to legacy methods if enhanced locator failed
             if not element:
@@ -1040,58 +1216,82 @@ class ActivityExecutor:
                     method = 'iframe' if element else 'not_found'
                 else:
                     # Find element using standard visual detection
-                    element, method = self.finder.find_element(details, original_screenshot)
+                    try:
+                        element, method = self.finder.find_element(details, original_screenshot)
+                    except Exception as e:
+                        print(f"[EXECUTOR] Visual finder failed: {e}")
+                        element = None
+                        method = 'not_found'
             
             # Phase 2: VLM fallback if traditional methods failed
-            if not element and self.vlm_enabled and self.vlm_finder and original_screenshot:
-                print("[EXECUTOR] Traditional methods failed - trying VLM element finder...")
-                try:
-                    # Generate natural language description from details
-                    desc_parts = []
-                    if details.get('text'):
-                        desc_parts.append(f"text '{details['text'][:50]}'")
-                    if details.get('tagName'):
-                        desc_parts.append(f"{details['tagName']} element")
-                    if details.get('placeholder'):
-                        desc_parts.append(f"placeholder '{details['placeholder']}'")
-                    if details.get('ariaLabel'):
-                        desc_parts.append(f"aria-label '{details['ariaLabel']}'")
-                    description = " with ".join(desc_parts) if desc_parts else "clickable element"
+            # Capture screenshot if not provided (for VLM to use)
+            screenshot_for_vlm = original_screenshot
+            if not element and self.vlm_enabled and self.vlm_finder:
+                if not screenshot_for_vlm:
+                    print("[EXECUTOR] Capturing screenshot for VLM fallback...")
+                    try:
+                        screenshot_for_vlm = self._capture_screenshot('vlm_fallback')
+                    except Exception as e:
+                        print(f"[EXECUTOR] Failed to capture screenshot for VLM: {e}")
+                
+                if screenshot_for_vlm:
+                    print("[EXECUTOR] Traditional methods failed - trying VLM element finder...")
+                    try:
+                        # Generate natural language description from details
+                        desc_parts = []
+                        if details.get('text'):
+                            desc_parts.append(f"text '{details['text'][:50]}'")
+                        if details.get('tagName'):
+                            desc_parts.append(f"{details['tagName']} element")
+                        if details.get('placeholder'):
+                            desc_parts.append(f"placeholder '{details['placeholder']}'")
+                        if details.get('ariaLabel'):
+                            desc_parts.append(f"aria-label '{details['ariaLabel']}'")
+                        if details.get('id'):
+                            desc_parts.append(f"id '{details['id']}'")
+                        if details.get('name'):
+                            desc_parts.append(f"name '{details['name']}'")
+                        description = " with ".join(desc_parts) if desc_parts else "clickable element"
+                        
+                        print(f"[EXECUTOR] VLM looking for: {description}")
 
-                    # Prefer direct click helper if provided by concrete implementation
-                    if hasattr(self.vlm_finder, 'click_element_by_description'):
-                        success, message = self.vlm_finder.click_element_by_description(  # type: ignore
-                            self.driver,
-                            description,
-                            screenshot_path=original_screenshot
-                        )
-                        if success:
-                            method = 'vlm_finder'
-                            print(f"[EXECUTOR] ✓ VLM clicked element: {message}")
-                            return True, method, ''
-                        else:
-                            print(f"[EXECUTOR] VLM click failed: {message}")
-                    elif hasattr(self.vlm_finder, 'find_element_by_description'):
-                        # Generic coordinate-based fallback
-                        vlm_result = self.vlm_finder.find_element_by_description(  # type: ignore
-                            self.driver,
-                            description,
-                            screenshot_path=original_screenshot
-                        )
-                        if getattr(vlm_result, 'found', False) and getattr(vlm_result, 'coordinates', None):
-                            x, y = vlm_result.coordinates  # type: ignore
-                            print(f"[EXECUTOR] ✓ VLM located element at ({x},{y}) - performing coordinate click")
-                            actions = ActionChains(self.driver)
-                            actions.move_by_offset(x, y).click().perform()
-                            # Reset pointer to avoid offset accumulation
-                            actions = ActionChains(self.driver)
-                            actions.move_by_offset(-x, -y).perform()
-                            method = 'vlm_coordinates'
-                            return True, method, ''
-                        else:
-                            print("[EXECUTOR] VLM did not locate element coordinates")
-                except Exception as vlm_error:
-                    print(f"[EXECUTOR] VLM fallback failed: {vlm_error}")
+                        # Prefer direct click helper if provided by concrete implementation
+                        if hasattr(self.vlm_finder, 'click_element_by_description'):
+                            success, message = self.vlm_finder.click_element_by_description(  # type: ignore
+                                self.driver,
+                                description,
+                                screenshot_path=screenshot_for_vlm
+                            )
+                            if success:
+                                method = 'vlm_finder'
+                                print(f"[EXECUTOR] ✓ VLM clicked element: {message}")
+                                return True, method, ''
+                            else:
+                                print(f"[EXECUTOR] VLM click failed: {message}")
+                        elif hasattr(self.vlm_finder, 'find_element_by_description'):
+                            # Generic coordinate-based fallback
+                            vlm_result = self.vlm_finder.find_element_by_description(  # type: ignore
+                                self.driver,
+                                description,
+                                screenshot_path=screenshot_for_vlm
+                            )
+                            if getattr(vlm_result, 'found', False) and getattr(vlm_result, 'coordinates', None):
+                                x, y = vlm_result.coordinates  # type: ignore
+                                print(f"[EXECUTOR] ✓ VLM located element at ({x},{y}) - performing coordinate click")
+                                actions = ActionChains(self.driver)
+                                actions.move_by_offset(x, y).click().perform()
+                                # Reset pointer to avoid offset accumulation
+                                actions = ActionChains(self.driver)
+                                actions.move_by_offset(-x, -y).perform()
+                                method = 'vlm_coordinates'
+                                return True, method, ''
+                            else:
+                                print("[EXECUTOR] VLM did not locate element coordinates")
+                    except Exception as vlm_error:
+                        print(f"[EXECUTOR] VLM fallback failed: {vlm_error}")
+                        from logging_config import log_exception
+                        log_exception(logger, f"VLM fallback error in click: {vlm_error}")
+
             
             if not element:
                 # Try to switch back from iframe if we were in one
@@ -1210,8 +1410,22 @@ class ActivityExecutor:
             element = None
             method = 'not_found'
             
+            # Phase 0: Try DOM path traversal if available (most reliable for iframe/shadow DOM)
+            locators_data = details.get('locators', {})
+            dom_path = locators_data.get('dom_path')
+            if dom_path and isinstance(dom_path, list) and len(dom_path) > 0:
+                print("[EXECUTOR] Attempting DOM path traversal...")
+                try:
+                    element = self._traverse_dom_path(dom_path)
+                    if element:
+                        method = 'dom_path'
+                        print(f"[EXECUTOR] ✓ Found input element using DOM path traversal")
+                except Exception as e:
+                    print(f"[EXECUTOR] DOM path traversal failed: {e}")
+                    element = None
+            
             # Phase 1: Try multi-strategy ElementLocator if locators available
-            if self.use_enhanced_locators and 'locators' in details:
+            if not element and self.use_enhanced_locators and 'locators' in details:
                 print("[EXECUTOR] Attempting multi-strategy element location...")
                 locator = self._create_locator_from_details(details)
                 element, method_used, _unused_error = locator.find_element(self.driver, timeout=5.0)
@@ -1514,8 +1728,9 @@ class ActivityExecutor:
             if not element and self.vlm_finder and visual_description and screenshot:
                 print(f"[EXECUTOR] Trying VLM to find element: {visual_description}")
                 vlm_result = self.vlm_finder.find_element_by_description(
-                    screenshot, 
-                    visual_description
+                    self.driver,
+                    visual_description,
+                    screenshot_path=screenshot
                 )
                 # stub result object has attributes, not dict
                 if getattr(vlm_result, 'found', False) and getattr(vlm_result, 'coordinates', None):
@@ -1589,7 +1804,11 @@ class ActivityExecutor:
         if getattr(self, 'vlm_enabled', False) and getattr(self, 'vlm_finder', None):
             try:
                 screenshot_path = self._capture_screenshot('verification')
-                vlm_result = self.vlm_finder.find_element_by_description(screenshot_path, criteria)
+                vlm_result = self.vlm_finder.find_element_by_description(
+                    self.driver,
+                    criteria,
+                    screenshot_path=screenshot_path
+                )
                 if getattr(vlm_result, 'found', False):
                     # Conditional follow-up actions
                     self._execute_conditional_followups(True, details)
@@ -1626,6 +1845,7 @@ class ActivityExecutor:
         """Hover over an element.
 
         Resolution order:
+        0. DOM path traversal (if available - most reliable for iframe/shadow DOM)
         1. Multi-strategy locators (if provided)
         2. Recorded coordinates (elementCenterX/Y)
         3. VLM fallback (description -> coordinates)
@@ -1636,8 +1856,21 @@ class ActivityExecutor:
             element = None
             method = 'unknown'
 
+            # 0. Try DOM path traversal if available
+            dom_path = locators.get('dom_path')
+            if dom_path and isinstance(dom_path, list) and len(dom_path) > 0:
+                print("[EXECUTOR] Attempting DOM path traversal for hover...")
+                try:
+                    element = self._traverse_dom_path(dom_path)
+                    if element:
+                        method = 'dom_path'
+                        print(f"[EXECUTOR] ✓ Found hover element using DOM path traversal")
+                except Exception as e:
+                    print(f"[EXECUTOR] DOM path traversal failed: {e}")
+                    element = None
+
             # 1. Try locator-based resolution (ElementLocator style interface)
-            if locators:
+            if not element and locators:
                 try:
                     result = self.element_locator.find_element(self.driver, locators)
                     if isinstance(result, dict) and result.get('success'):
@@ -1736,12 +1969,57 @@ class ActivityExecutor:
         try:
             timestamp = time.strftime('%Y%m%d_%H%M%S')
             filename = f"step_{self.step_counter}_{suffix}_{timestamp}.png"
-            filepath = os.path.join(self.screenshots_dir, filename)
             
-            self.driver.save_screenshot(filepath)
-            print(f"[EXECUTOR] Screenshot saved: {filename}")
+            # Use ABSOLUTE path to ensure files are saved in the correct location
+            abs_screenshots_dir = os.path.abspath(self.screenshots_dir)
+            filepath = os.path.join(abs_screenshots_dir, filename)
             
-            return filepath
+            print(f"[EXECUTOR] Attempting to save screenshot: {filepath}")
+            print(f"[EXECUTOR] Current working directory: {os.getcwd()}")
+            
+            # Ensure directory exists
+            os.makedirs(abs_screenshots_dir, exist_ok=True)
+            print(f"[EXECUTOR] Directory exists: {os.path.exists(abs_screenshots_dir)}")
+            
+            # Capture screenshot and check return value
+            result = self.driver.save_screenshot(filepath)
+            print(f"[EXECUTOR] driver.save_screenshot() returned: {result}")
+            
+            # Small delay to ensure file is written
+            time.sleep(0.2)
+            
+            # Force filesystem sync
+            try:
+                import subprocess
+                subprocess.run(['sync'], check=False, timeout=1)
+            except:
+                pass
+            
+            # Verify file was created
+            if os.path.exists(filepath):
+                file_size = os.path.getsize(filepath)
+                print(f"[EXECUTOR] ✓ Screenshot saved: {filename} ({file_size} bytes)")
+                
+                # Double-check after another small delay
+                time.sleep(0.1)
+                if os.path.exists(filepath):
+                    print(f"[EXECUTOR] ✓ File still exists after 0.3s delay")
+                else:
+                    print(f"[EXECUTOR] ✗ WARNING: File disappeared after 0.3s!")
+                
+                # Return relative path for HTML compatibility
+                return os.path.relpath(filepath)
+            else:
+                print(f"[EXECUTOR] ✗ Screenshot file not created: {filename}")
+                print(f"[EXECUTOR] ✗ Checked path: {filepath}")
+                # List directory contents
+                if os.path.exists(abs_screenshots_dir):
+                    files = os.listdir(abs_screenshots_dir)
+                    print(f"[EXECUTOR] Directory contents ({len(files)} files): {files[:5]}")
+                return ''
+            
         except Exception as e:
-            print(f"[EXECUTOR] Screenshot capture error: {e}")
+            print(f"[EXECUTOR] ✗ Screenshot capture error: {e}")
+            import traceback
+            traceback.print_exc()
             return ''

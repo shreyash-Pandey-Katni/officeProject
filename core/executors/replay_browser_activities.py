@@ -11,7 +11,7 @@ import json
 import time
 import os
 from datetime import datetime
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 
 class BrowserActivityReplayer:
@@ -19,14 +19,14 @@ class BrowserActivityReplayer:
     
     def __init__(self, activity_log_path: str = "activity_log.json"):
         self.activity_log_path = activity_log_path
-        self.driver = None
-        self.executor = None
+        self.driver: Optional[webdriver.Chrome] = None
+        self.executor: Optional[ActivityExecutor] = None
         self.llm = OllamaLLM(model="granite3.2-vision:latest")
         self.db = TestDatabase()
-        self.results = []
-        self.start_time = None
-        self.end_time = None
-        self.test_run_id = None
+        self.results: List[Dict[str, Any]] = []
+        self.start_time: Optional[datetime] = None
+        self.end_time: Optional[datetime] = None
+        self.test_run_id: Optional[int] = None
     
     def load_activities(self) -> List[Dict[str, Any]]:
         """Load activities from JSON log"""
@@ -109,20 +109,26 @@ class BrowserActivityReplayer:
             
             # Save screenshots to database if they exist
             if 'screenshot_before' in result and result['screenshot_before']:
+                print(f"[REPLAYER] Saving 'before' screenshot: {result['screenshot_before']}")
                 self.db.save_screenshot(
                     self.test_run_id,
                     i,
                     'before',
                     result['screenshot_before']
                 )
+            else:
+                print(f"[REPLAYER] ⚠️  No 'before' screenshot for step {i}")
             
             if 'screenshot_after' in result and result['screenshot_after']:
+                print(f"[REPLAYER] Saving 'after' screenshot: {result['screenshot_after']}")
                 self.db.save_screenshot(
                     self.test_run_id,
                     i,
                     'after',
                     result['screenshot_after']
                 )
+            else:
+                print(f"[REPLAYER] ⚠️  No 'after' screenshot for step {i}")
             
             # Wait between actions
             if i < len(activities):
@@ -155,7 +161,9 @@ class BrowserActivityReplayer:
         successful = sum(1 for r in self.results if r['success'])
         failed = total - successful
         
-        duration = (self.end_time - self.start_time).total_seconds()
+        duration = 0.0
+        if self.start_time and self.end_time:
+            duration = (self.end_time - self.start_time).total_seconds()
         
         print(f"\n{'='*80}")
         print("REPLAY SUMMARY")
@@ -241,6 +249,12 @@ class BrowserActivityReplayer:
     def generate_report(self, output_path: str = "replay_report.html"):
         """Generate HTML report with screenshots"""
         print(f"[REPLAYER] Generating report: {output_path}")
+        print(f"[REPLAYER] Total results to include: {len(self.results)}")
+        
+        # Debug: Check screenshot paths in results
+        for i, r in enumerate(self.results[:3], 1):  # Check first 3
+            print(f"[REPLAYER] Result {i} screenshot_before: '{r.get('screenshot_before', '')}'")
+            print(f"[REPLAYER] Result {i} screenshot_after: '{r.get('screenshot_after', '')}'")
         
         # Get natural language summary from LLM
         summary_data = {
@@ -456,7 +470,7 @@ class BrowserActivityReplayer:
         
         <div class="detail-row">
             <div class="detail-label">Duration:</div>
-            <div class="detail-value">{(self.end_time - self.start_time).total_seconds():.1f} seconds</div>
+            <div class="detail-value">{(self.end_time - self.start_time).total_seconds() if self.start_time and self.end_time else 0:.1f} seconds</div>
         </div>
         <div class="detail-row">
             <div class="detail-label">Activity Log:</div>
@@ -525,6 +539,12 @@ class BrowserActivityReplayer:
             before = result.get('screenshot_before', '')
             after = result.get('screenshot_after', '')
             
+            print(f"[REPORT] Step {result['step']} - Before: {before}, After: {after}")
+            if before:
+                print(f"[REPORT]   Before exists: {os.path.exists(before)}")
+            if after:
+                print(f"[REPORT]   After exists: {os.path.exists(after)}")
+            
             if before or after:
                 html += """
         </div>
@@ -537,6 +557,7 @@ class BrowserActivityReplayer:
                 <div class="screenshot-label">Before Action</div>
             </div>
 """
+                    print(f"[REPORT]   ✓ Added before screenshot to HTML")
                 if after and os.path.exists(after):
                     html += f"""
             <div class="screenshot">
@@ -544,6 +565,7 @@ class BrowserActivityReplayer:
                 <div class="screenshot-label">After Action</div>
             </div>
 """
+                    print(f"[REPORT]   ✓ Added after screenshot to HTML")
                 html += """
         </div>
 """

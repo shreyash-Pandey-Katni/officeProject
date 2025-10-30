@@ -22,7 +22,20 @@ import json
 import os
 from datetime import datetime
 import sys
+import logging
+import traceback
 from selenium.webdriver.common.by import By
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('test_generation_ui.log'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 # Add project root to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -32,7 +45,9 @@ try:
     from ui.natural_language_test_creator import NaturalLanguageTestCreator
     from ui.screenshot_test_generator import ScreenshotTestGenerator
     from core.analyzers.content_verifier import ContentVerifier
+    logger.info("Successfully imported Phase 3 modules")
 except ImportError as e:
+    logger.error(f"Could not import Phase 3 modules: {e}")
     print(f"⚠️  Warning: Could not import Phase 3 modules: {e}")
     print("Make sure all required modules are available in the organized structure")
 
@@ -48,6 +63,9 @@ app.config['SECRET_KEY'] = 'test-generation-ui-secret-key'
 app.config['UPLOAD_FOLDER'] = str(PROJECT_ROOT / 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 app.config['GENERATED_TESTS_FOLDER'] = str(PROJECT_ROOT / 'tests' / 'test_cases')
+
+# Module-level storage for active recorders (cleaner than dynamic app attributes)
+active_recorders = {}
 
 # Create necessary directories
 Path(app.config['UPLOAD_FOLDER']).mkdir(exist_ok=True)
@@ -101,6 +119,13 @@ def test_library_page():
     
     tests.sort(key=lambda x: x['created'], reverse=True)
     return render_template('test_library.html', tests=tests)
+
+
+@app.route('/record-test')
+def record_test_page():
+    """Browser recording page"""
+    return render_template('record_test.html')
+
 
 
 @app.route('/api/generate-from-text', methods=['POST'])
@@ -196,7 +221,160 @@ def generate_from_screenshots():
         })
         
     except Exception as e:
+        logger.error(f"Screenshot test generation failed: {e}", exc_info=True)
         return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/start-recording', methods=['POST'])
+def start_recording():
+    """API endpoint: Start browser recording"""
+    try:
+        data = request.get_json()
+        url = data.get('url', 'https://www.google.com')
+        test_name = data.get('test_name', 'recorded_test')
+        enable_hover = data.get('enable_hover_recording', True)
+        
+        logger.info(f"Starting recording: URL={url}, test_name={test_name}, hover={enable_hover}")
+        
+        # Import recorder
+        from main import BrowserActivityRecorder
+        from selenium import webdriver
+        from selenium.webdriver.chrome.options import Options
+        
+        # Setup Chrome
+        chrome_options = Options()
+        chrome_options.add_argument("--start-maximized")
+        chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        chrome_options.add_experimental_option('useAutomationExtension', False)
+        
+        driver = webdriver.Chrome(options=chrome_options)
+        driver.get(url)
+        
+        # Create recorder with hover setting
+        recorder = BrowserActivityRecorder(driver, enable_hover_recording=enable_hover)
+        
+        # Start monitoring in background thread
+        import threading
+        monitor_thread = threading.Thread(target=recorder.monitor_activities, daemon=True)
+        monitor_thread.start()
+        
+        # Store in module-level storage
+        active_recorders['current'] = {
+            'recorder': recorder,
+            'driver': driver,
+            'test_name': test_name,
+            'start_time': datetime.now(),
+            'monitor_thread': monitor_thread
+        }
+        
+        logger.info(f"Recording started successfully for test: {test_name}")
+        return jsonify({
+            'status': 'success',
+            'message': 'Recording started successfully'
+        })
+        
+    except Exception as e:
+        logger.error(f"Failed to start recording: {e}", exc_info=True)
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+@app.route('/api/stop-recording', methods=['POST'])
+def stop_recording():
+    """API endpoint: Stop browser recording and save test"""
+    try:
+        if 'current' not in active_recorders:
+            logger.warning("Attempted to stop recording with no active session")
+            return jsonify({'status': 'error', 'message': 'No active recording session'}), 400
+        
+        session = active_recorders['current']
+        recorder = session['recorder']
+        driver = session['driver']
+        test_name = session['test_name']
+        
+        logger.info(f"Stopping recording for test: {test_name}")
+        
+        # Stop recording by setting flag
+        recorder.stop_recording()
+        
+        # Wait a moment for any pending activities
+        import time
+        time.sleep(2)
+        
+        # Save activity log
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        filename = f"{test_name}_{timestamp}.json"
+        filepath = Path(app.config['GENERATED_TESTS_FOLDER']) / filename
+        
+        with open(filepath, 'w') as f:
+            json.dump(recorder.activity_log, f, indent=2)
+        
+        logger.info(f"Saved {len(recorder.activity_log)} activities to {filepath}")
+        
+        # Close browser
+        driver.quit()
+        
+        # Remove from active sessions
+        del active_recorders['current']
+        
+        return jsonify({
+            'status': 'success',
+            'activity_log': str(filepath),
+            'activities': len(recorder.activity_log),
+            'message': f'Recording saved with {len(recorder.activity_log)} activities'
+        })
+        
+    except Exception as e:
+        logger.error(f"Failed to stop recording: {e}", exc_info=True)
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+@app.route('/api/recording-status', methods=['GET'])
+def recording_status():
+    """API endpoint: Get current recording status"""
+    try:
+        if 'current' not in active_recorders:
+            return jsonify({
+                'is_recording': False,
+                'message': 'No active recording'
+            })
+        
+        session = active_recorders['current']
+        recorder = session['recorder']
+        
+        duration = (datetime.now() - session['start_time']).total_seconds()
+        
+        # Count activity types
+        activity_counts = {
+            'clicks': 0,
+            'text_inputs': 0,
+            'change_inputs': 0,
+            'hovers': 0,
+            'total': len(recorder.activity_log)
+        }
+        
+        for activity in recorder.activity_log:
+            activity_type = activity.get('type', '')
+            if activity_type == 'click':
+                activity_counts['clicks'] += 1
+            elif activity_type == 'text_input':
+                activity_counts['text_inputs'] += 1
+            elif activity_type == 'change_input':
+                activity_counts['change_inputs'] += 1
+            elif activity_type == 'hover':
+                activity_counts['hovers'] += 1
+        
+        return jsonify({
+            'is_recording': True,
+            'test_name': session['test_name'],
+            'activity_counts': activity_counts,
+            'duration': duration
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'is_recording': False,
+            'error': str(e)
+        })
 
 
 @app.route('/api/test/<filename>')

@@ -1,0 +1,2110 @@
+[
+  {
+    "timestamp": "2025-10-30T11:49:33.130153",
+    "action": "navigation",
+    "details": {
+      "url": "https://www.ibm.com/in-en",
+      "title": "IBM",
+      "previous_url": ""
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1
+  },
+  {
+    "timestamp": "2025-10-30T11:49:36.862336",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "class": "truste-icon-box"
+      },
+      "className": "truste-icon-box",
+      "coordinates": {
+        "clickX": 1887,
+        "clickY": 804,
+        "elementBottom": 812,
+        "elementCenterX": 1890,
+        "elementCenterY": 798,
+        "elementHeight": 28,
+        "elementLeft": 1876,
+        "elementRight": 1904,
+        "elementTop": 784,
+        "elementWidth": 28,
+        "pageX": 1887,
+        "pageY": 804,
+        "relativeX": 11,
+        "relativeY": 20,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {},
+      "domPath": [
+        {
+          "className": "truste-icon-box",
+          "id": "",
+          "name": "",
+          "selector": "div#truste-consent-track > div > div",
+          "tagName": "div",
+          "type": "element",
+          "xpath": "//*[@id=\"truste-consent-track\"]/div[1]/div[1]"
+        }
+      ],
+      "href": "",
+      "id": "",
+      "name": "",
+      "parent": {
+        "className": "truste-consent-track-class",
+        "id": "",
+        "tagName": "DIV"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "div#truste-consent-track > div > div",
+        "xpath": "//*[@id=\"truste-consent-track\"]/div[1]/div[1]"
+      },
+      "siblingsCount": 2,
+      "src": "",
+      "tagName": "DIV",
+      "target": "",
+      "text": "",
+      "textContent": "                  ",
+      "timestamp": "2025-10-30T06:19:36.691Z",
+      "title": "",
+      "type": "",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgb(255, 255, 255)",
+        "border": "0px none rgb(22, 22, 22)",
+        "color": "rgb(22, 22, 22)",
+        "cursor": "pointer",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "height": "28px",
+        "margin": "0px",
+        "opacity": "1",
+        "padding": "8px",
+        "position": "absolute",
+        "width": "28px",
+        "zIndex": "99"
+      }
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "class": "truste-icon-box",
+      "tag_name": "DIV",
+      "css_selector": "div#truste-consent-track > div > div",
+      "xpath": "//*[@id=\"truste-consent-track\"]/div[1]/div[1]",
+      "dom_path": [
+        {
+          "className": "truste-icon-box",
+          "id": "",
+          "name": "",
+          "selector": "div#truste-consent-track > div > div",
+          "tagName": "div",
+          "type": "element",
+          "xpath": "//*[@id=\"truste-consent-track\"]/div[1]/div[1]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_1_20251030_114936.png",
+      "path": "screenshots/screenshot_1_20251030_114936.png",
+      "element_bounds": {
+        "left": 1876,
+        "top": 784,
+        "width": 28,
+        "height": 28
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:49:40.177326",
+    "action": "click",
+    "details": {
+      "alt": "close icon",
+      "ariaLabel": "",
+      "ariaRole": "button",
+      "attributes": {
+        "alt": "close icon",
+        "id": "truste-consent-close",
+        "role": "button",
+        "src": "https://consent.trustarc.com/get?name=ibm_close_icon.svg"
+      },
+      "className": "",
+      "coordinates": {
+        "clickX": 1889,
+        "clickY": 795,
+        "elementBottom": 804,
+        "elementCenterX": 1890,
+        "elementCenterY": 798,
+        "elementHeight": 12,
+        "elementLeft": 1884,
+        "elementRight": 1896,
+        "elementTop": 792,
+        "elementWidth": 12,
+        "pageX": 1889,
+        "pageY": 795,
+        "relativeX": 5,
+        "relativeY": 3,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {},
+      "domPath": [
+        {
+          "className": "",
+          "id": "truste-consent-close",
+          "name": "",
+          "selector": "#truste-consent-close",
+          "tagName": "img",
+          "type": "element",
+          "xpath": "//*[@id=\"truste-consent-close\"]"
+        }
+      ],
+      "href": "",
+      "id": "truste-consent-close",
+      "name": "",
+      "parent": {
+        "className": "truste-icon-box",
+        "id": "",
+        "tagName": "DIV"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "#truste-consent-close",
+        "xpath": "//*[@id=\"truste-consent-close\"]"
+      },
+      "siblingsCount": 1,
+      "src": "https://consent.trustarc.com/get?name=ibm_close_icon.svg",
+      "tagName": "IMG",
+      "target": "",
+      "text": "",
+      "textContent": "",
+      "timestamp": "2025-10-30T06:19:39.857Z",
+      "title": "",
+      "type": "",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(22, 22, 22)",
+        "color": "rgb(22, 22, 22)",
+        "cursor": "pointer",
+        "display": "inline",
+        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "height": "12px",
+        "margin": "0px",
+        "opacity": "1",
+        "padding": "0px",
+        "position": "static",
+        "width": "12px",
+        "zIndex": "auto"
+      }
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "truste-consent-close",
+      "tag_name": "IMG",
+      "css_selector": "#truste-consent-close",
+      "xpath": "//*[@id=\"truste-consent-close\"]",
+      "dom_path": [
+        {
+          "className": "",
+          "id": "truste-consent-close",
+          "name": "",
+          "selector": "#truste-consent-close",
+          "tagName": "img",
+          "type": "element",
+          "xpath": "//*[@id=\"truste-consent-close\"]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_2_20251030_114940.png",
+      "path": "screenshots/screenshot_2_20251030_114940.png",
+      "element_bounds": {
+        "left": 1884,
+        "top": 792,
+        "width": 12,
+        "height": 12
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:49:43.311917",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "data-autoid": "c4d--masthead__l0-nav--nav2",
+        "menu-label": "Products",
+        "style": "--c4d-ce--viewport-width: 1905px;",
+        "trigger-content": "Products"
+      },
+      "className": "",
+      "coordinates": {
+        "clickX": 641,
+        "clickY": 33,
+        "elementBottom": 48,
+        "elementCenterX": 610.34375,
+        "elementCenterY": 24,
+        "elementHeight": 48,
+        "elementLeft": 548.28125,
+        "elementRight": 672.40625,
+        "elementTop": 0,
+        "elementWidth": 124.125,
+        "pageX": 641,
+        "pageY": 33,
+        "relativeX": 92.71875,
+        "relativeY": 33,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-autoid": "c4d--masthead__l0-nav--nav2"
+      },
+      "domPath": [
+        {
+          "className": "",
+          "id": "",
+          "name": "",
+          "selector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-top-nav > c4d-megamenu-top-nav-menu:nth-of-type(3)",
+          "tagName": "c4d-megamenu-top-nav-menu",
+          "type": "element",
+          "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-top-nav[1]/c4d-megamenu-top-nav-menu[3]"
+        }
+      ],
+      "href": "",
+      "id": "",
+      "name": "",
+      "parent": {
+        "className": "",
+        "id": "",
+        "tagName": "C4D-TOP-NAV"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-top-nav > c4d-megamenu-top-nav-menu:nth-of-type(3)",
+        "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-top-nav[1]/c4d-megamenu-top-nav-menu[3]"
+      },
+      "siblingsCount": 6,
+      "src": "",
+      "tagName": "C4D-MEGAMENU-TOP-NAV-MENU",
+      "target": "",
+      "text": "",
+      "textContent": "\n          \n        ",
+      "timestamp": "2025-10-30T06:19:43.127Z",
+      "title": "",
+      "type": "",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(22, 22, 22)",
+        "color": "rgb(22, 22, 22)",
+        "cursor": "auto",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", system-ui, -apple-system, BlinkMacSystemFont, \".SFNSText-Regular\", sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "height": "48px",
+        "margin": "0px",
+        "opacity": "1",
+        "padding": "0px",
+        "position": "relative",
+        "width": "124.125px",
+        "zIndex": "auto"
+      }
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "C4D-MEGAMENU-TOP-NAV-MENU",
+      "css_selector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-top-nav > c4d-megamenu-top-nav-menu:nth-of-type(3)",
+      "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-top-nav[1]/c4d-megamenu-top-nav-menu[3]",
+      "dom_path": [
+        {
+          "className": "",
+          "id": "",
+          "name": "",
+          "selector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-top-nav > c4d-megamenu-top-nav-menu:nth-of-type(3)",
+          "tagName": "c4d-megamenu-top-nav-menu",
+          "type": "element",
+          "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-top-nav[1]/c4d-megamenu-top-nav-menu[3]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_3_20251030_114943.png",
+      "path": "screenshots/screenshot_3_20251030_114943.png",
+      "element_bounds": {
+        "left": 548.28125,
+        "top": 0,
+        "width": 124.125,
+        "height": 48
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:49:44.159892",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "data-autoid": "c4d--masthead__l0-nav--nav2",
+        "expanded": "",
+        "menu-label": "Products",
+        "style": "--c4d-ce--viewport-width: 1920px;",
+        "trigger-content": "Products"
+      },
+      "className": "",
+      "coordinates": {
+        "clickX": 645,
+        "clickY": 31,
+        "elementBottom": 48,
+        "elementCenterX": 617.84375,
+        "elementCenterY": 24,
+        "elementHeight": 48,
+        "elementLeft": 555.78125,
+        "elementRight": 679.90625,
+        "elementTop": 0,
+        "elementWidth": 124.125,
+        "pageX": 645,
+        "pageY": 31,
+        "relativeX": 89.21875,
+        "relativeY": 31,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-autoid": "c4d--masthead__l0-nav--nav2"
+      },
+      "domPath": [
+        {
+          "className": "",
+          "id": "",
+          "name": "",
+          "selector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-top-nav > c4d-megamenu-top-nav-menu:nth-of-type(3)",
+          "tagName": "c4d-megamenu-top-nav-menu",
+          "type": "element",
+          "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-top-nav[1]/c4d-megamenu-top-nav-menu[3]"
+        }
+      ],
+      "href": "",
+      "id": "",
+      "name": "",
+      "parent": {
+        "className": "",
+        "id": "",
+        "tagName": "C4D-TOP-NAV"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-top-nav > c4d-megamenu-top-nav-menu:nth-of-type(3)",
+        "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-top-nav[1]/c4d-megamenu-top-nav-menu[3]"
+      },
+      "siblingsCount": 6,
+      "src": "",
+      "tagName": "C4D-MEGAMENU-TOP-NAV-MENU",
+      "target": "",
+      "text": "FeaturedAI & machine learningAnalyticsAsset lifecycle managementBusiness automationContainersDatabas",
+      "textContent": "\n          \n      \n        \n          \n            \n                    \n                      Featu",
+      "timestamp": "2025-10-30T06:19:44.063Z",
+      "title": "",
+      "type": "",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(22, 22, 22)",
+        "color": "rgb(22, 22, 22)",
+        "cursor": "auto",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", system-ui, -apple-system, BlinkMacSystemFont, \".SFNSText-Regular\", sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "height": "48px",
+        "margin": "0px",
+        "opacity": "1",
+        "padding": "0px",
+        "position": "relative",
+        "width": "124.125px",
+        "zIndex": "auto"
+      }
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "C4D-MEGAMENU-TOP-NAV-MENU",
+      "text": "FeaturedAI & machine learningAnalyticsAsset lifecycle managementBusiness automationContainersDatabas",
+      "css_selector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-top-nav > c4d-megamenu-top-nav-menu:nth-of-type(3)",
+      "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-top-nav[1]/c4d-megamenu-top-nav-menu[3]",
+      "dom_path": [
+        {
+          "className": "",
+          "id": "",
+          "name": "",
+          "selector": "div#container-9225520bd9 > div > c4d-masthead-container > c4d-masthead > c4d-top-nav > c4d-megamenu-top-nav-menu:nth-of-type(3)",
+          "tagName": "c4d-megamenu-top-nav-menu",
+          "type": "element",
+          "xpath": "//*[@id=\"container-9225520bd9\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-top-nav[1]/c4d-megamenu-top-nav-menu[3]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_4_20251030_114944.png",
+      "path": "screenshots/screenshot_4_20251030_114944.png",
+      "element_bounds": {
+        "left": 555.78125,
+        "top": 0,
+        "width": 124.125,
+        "height": 48
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:49:54.049346",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "class": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+        "data-di-id": "#email",
+        "id": "email",
+        "name": "email",
+        "type": "text",
+        "value": ""
+      },
+      "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+      "coordinates": {
+        "clickX": 1380,
+        "clickY": 685,
+        "elementBottom": 720.171875,
+        "elementCenterX": 1328.5,
+        "elementCenterY": 696.171875,
+        "elementHeight": 48,
+        "elementLeft": 968.5,
+        "elementRight": 1688.5,
+        "elementTop": 672.171875,
+        "elementWidth": 720,
+        "pageX": 1380,
+        "pageY": 3205,
+        "relativeX": 411.5,
+        "relativeY": 12.828125,
+        "scrollX": 0,
+        "scrollY": 2520,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-di-id": "#email"
+      },
+      "domPath": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "href": "",
+      "id": "email",
+      "name": "email",
+      "parent": {
+        "className": "cds--text-input__field-wrapper",
+        "id": "",
+        "tagName": "DIV"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "#email",
+        "xpath": "//*[@id=\"email\"]"
+      },
+      "siblingsCount": 2,
+      "src": "",
+      "tagName": "INPUT",
+      "target": "",
+      "text": "",
+      "textContent": "",
+      "timestamp": "2025-10-30T06:19:53.872Z",
+      "title": "",
+      "type": "text",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgb(244, 244, 244)",
+        "border": "",
+        "color": "rgb(22, 22, 22)",
+        "cursor": "text",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "height": "48px",
+        "margin": "0px",
+        "opacity": "1",
+        "padding": "0px 16px",
+        "position": "static",
+        "width": "720px",
+        "zIndex": "auto"
+      }
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "email",
+      "name": "email",
+      "class": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+      "tag_name": "INPUT",
+      "type": "text",
+      "css_selector": "#email",
+      "xpath": "//*[@id=\"email\"]",
+      "dom_path": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_5_20251030_114954.png",
+      "path": "screenshots/screenshot_5_20251030_114954.png",
+      "element_bounds": {
+        "left": 968.5,
+        "top": 672.171875,
+        "width": 720,
+        "height": 48
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:49:55.918888",
+    "action": "text_input",
+    "details": {
+      "ariaDescribedBy": "",
+      "ariaLabel": "",
+      "ariaRequired": "",
+      "attributes": {
+        "class": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+        "data-di-id": "#email",
+        "id": "email",
+        "name": "email",
+        "type": "text",
+        "value": "shreyas"
+      },
+      "autocomplete": "",
+      "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+      "coordinates": {
+        "elementBottom": 720.171875,
+        "elementCenterX": 1328.5,
+        "elementCenterY": 696.171875,
+        "elementHeight": 48,
+        "elementLeft": 968.5,
+        "elementRight": 1688.5,
+        "elementTop": 672.171875,
+        "elementWidth": 720,
+        "scrollX": 0,
+        "scrollY": 2520,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-di-id": "#email"
+      },
+      "disabled": false,
+      "domPath": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "form": {
+        "action": "https://www.ibm.com/in-en",
+        "id": "signUpForm",
+        "method": "get",
+        "name": "signUpForm"
+      },
+      "id": "email",
+      "label": "Business email",
+      "maxLength": -1,
+      "minLength": -1,
+      "name": "email",
+      "parent": {
+        "className": "cds--text-input__field-wrapper",
+        "id": "",
+        "tagName": "DIV"
+      },
+      "placeholder": "",
+      "readOnly": false,
+      "required": false,
+      "selectionEnd": 7,
+      "selectionStart": 7,
+      "selectors": {
+        "cssSelector": "#email",
+        "xpath": "//*[@id=\"email\"]"
+      },
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:19:55.704Z",
+      "type": "text",
+      "value": "shreyas",
+      "visualProperties": {
+        "backgroundColor": "rgb(244, 244, 244)",
+        "border": "",
+        "borderRadius": "0px",
+        "boxShadow": "none",
+        "color": "rgb(22, 22, 22)",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "height": "48px",
+        "margin": "0px",
+        "padding": "0px 16px",
+        "width": "720px"
+      }
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "email",
+      "name": "email",
+      "class": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+      "tag_name": "INPUT",
+      "type": "text",
+      "value": "shreyas",
+      "css_selector": "#email",
+      "xpath": "//*[@id=\"email\"]",
+      "dom_path": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "label": "Business email"
+    },
+    "screenshot": {
+      "filename": "screenshot_6_20251030_114955.png",
+      "path": "screenshots/screenshot_6_20251030_114955.png",
+      "element_bounds": {
+        "left": 968.5,
+        "top": 672.171875,
+        "width": 720,
+        "height": 48
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:49:56.108637",
+    "action": "text_input",
+    "details": {
+      "domPath": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "id": "email",
+      "inShadowRoot": true,
+      "name": "email",
+      "placeholder": "",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:19:55.704Z",
+      "type": "text",
+      "value": "shreyas"
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "email",
+      "name": "email",
+      "tag_name": "INPUT",
+      "type": "text",
+      "value": "shreyas",
+      "in_shadow_root": true,
+      "dom_path": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_7_20251030_114956.png",
+      "path": "screenshots/screenshot_7_20251030_114956.png"
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:49:57.325179",
+    "action": "text_input",
+    "details": {
+      "ariaDescribedBy": "",
+      "ariaLabel": "",
+      "ariaRequired": "",
+      "attributes": {
+        "class": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+        "data-di-id": "#email",
+        "id": "email",
+        "name": "email",
+        "type": "text",
+        "value": "test"
+      },
+      "autocomplete": "",
+      "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+      "coordinates": {
+        "elementBottom": 720.171875,
+        "elementCenterX": 1328.5,
+        "elementCenterY": 696.171875,
+        "elementHeight": 48,
+        "elementLeft": 968.5,
+        "elementRight": 1688.5,
+        "elementTop": 672.171875,
+        "elementWidth": 720,
+        "scrollX": 0,
+        "scrollY": 2520,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-di-id": "#email"
+      },
+      "disabled": false,
+      "domPath": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "form": {
+        "action": "https://www.ibm.com/in-en",
+        "id": "signUpForm",
+        "method": "get",
+        "name": "signUpForm"
+      },
+      "id": "email",
+      "label": "Business email",
+      "maxLength": -1,
+      "minLength": -1,
+      "name": "email",
+      "parent": {
+        "className": "cds--text-input__field-wrapper",
+        "id": "",
+        "tagName": "DIV"
+      },
+      "placeholder": "",
+      "readOnly": false,
+      "required": false,
+      "selectionEnd": 4,
+      "selectionStart": 4,
+      "selectors": {
+        "cssSelector": "#email",
+        "xpath": "//*[@id=\"email\"]"
+      },
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:19:57.089Z",
+      "type": "text",
+      "value": "test",
+      "visualProperties": {
+        "backgroundColor": "rgb(244, 244, 244)",
+        "border": "",
+        "borderRadius": "0px",
+        "boxShadow": "none",
+        "color": "rgb(22, 22, 22)",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "height": "48px",
+        "margin": "0px",
+        "padding": "0px 16px",
+        "width": "720px"
+      }
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "email",
+      "name": "email",
+      "class": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+      "tag_name": "INPUT",
+      "type": "text",
+      "value": "test",
+      "css_selector": "#email",
+      "xpath": "//*[@id=\"email\"]",
+      "dom_path": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "label": "Business email"
+    },
+    "screenshot": {
+      "filename": "screenshot_8_20251030_114957.png",
+      "path": "screenshots/screenshot_8_20251030_114957.png",
+      "element_bounds": {
+        "left": 968.5,
+        "top": 672.171875,
+        "width": 720,
+        "height": 48
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:49:57.487293",
+    "action": "text_input",
+    "details": {
+      "domPath": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "id": "email",
+      "inShadowRoot": true,
+      "name": "email",
+      "placeholder": "",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:19:57.089Z",
+      "type": "text",
+      "value": "test"
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "email",
+      "name": "email",
+      "tag_name": "INPUT",
+      "type": "text",
+      "value": "test",
+      "in_shadow_root": true,
+      "dom_path": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_9_20251030_114957.png",
+      "path": "screenshots/screenshot_9_20251030_114957.png"
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:49:57.929550",
+    "action": "text_input",
+    "details": {
+      "ariaDescribedBy": "",
+      "ariaLabel": "",
+      "ariaRequired": "",
+      "attributes": {
+        "class": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+        "data-di-id": "#email",
+        "id": "email",
+        "name": "email",
+        "type": "text",
+        "value": "test@"
+      },
+      "autocomplete": "",
+      "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+      "coordinates": {
+        "elementBottom": 720.171875,
+        "elementCenterX": 1328.5,
+        "elementCenterY": 696.171875,
+        "elementHeight": 48,
+        "elementLeft": 968.5,
+        "elementRight": 1688.5,
+        "elementTop": 672.171875,
+        "elementWidth": 720,
+        "scrollX": 0,
+        "scrollY": 2520,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-di-id": "#email"
+      },
+      "disabled": false,
+      "domPath": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "form": {
+        "action": "https://www.ibm.com/in-en",
+        "id": "signUpForm",
+        "method": "get",
+        "name": "signUpForm"
+      },
+      "id": "email",
+      "label": "Business email",
+      "maxLength": -1,
+      "minLength": -1,
+      "name": "email",
+      "parent": {
+        "className": "cds--text-input__field-wrapper",
+        "id": "",
+        "tagName": "DIV"
+      },
+      "placeholder": "",
+      "readOnly": false,
+      "required": false,
+      "selectionEnd": 5,
+      "selectionStart": 5,
+      "selectors": {
+        "cssSelector": "#email",
+        "xpath": "//*[@id=\"email\"]"
+      },
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:19:57.479Z",
+      "type": "text",
+      "value": "test@",
+      "visualProperties": {
+        "backgroundColor": "rgb(244, 244, 244)",
+        "border": "",
+        "borderRadius": "0px",
+        "boxShadow": "none",
+        "color": "rgb(22, 22, 22)",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "height": "48px",
+        "margin": "0px",
+        "padding": "0px 16px",
+        "width": "720px"
+      }
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "email",
+      "name": "email",
+      "class": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+      "tag_name": "INPUT",
+      "type": "text",
+      "value": "test@",
+      "css_selector": "#email",
+      "xpath": "//*[@id=\"email\"]",
+      "dom_path": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "label": "Business email"
+    },
+    "screenshot": {
+      "filename": "screenshot_10_20251030_114957.png",
+      "path": "screenshots/screenshot_10_20251030_114957.png",
+      "element_bounds": {
+        "left": 968.5,
+        "top": 672.171875,
+        "width": 720,
+        "height": 48
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:49:58.110361",
+    "action": "text_input",
+    "details": {
+      "domPath": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "id": "email",
+      "inShadowRoot": true,
+      "name": "email",
+      "placeholder": "",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:19:57.479Z",
+      "type": "text",
+      "value": "test@"
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "email",
+      "name": "email",
+      "tag_name": "INPUT",
+      "type": "text",
+      "value": "test@",
+      "in_shadow_root": true,
+      "dom_path": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_11_20251030_114958.png",
+      "path": "screenshots/screenshot_11_20251030_114958.png"
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:49:58.549208",
+    "action": "text_input",
+    "details": {
+      "ariaDescribedBy": "",
+      "ariaLabel": "",
+      "ariaRequired": "",
+      "attributes": {
+        "class": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+        "data-di-id": "#email",
+        "id": "email",
+        "name": "email",
+        "type": "text",
+        "value": "test@ibm"
+      },
+      "autocomplete": "",
+      "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+      "coordinates": {
+        "elementBottom": 720.171875,
+        "elementCenterX": 1328.5,
+        "elementCenterY": 696.171875,
+        "elementHeight": 48,
+        "elementLeft": 968.5,
+        "elementRight": 1688.5,
+        "elementTop": 672.171875,
+        "elementWidth": 720,
+        "scrollX": 0,
+        "scrollY": 2520,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-di-id": "#email"
+      },
+      "disabled": false,
+      "domPath": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "form": {
+        "action": "https://www.ibm.com/in-en",
+        "id": "signUpForm",
+        "method": "get",
+        "name": "signUpForm"
+      },
+      "id": "email",
+      "label": "Business email",
+      "maxLength": -1,
+      "minLength": -1,
+      "name": "email",
+      "parent": {
+        "className": "cds--text-input__field-wrapper",
+        "id": "",
+        "tagName": "DIV"
+      },
+      "placeholder": "",
+      "readOnly": false,
+      "required": false,
+      "selectionEnd": 8,
+      "selectionStart": 8,
+      "selectors": {
+        "cssSelector": "#email",
+        "xpath": "//*[@id=\"email\"]"
+      },
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:19:58.535Z",
+      "type": "text",
+      "value": "test@ibm",
+      "visualProperties": {
+        "backgroundColor": "rgb(244, 244, 244)",
+        "border": "",
+        "borderRadius": "0px",
+        "boxShadow": "none",
+        "color": "rgb(22, 22, 22)",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "height": "48px",
+        "margin": "0px",
+        "padding": "0px 16px",
+        "width": "720px"
+      }
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "email",
+      "name": "email",
+      "class": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+      "tag_name": "INPUT",
+      "type": "text",
+      "value": "test@ibm",
+      "css_selector": "#email",
+      "xpath": "//*[@id=\"email\"]",
+      "dom_path": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "label": "Business email"
+    },
+    "screenshot": {
+      "filename": "screenshot_12_20251030_114958.png",
+      "path": "screenshots/screenshot_12_20251030_114958.png",
+      "element_bounds": {
+        "left": 968.5,
+        "top": 672.171875,
+        "width": 720,
+        "height": 48
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:49:58.718080",
+    "action": "text_input",
+    "details": {
+      "domPath": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "id": "email",
+      "inShadowRoot": true,
+      "name": "email",
+      "placeholder": "",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:19:58.535Z",
+      "type": "text",
+      "value": "test@ibm"
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "email",
+      "name": "email",
+      "tag_name": "INPUT",
+      "type": "text",
+      "value": "test@ibm",
+      "in_shadow_root": true,
+      "dom_path": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_13_20251030_114958.png",
+      "path": "screenshots/screenshot_13_20251030_114958.png"
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:49:59.700016",
+    "action": "text_input",
+    "details": {
+      "ariaDescribedBy": "",
+      "ariaLabel": "",
+      "ariaRequired": "",
+      "attributes": {
+        "class": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+        "data-di-id": "#email",
+        "id": "email",
+        "name": "email",
+        "type": "text",
+        "value": "test@ibm.com"
+      },
+      "autocomplete": "",
+      "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+      "coordinates": {
+        "elementBottom": 720.171875,
+        "elementCenterX": 1328.5,
+        "elementCenterY": 696.171875,
+        "elementHeight": 48,
+        "elementLeft": 968.5,
+        "elementRight": 1688.5,
+        "elementTop": 672.171875,
+        "elementWidth": 720,
+        "scrollX": 0,
+        "scrollY": 2520,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-di-id": "#email"
+      },
+      "disabled": false,
+      "domPath": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "form": {
+        "action": "https://www.ibm.com/in-en",
+        "id": "signUpForm",
+        "method": "get",
+        "name": "signUpForm"
+      },
+      "id": "email",
+      "label": "Business email",
+      "maxLength": -1,
+      "minLength": -1,
+      "name": "email",
+      "parent": {
+        "className": "cds--text-input__field-wrapper",
+        "id": "",
+        "tagName": "DIV"
+      },
+      "placeholder": "",
+      "readOnly": false,
+      "required": false,
+      "selectionEnd": 12,
+      "selectionStart": 12,
+      "selectors": {
+        "cssSelector": "#email",
+        "xpath": "//*[@id=\"email\"]"
+      },
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:19:59.688Z",
+      "type": "text",
+      "value": "test@ibm.com",
+      "visualProperties": {
+        "backgroundColor": "rgb(244, 244, 244)",
+        "border": "",
+        "borderRadius": "0px",
+        "boxShadow": "none",
+        "color": "rgb(22, 22, 22)",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "height": "48px",
+        "margin": "0px",
+        "padding": "0px 16px",
+        "width": "720px"
+      }
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "email",
+      "name": "email",
+      "class": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+      "tag_name": "INPUT",
+      "type": "text",
+      "value": "test@ibm.com",
+      "css_selector": "#email",
+      "xpath": "//*[@id=\"email\"]",
+      "dom_path": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "label": "Business email"
+    },
+    "screenshot": {
+      "filename": "screenshot_14_20251030_114959.png",
+      "path": "screenshots/screenshot_14_20251030_114959.png",
+      "element_bounds": {
+        "left": 968.5,
+        "top": 672.171875,
+        "width": 720,
+        "height": 48
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:49:59.871110",
+    "action": "text_input",
+    "details": {
+      "domPath": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ],
+      "id": "email",
+      "inShadowRoot": true,
+      "name": "email",
+      "placeholder": "",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:19:59.689Z",
+      "type": "text",
+      "value": "test@ibm.com"
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "id": "email",
+      "name": "email",
+      "tag_name": "INPUT",
+      "type": "text",
+      "value": "test@ibm.com",
+      "in_shadow_root": true,
+      "dom_path": [
+        {
+          "className": "cds--text-input cds--text-input--lg cds--layout--size-lg",
+          "id": "email",
+          "name": "email",
+          "selector": "#email",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"email\"]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_15_20251030_114959.png",
+      "path": "screenshots/screenshot_15_20251030_114959.png"
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:50:05.613368",
+    "action": "navigation",
+    "details": {
+      "url": "https://www.ibm.com/subscribe/thank-you-product-news",
+      "title": "Thank you | IBM",
+      "previous_url": "https://www.ibm.com/in-en"
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1
+  },
+  {
+    "timestamp": "2025-10-30T11:50:08.383873",
+    "action": "click",
+    "details": {
+      "alt": "",
+      "ariaLabel": "",
+      "ariaRole": "",
+      "attributes": {
+        "aria-label": "",
+        "data-autoid": "c4d--search-with-typeahead",
+        "direction": "bottom",
+        "input-timeout": "200",
+        "language": "en-us",
+        "placeholder": "Search all of IBM",
+        "size": "md",
+        "slot": "search",
+        "type": "",
+        "value": ""
+      },
+      "className": "",
+      "coordinates": {
+        "clickX": 1634,
+        "clickY": 24,
+        "elementBottom": 48,
+        "elementCenterX": 1644.5,
+        "elementCenterY": 24,
+        "elementHeight": 48,
+        "elementLeft": 1644.5,
+        "elementRight": 1644.5,
+        "elementTop": 0,
+        "elementWidth": 0,
+        "pageX": 1634,
+        "pageY": 24,
+        "relativeX": -10.5,
+        "relativeY": 24,
+        "scrollX": 0,
+        "scrollY": 0,
+        "viewportHeight": 961,
+        "viewportWidth": 1920
+      },
+      "dataAttributes": {
+        "data-autoid": "c4d--search-with-typeahead"
+      },
+      "domPath": [
+        {
+          "className": "",
+          "id": "",
+          "name": "",
+          "selector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "tagName": "c4d-search-with-typeahead",
+          "type": "element",
+          "xpath": "//*[@id=\"container-e2b350236f\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-search-with-typeahead[1]"
+        }
+      ],
+      "href": "",
+      "id": "",
+      "name": "",
+      "parent": {
+        "className": "",
+        "id": "",
+        "tagName": "C4D-MASTHEAD"
+      },
+      "placeholder": "",
+      "selectors": {
+        "cssSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+        "xpath": "//*[@id=\"container-e2b350236f\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-search-with-typeahead[1]"
+      },
+      "siblingsCount": 6,
+      "src": "",
+      "tagName": "C4D-SEARCH-WITH-TYPEAHEAD",
+      "target": "",
+      "text": "",
+      "textContent": "",
+      "timestamp": "2025-10-30T06:20:08.342Z",
+      "title": "",
+      "type": "",
+      "value": "",
+      "visualProperties": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(22, 22, 22)",
+        "color": "rgb(22, 22, 22)",
+        "cursor": "auto",
+        "display": "block",
+        "fontFamily": "\"IBM Plex Sans\", system-ui, -apple-system, BlinkMacSystemFont, \".SFNSText-Regular\", sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "height": "48px",
+        "margin": "0px 0px 0px 48px",
+        "opacity": "1",
+        "padding": "0px",
+        "position": "relative",
+        "width": "0px",
+        "zIndex": "auto"
+      }
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "tag_name": "C4D-SEARCH-WITH-TYPEAHEAD",
+      "css_selector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+      "xpath": "//*[@id=\"container-e2b350236f\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-search-with-typeahead[1]",
+      "dom_path": [
+        {
+          "className": "",
+          "id": "",
+          "name": "",
+          "selector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "tagName": "c4d-search-with-typeahead",
+          "type": "element",
+          "xpath": "//*[@id=\"container-e2b350236f\"]/div[1]/c4d-masthead-container[1]/c4d-masthead[1]/c4d-search-with-typeahead[1]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_16_20251030_115008.png",
+      "path": "screenshots/screenshot_16_20251030_115008.png",
+      "element_bounds": {
+        "left": 1644.5,
+        "top": 0,
+        "width": 0,
+        "height": 48
+      },
+      "viewport_size": {
+        "width": 1920,
+        "height": 961
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:50:10.117698",
+    "action": "text_input",
+    "details": {
+      "domPath": [
+        {
+          "host": "c4d-search-with-typeahead",
+          "hostSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "type": "shadow"
+        },
+        {
+          "className": "cds--header__search--input",
+          "id": "",
+          "name": "q",
+          "selector": "form > div > input",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"undefined\"]/form[1]/div[1]/input[1]"
+        }
+      ],
+      "id": "",
+      "inShadowRoot": true,
+      "name": "q",
+      "placeholder": "Search all of IBM",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:20:09.963Z",
+      "type": "text",
+      "value": "Shr"
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "name": "q",
+      "tag_name": "INPUT",
+      "placeholder": "Search all of IBM",
+      "type": "text",
+      "value": "Shr",
+      "in_shadow_root": true,
+      "dom_path": [
+        {
+          "host": "c4d-search-with-typeahead",
+          "hostSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "type": "shadow"
+        },
+        {
+          "className": "cds--header__search--input",
+          "id": "",
+          "name": "q",
+          "selector": "form > div > input",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"undefined\"]/form[1]/div[1]/input[1]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_17_20251030_115010.png",
+      "path": "screenshots/screenshot_17_20251030_115010.png"
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:50:11.318144",
+    "action": "text_input",
+    "details": {
+      "domPath": [
+        {
+          "host": "c4d-search-with-typeahead",
+          "hostSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "type": "shadow"
+        },
+        {
+          "className": "cds--header__search--input",
+          "id": "",
+          "name": "q",
+          "selector": "form > div > input",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"undefined\"]/form[1]/div[1]/input[1]"
+        }
+      ],
+      "id": "",
+      "inShadowRoot": true,
+      "name": "q",
+      "placeholder": "Search all of IBM",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:20:11.123Z",
+      "type": "text",
+      "value": "Shreyash"
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "name": "q",
+      "tag_name": "INPUT",
+      "placeholder": "Search all of IBM",
+      "type": "text",
+      "value": "Shreyash",
+      "in_shadow_root": true,
+      "dom_path": [
+        {
+          "host": "c4d-search-with-typeahead",
+          "hostSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "type": "shadow"
+        },
+        {
+          "className": "cds--header__search--input",
+          "id": "",
+          "name": "q",
+          "selector": "form > div > input",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"undefined\"]/form[1]/div[1]/input[1]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_18_20251030_115011.png",
+      "path": "screenshots/screenshot_18_20251030_115011.png"
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:50:12.005683",
+    "action": "text_input",
+    "details": {
+      "domPath": [
+        {
+          "host": "c4d-search-with-typeahead",
+          "hostSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "type": "shadow"
+        },
+        {
+          "className": "cds--header__search--input",
+          "id": "",
+          "name": "q",
+          "selector": "form > div > input",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"undefined\"]/form[1]/div[1]/input[1]"
+        }
+      ],
+      "id": "",
+      "inShadowRoot": true,
+      "name": "q",
+      "placeholder": "Search all of IBM",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:20:11.884Z",
+      "type": "text",
+      "value": "Shreyash "
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "name": "q",
+      "tag_name": "INPUT",
+      "placeholder": "Search all of IBM",
+      "type": "text",
+      "value": "Shreyash ",
+      "in_shadow_root": true,
+      "dom_path": [
+        {
+          "host": "c4d-search-with-typeahead",
+          "hostSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "type": "shadow"
+        },
+        {
+          "className": "cds--header__search--input",
+          "id": "",
+          "name": "q",
+          "selector": "form > div > input",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"undefined\"]/form[1]/div[1]/input[1]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_19_20251030_115012.png",
+      "path": "screenshots/screenshot_19_20251030_115012.png"
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:50:13.718744",
+    "action": "text_input",
+    "details": {
+      "domPath": [
+        {
+          "host": "c4d-search-with-typeahead",
+          "hostSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "type": "shadow"
+        },
+        {
+          "className": "cds--header__search--input",
+          "id": "",
+          "name": "q",
+          "selector": "form > div > input",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"undefined\"]/form[1]/div[1]/input[1]"
+        }
+      ],
+      "id": "",
+      "inShadowRoot": true,
+      "name": "q",
+      "placeholder": "Search all of IBM",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:20:13.540Z",
+      "type": "text",
+      "value": "Shreyash Pandey "
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "name": "q",
+      "tag_name": "INPUT",
+      "placeholder": "Search all of IBM",
+      "type": "text",
+      "value": "Shreyash Pandey ",
+      "in_shadow_root": true,
+      "dom_path": [
+        {
+          "host": "c4d-search-with-typeahead",
+          "hostSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "type": "shadow"
+        },
+        {
+          "className": "cds--header__search--input",
+          "id": "",
+          "name": "q",
+          "selector": "form > div > input",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"undefined\"]/form[1]/div[1]/input[1]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_20_20251030_115013.png",
+      "path": "screenshots/screenshot_20_20251030_115013.png"
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:50:14.909331",
+    "action": "text_input",
+    "details": {
+      "domPath": [
+        {
+          "host": "c4d-search-with-typeahead",
+          "hostSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "type": "shadow"
+        },
+        {
+          "className": "cds--header__search--input",
+          "id": "",
+          "name": "q",
+          "selector": "form > div > input",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"undefined\"]/form[1]/div[1]/input[1]"
+        }
+      ],
+      "id": "",
+      "inShadowRoot": true,
+      "name": "q",
+      "placeholder": "Search all of IBM",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:20:14.788Z",
+      "type": "text",
+      "value": "Shreyash Pandey ollama"
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "name": "q",
+      "tag_name": "INPUT",
+      "placeholder": "Search all of IBM",
+      "type": "text",
+      "value": "Shreyash Pandey ollama",
+      "in_shadow_root": true,
+      "dom_path": [
+        {
+          "host": "c4d-search-with-typeahead",
+          "hostSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "type": "shadow"
+        },
+        {
+          "className": "cds--header__search--input",
+          "id": "",
+          "name": "q",
+          "selector": "form > div > input",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"undefined\"]/form[1]/div[1]/input[1]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_21_20251030_115014.png",
+      "path": "screenshots/screenshot_21_20251030_115014.png"
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:50:16.349270",
+    "action": "text_input",
+    "details": {
+      "domPath": [
+        {
+          "host": "c4d-search-with-typeahead",
+          "hostSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "type": "shadow"
+        },
+        {
+          "className": "cds--header__search--input",
+          "id": "",
+          "name": "q",
+          "selector": "form > div > input",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"undefined\"]/form[1]/div[1]/input[1]"
+        }
+      ],
+      "id": "",
+      "inShadowRoot": true,
+      "name": "q",
+      "placeholder": "Search all of IBM",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:20:16.339Z",
+      "type": "text",
+      "value": "Shreyash ollama"
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "name": "q",
+      "tag_name": "INPUT",
+      "placeholder": "Search all of IBM",
+      "type": "text",
+      "value": "Shreyash ollama",
+      "in_shadow_root": true,
+      "dom_path": [
+        {
+          "host": "c4d-search-with-typeahead",
+          "hostSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "type": "shadow"
+        },
+        {
+          "className": "cds--header__search--input",
+          "id": "",
+          "name": "q",
+          "selector": "form > div > input",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"undefined\"]/form[1]/div[1]/input[1]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_22_20251030_115016.png",
+      "path": "screenshots/screenshot_22_20251030_115016.png"
+    }
+  },
+  {
+    "timestamp": "2025-10-30T11:50:16.734180",
+    "action": "text_input",
+    "details": {
+      "domPath": [
+        {
+          "host": "c4d-search-with-typeahead",
+          "hostSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "type": "shadow"
+        },
+        {
+          "className": "cds--header__search--input",
+          "id": "",
+          "name": "q",
+          "selector": "form > div > input",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"undefined\"]/form[1]/div[1]/input[1]"
+        }
+      ],
+      "id": "",
+      "inShadowRoot": true,
+      "name": "q",
+      "placeholder": "Search all of IBM",
+      "tagName": "INPUT",
+      "timestamp": "2025-10-30T06:20:16.723Z",
+      "type": "text",
+      "value": "ollama"
+    },
+    "window_handle": "8358C12E2EFF64938733D5C08A533B09",
+    "tab_index": 0,
+    "total_tabs": 1,
+    "locators": {
+      "name": "q",
+      "tag_name": "INPUT",
+      "placeholder": "Search all of IBM",
+      "type": "text",
+      "value": "ollama",
+      "in_shadow_root": true,
+      "dom_path": [
+        {
+          "host": "c4d-search-with-typeahead",
+          "hostSelector": "div#container-e2b350236f > div > c4d-masthead-container > c4d-masthead > c4d-search-with-typeahead",
+          "type": "shadow"
+        },
+        {
+          "className": "cds--header__search--input",
+          "id": "",
+          "name": "q",
+          "selector": "form > div > input",
+          "tagName": "input",
+          "type": "element",
+          "xpath": "//*[@id=\"undefined\"]/form[1]/div[1]/input[1]"
+        }
+      ]
+    },
+    "screenshot": {
+      "filename": "screenshot_23_20251030_115016.png",
+      "path": "screenshots/screenshot_23_20251030_115016.png"
+    }
+  }
+]

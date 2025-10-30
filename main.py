@@ -10,6 +10,10 @@ from concurrent.futures import ThreadPoolExecutor
 import queue
 import threading
 from llm_helpers import OllamaVLM
+from logging_config import setup_logger, log_exception
+
+# Setup logger
+logger = setup_logger('browser_recorder', 'browser_recorder.log')
 
 # Placeholder for LLM integration
 def convert_to_natural_language(activity_log):
@@ -19,7 +23,7 @@ def convert_to_natural_language(activity_log):
         print(json.dumps(activity, indent=2))
 
 class BrowserActivityRecorder:
-    def __init__(self, driver):
+    def __init__(self, driver, enable_hover_recording=True):
         self.driver = driver
         self.activity_log = []
         self.previous_url = ""
@@ -29,6 +33,8 @@ class BrowserActivityRecorder:
         self.use_cdp = False
         self.injection_failed_count = 0
         self.screenshot_counter = 0
+        self.enable_hover_recording = enable_hover_recording  # Control hover recording
+        self.is_recording = True  # Control flag for monitor loop
         
         # Create screenshots directory
         self.screenshots_dir = "screenshots"
@@ -54,8 +60,10 @@ class BrowserActivityRecorder:
             self.driver.execute_cdp_cmd('Page.enable', {})
             self.use_cdp = True
             self.network_monitoring_enabled = True
+            logger.info("Chrome DevTools Protocol enabled for enhanced tracking")
             print("[INFO] Chrome DevTools Protocol enabled for enhanced tracking")
-        except Exception:
+        except Exception as e:
+            logger.warning(f"CDP not available: {e}")
             print("[INFO] CDP not available, using JavaScript injection method")
         
         # Setup DOM mutation observer for loading detection
@@ -146,6 +154,11 @@ class BrowserActivityRecorder:
             print(f"[{action_type}] {summary}")
             # (No screenshot captured for hover events)
     
+    def stop_recording(self):
+        """Stop the recording loop"""
+        print("[INFO] Stopping recording...")
+        self.is_recording = False
+    
     def capture_multiple_locators(self, element_details):
         """Return a dictionary of multiple locator strategies for robust replay."""
         locators = {}
@@ -172,6 +185,15 @@ class BrowserActivityRecorder:
                 locators['css_selector'] = element_details['cssSelector']
             if element_details.get('xpath'):
                 locators['xpath'] = element_details['xpath']
+            
+            # Handle nested selectors object (from new recording format)
+            selectors = element_details.get('selectors', {})
+            if selectors:
+                if selectors.get('cssSelector') and not locators.get('css_selector'):
+                    locators['css_selector'] = selectors['cssSelector']
+                if selectors.get('xpath') and not locators.get('xpath'):
+                    locators['xpath'] = selectors['xpath']
+            
             coords = element_details.get('coordinates', {})
             if coords and all(k in coords for k in ['clickX', 'clickY', 'width', 'height']):
                 locators['coordinates'] = {
@@ -184,10 +206,12 @@ class BrowserActivityRecorder:
                 locators['in_shadow_root'] = True
             if element_details.get('inIframe'):
                 locators['in_iframe'] = True
+            if element_details.get('domPath'):
+                locators['dom_path'] = element_details['domPath']
             if element_details.get('label'):
                 locators['label'] = element_details['label']
         except Exception as e:
-            print(f"[WARNING] Error capturing locators: {e}")
+            log_exception(logger, f"Error capturing locators: {e}")
         return locators
     
     def capture_screenshot_with_highlight(self, details):
@@ -1713,6 +1737,81 @@ class BrowserActivityRecorder:
             };
         }
         
+        // Helper function to capture DOM path (iframe and shadow DOM chain)
+        function getDomPath(element) {
+            var path = [];
+            var currentElement = element;
+            var currentRoot = document;
+            
+            while (currentElement && currentElement !== currentRoot) {
+                // Check if we're crossing a shadow boundary
+                var host = currentElement.getRootNode();
+                if (host && host !== document && host.host) {
+                    // We're in a shadow root
+                    var shadowHost = host.host;
+                    path.unshift({
+                        type: 'shadow',
+                        host: shadowHost.tagName.toLowerCase() + (shadowHost.id ? '#' + shadowHost.id : ''),
+                        hostSelector: getCssSelector(shadowHost)
+                    });
+                    currentElement = shadowHost;
+                    continue;
+                }
+                
+                // Check if parent is in an iframe
+                if (currentElement === currentRoot.body || currentElement === currentRoot.documentElement) {
+                    // Check if this document is inside an iframe
+                    try {
+                        if (currentRoot !== window.top.document && currentRoot.defaultView && currentRoot.defaultView.frameElement) {
+                            var iframe = currentRoot.defaultView.frameElement;
+                            var iframeDoc = window.top.document;
+                            var iframeSelector = getCssSelector.call({nodeType: Node.ELEMENT_NODE}, iframe);
+                            
+                            // Find iframe index
+                            var iframes = iframeDoc.querySelectorAll('iframe');
+                            var iframeIndex = -1;
+                            for (var i = 0; i < iframes.length; i++) {
+                                if (iframes[i] === iframe) {
+                                    iframeIndex = i;
+                                    break;
+                                }
+                            }
+                            
+                            path.unshift({
+                                type: 'iframe',
+                                selector: iframeSelector,
+                                index: iframeIndex,
+                                name: iframe.name || '',
+                                id: iframe.id || ''
+                            });
+                            
+                            currentRoot = iframeDoc;
+                            currentElement = iframe;
+                            continue;
+                        }
+                    } catch(e) {
+                        // Cross-origin or top-level, stop traversal
+                        break;
+                    }
+                }
+                
+                currentElement = currentElement.parentNode;
+            }
+            
+            // Add the element itself at the end
+            path.push({
+                type: 'element',
+                selector: getCssSelector(element),
+                xpath: getXPath(element),
+                tagName: element.tagName.toLowerCase(),
+                id: element.id || '',
+                name: element.name || '',
+                className: element.className || ''
+            });
+            
+            return path;
+        }
+        
         if (!window.clickTrackerInjected) {
             window.clickEvents = [];
             window.lastClickTime = 0;
@@ -1794,6 +1893,9 @@ class BrowserActivityRecorder:
                         cssSelector: getCssSelector(element)
                     },
                     
+                    // DOM traversal path (iframe and shadow DOM chain)
+                    domPath: getDomPath(element),
+                    
                     // Visual properties
                     visualProperties: getVisualProperties(element),
                     
@@ -1868,6 +1970,7 @@ class BrowserActivityRecorder:
                                     text: element.innerText ? element.innerText.substring(0, 100) : '',
                                     href: element.href || '',
                                     type: element.type || '',
+                                    domPath: getDomPath(element),
                                     inIframe: true,
                                     iframeIndex: i,
                                     coordinates: {
@@ -1911,6 +2014,7 @@ class BrowserActivityRecorder:
                                     text: element.innerText ? element.innerText.substring(0, 100) : '',
                                     href: element.href || '',
                                     type: element.type || '',
+                                    domPath: getDomPath(element),
                                     inShadowRoot: true,
                                     coordinates: {
                                         clickX: e.clientX,
@@ -1997,6 +2101,80 @@ class BrowserActivityRecorder:
             }
             return path.join(' > ');
         }
+        // Helper function to capture DOM path (iframe and shadow DOM chain)
+        function getDomPath(element) {
+            var path = [];
+            var currentElement = element;
+            var currentRoot = document;
+            
+            while (currentElement && currentElement !== currentRoot) {
+                // Check if we're crossing a shadow boundary
+                var host = currentElement.getRootNode();
+                if (host && host !== document && host.host) {
+                    // We're in a shadow root
+                    var shadowHost = host.host;
+                    path.unshift({
+                        type: 'shadow',
+                        host: shadowHost.tagName.toLowerCase() + (shadowHost.id ? '#' + shadowHost.id : ''),
+                        hostSelector: getCssSelector(shadowHost)
+                    });
+                    currentElement = shadowHost;
+                    continue;
+                }
+                
+                // Check if parent is in an iframe
+                if (currentElement === currentRoot.body || currentElement === currentRoot.documentElement) {
+                    // Check if this document is inside an iframe
+                    try {
+                        if (currentRoot !== window.top.document && currentRoot.defaultView && currentRoot.defaultView.frameElement) {
+                            var iframe = currentRoot.defaultView.frameElement;
+                            var iframeDoc = window.top.document;
+                            var iframeSelector = getCssSelector.call({nodeType: Node.ELEMENT_NODE}, iframe);
+                            
+                            // Find iframe index
+                            var iframes = iframeDoc.querySelectorAll('iframe');
+                            var iframeIndex = -1;
+                            for (var i = 0; i < iframes.length; i++) {
+                                if (iframes[i] === iframe) {
+                                    iframeIndex = i;
+                                    break;
+                                }
+                            }
+                            
+                            path.unshift({
+                                type: 'iframe',
+                                selector: iframeSelector,
+                                index: iframeIndex,
+                                name: iframe.name || '',
+                                id: iframe.id || ''
+                            });
+                            
+                            currentRoot = iframeDoc;
+                            currentElement = iframe;
+                            continue;
+                        }
+                    } catch(e) {
+                        // Cross-origin or top-level, stop traversal
+                        break;
+                    }
+                }
+                
+                currentElement = currentElement.parentNode;
+            }
+            
+            // Add the element itself at the end
+            path.push({
+                type: 'element',
+                selector: getCssSelector(element),
+                xpath: getXPath(element),
+                tagName: element.tagName.toLowerCase(),
+                id: element.id || '',
+                name: element.name || '',
+                className: element.className || ''
+            });
+            
+            return path;
+        }
         if (!window.hoverTrackerInjected) {
             window.hoverEvents = [];
             window.lastHover = { selector: null, ts: 0 };
@@ -2033,6 +2211,7 @@ class BrowserActivityRecorder:
                         xpath: getXPath(el),
                         cssSelector: selector
                     },
+                    domPath: getDomPath(el),
                     inIframe: false,
                     inShadowRoot: false,
                     timestamp: new Date().toISOString()
@@ -2174,6 +2353,81 @@ class BrowserActivityRecorder:
             };
         }
         
+        // Helper function to capture DOM path (iframe and shadow DOM chain)
+        function getDomPath(element) {
+            var path = [];
+            var currentElement = element;
+            var currentRoot = document;
+            
+            while (currentElement && currentElement !== currentRoot) {
+                // Check if we're crossing a shadow boundary
+                var host = currentElement.getRootNode();
+                if (host && host !== document && host.host) {
+                    // We're in a shadow root
+                    var shadowHost = host.host;
+                    path.unshift({
+                        type: 'shadow',
+                        host: shadowHost.tagName.toLowerCase() + (shadowHost.id ? '#' + shadowHost.id : ''),
+                        hostSelector: getCssSelector(shadowHost)
+                    });
+                    currentElement = shadowHost;
+                    continue;
+                }
+                
+                // Check if parent is in an iframe
+                if (currentElement === currentRoot.body || currentElement === currentRoot.documentElement) {
+                    // Check if this document is inside an iframe
+                    try {
+                        if (currentRoot !== window.top.document && currentRoot.defaultView && currentRoot.defaultView.frameElement) {
+                            var iframe = currentRoot.defaultView.frameElement;
+                            var iframeDoc = window.top.document;
+                            var iframeSelector = getCssSelector.call({nodeType: Node.ELEMENT_NODE}, iframe);
+                            
+                            // Find iframe index
+                            var iframes = iframeDoc.querySelectorAll('iframe');
+                            var iframeIndex = -1;
+                            for (var i = 0; i < iframes.length; i++) {
+                                if (iframes[i] === iframe) {
+                                    iframeIndex = i;
+                                    break;
+                                }
+                            }
+                            
+                            path.unshift({
+                                type: 'iframe',
+                                selector: iframeSelector,
+                                index: iframeIndex,
+                                name: iframe.name || '',
+                                id: iframe.id || ''
+                            });
+                            
+                            currentRoot = iframeDoc;
+                            currentElement = iframe;
+                            continue;
+                        }
+                    } catch(e) {
+                        // Cross-origin or top-level, stop traversal
+                        break;
+                    }
+                }
+                
+                currentElement = currentElement.parentNode;
+            }
+            
+            // Add the element itself at the end
+            path.push({
+                type: 'element',
+                selector: getCssSelector(element),
+                xpath: getXPath(element),
+                tagName: element.tagName.toLowerCase(),
+                id: element.id || '',
+                name: element.name || '',
+                className: element.className || ''
+            });
+            
+            return path;
+        }
+        
         if (!window.inputTrackerInjected) {
             window.inputEvents = [];
             window.inputDebounce = {};
@@ -2240,6 +2494,9 @@ class BrowserActivityRecorder:
                                 cssSelector: getCssSelector(element)
                             },
                             
+                            // DOM traversal path (iframe and shadow DOM chain)
+                            domPath: getDomPath(element),
+                            
                             // Visual properties
                             visualProperties: getVisualProperties(element),
                             
@@ -2303,6 +2560,123 @@ class BrowserActivityRecorder:
                     }, 300); // Wait 300ms after last keystroke
                 }
             }, true);
+            
+            // Add change event listener for checkboxes and radio buttons
+            document.addEventListener('change', function(e) {
+                var element = e.target;
+                if (element.tagName === 'INPUT' && (element.type === 'checkbox' || element.type === 'radio')) {
+                    // Get bounding rectangle for coordinates
+                    var rect = element.getBoundingClientRect();
+                    
+                    // Get viewport dimensions
+                    var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+                    var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                    
+                    var changeData = {
+                        // Basic element info
+                        tagName: element.tagName,
+                        type: element.type,
+                        id: element.id || '',
+                        name: element.name || '',
+                        className: element.className || '',
+                        
+                        // Checkbox/Radio specific properties
+                        checked: element.checked,
+                        value: element.value || '',
+                        required: element.required || false,
+                        disabled: element.disabled || false,
+                        
+                        // Label association
+                        label: '',
+                        
+                        // Coordinates
+                        coordinates: {
+                            // Element position and size
+                            elementLeft: rect.left,
+                            elementTop: rect.top,
+                            elementRight: rect.right,
+                            elementBottom: rect.bottom,
+                            elementWidth: rect.width,
+                            elementHeight: rect.height,
+                            // Element center point
+                            elementCenterX: rect.left + rect.width / 2,
+                            elementCenterY: rect.top + rect.height / 2,
+                            // Viewport dimensions
+                            viewportWidth: viewportWidth,
+                            viewportHeight: viewportHeight,
+                            // Scroll position
+                            scrollX: window.scrollX || window.pageXOffset,
+                            scrollY: window.scrollY || window.pageYOffset
+                        },
+                        
+                        // Selectors for element identification
+                        selectors: {
+                            xpath: getXPath(element),
+                            cssSelector: getCssSelector(element)
+                        },
+                        
+                        // DOM traversal path (iframe and shadow DOM chain)
+                        domPath: getDomPath(element),
+                        
+                        // Visual properties
+                        visualProperties: getVisualProperties(element),
+                        
+                        // Attributes
+                        attributes: {},
+                        
+                        // Parent information
+                        parent: {
+                            tagName: element.parentElement ? element.parentElement.tagName : '',
+                            id: element.parentElement ? element.parentElement.id : '',
+                            className: element.parentElement ? element.parentElement.className : ''
+                        },
+                        
+                        // Form information if in a form
+                        form: {
+                            id: element.form ? element.form.id : '',
+                            name: element.form ? element.form.name : '',
+                            action: element.form ? element.form.action : '',
+                            method: element.form ? element.form.method : ''
+                        },
+                        
+                        // ARIA attributes
+                        ariaLabel: element.getAttribute('aria-label') || '',
+                        ariaDescribedBy: element.getAttribute('aria-describedby') || '',
+                        ariaRequired: element.getAttribute('aria-required') || '',
+                        
+                        // Data attributes
+                        dataAttributes: {},
+                        
+                        // Timestamp
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    // Try to find associated label
+                    var label = element.labels ? element.labels[0] : null;
+                    if (!label && element.id) {
+                        label = document.querySelector('label[for="' + element.id + '"]');
+                    }
+                    if (label) {
+                        changeData.label = label.innerText || label.textContent || '';
+                    }
+                    
+                    // Collect all attributes
+                    if (element.attributes) {
+                        for (var i = 0; i < element.attributes.length; i++) {
+                            var attr = element.attributes[i];
+                            changeData.attributes[attr.name] = attr.value;
+                            
+                            // Separately collect data-* attributes
+                            if (attr.name.startsWith('data-')) {
+                                changeData.dataAttributes[attr.name] = attr.value;
+                            }
+                        }
+                    }
+                    
+                    window.inputEvents.push(changeData);
+                }
+            }, true);
+            
             window.inputTrackerInjected = true;
             
             // Inject into iframes
@@ -2324,6 +2698,7 @@ class BrowserActivityRecorder:
                                             type: element.type || 'text',
                                             value: element.value,
                                             placeholder: element.placeholder || '',
+                                            domPath: getDomPath(element),
                                             inIframe: true,
                                             iframeIndex: i,
                                             timestamp: new Date().toISOString()
@@ -2332,6 +2707,26 @@ class BrowserActivityRecorder:
                                     }, 300);
                                 }
                             }, true);
+                            
+                            // Add change event listener for checkboxes and radio buttons in iframes
+                            iframeDoc.addEventListener('change', function(e) {
+                                var element = e.target;
+                                if (element.tagName === 'INPUT' && (element.type === 'checkbox' || element.type === 'radio')) {
+                                    var changeData = {
+                                        tagName: element.tagName,
+                                        id: element.id || '',
+                                        name: element.name || '',
+                                        type: element.type,
+                                        checked: element.checked,
+                                        value: element.value || '',
+                                        inIframe: true,
+                                        iframeIndex: i,
+                                        timestamp: new Date().toISOString()
+                                    };
+                                    window.inputEvents.push(changeData);
+                                }
+                            }, true);
+                            
                             iframeDoc._inputTrackerInjected = true;
                         }
                     } catch(e) {
@@ -2359,6 +2754,7 @@ class BrowserActivityRecorder:
                                             type: element.type || 'text',
                                             value: element.value,
                                             placeholder: element.placeholder || '',
+                                            domPath: getDomPath(element),
                                             inShadowRoot: true,
                                             timestamp: new Date().toISOString()
                                         };
@@ -2366,6 +2762,25 @@ class BrowserActivityRecorder:
                                     }, 300);
                                 }
                             }, true);
+                            
+                            // Add change event listener for checkboxes and radio buttons in shadow DOMs
+                            shadowRoot.addEventListener('change', function(e) {
+                                var element = e.target;
+                                if (element.tagName === 'INPUT' && (element.type === 'checkbox' || element.type === 'radio')) {
+                                    var changeData = {
+                                        tagName: element.tagName,
+                                        id: element.id || '',
+                                        name: element.name || '',
+                                        type: element.type,
+                                        checked: element.checked,
+                                        value: element.value || '',
+                                        inShadowRoot: true,
+                                        timestamp: new Date().toISOString()
+                                    };
+                                    window.inputEvents.push(changeData);
+                                }
+                            }, true);
+                            
                             shadowRoot._inputTrackerInjected = true;
                             
                             // Recursively inject into nested shadow roots
@@ -2480,7 +2895,11 @@ class BrowserActivityRecorder:
             inputs = self.driver.execute_script("var events = window.inputEvents || []; window.inputEvents = []; return events;")
             if inputs:
                 for inp in inputs:
-                    self.record_activity("text_input", inp)
+                    # Distinguish between text input and checkbox/radio change events
+                    if inp.get('type') in ['checkbox', 'radio']:
+                        self.record_activity("change_input", inp)
+                    else:
+                        self.record_activity("text_input", inp)
         except Exception:
             pass
     
@@ -2539,7 +2958,7 @@ class BrowserActivityRecorder:
         use_fallback = False
         last_injection_url = ""
         
-        while True:
+        while self.is_recording:
             try:
                 # IMPORTANT: Collect clicks FIRST before any loading checks
                 # This ensures clicks that trigger DOM changes are captured
@@ -2593,7 +3012,10 @@ class BrowserActivityRecorder:
                 if not trackers_injected and current_url != last_injection_url and not use_fallback:
                     click_ok = self.inject_click_tracker()
                     input_ok = self.inject_input_tracker()
-                    hover_ok = self.inject_hover_tracker()
+                    # Only inject hover tracker if enabled
+                    hover_ok = True
+                    if self.enable_hover_recording:
+                        hover_ok = self.inject_hover_tracker()
                     trackers_injected = click_ok and input_ok and hover_ok
                     
                     if trackers_injected:
@@ -2612,13 +3034,14 @@ class BrowserActivityRecorder:
                 
                 # Use fallback methods if trackers not injected
                 if trackers_injected:
-                    # Collect hover events when trackers active
-                    try:
-                        hover_events = self.driver.execute_script("return window.hoverEvents ? window.hoverEvents.splice(0, window.hoverEvents.length) : [];")
-                        for he in hover_events:
-                            self.record_activity("hover", he)
-                    except Exception:
-                        pass
+                    # Collect hover events when trackers active (only if enabled)
+                    if self.enable_hover_recording:
+                        try:
+                            hover_events = self.driver.execute_script("return window.hoverEvents ? window.hoverEvents.splice(0, window.hoverEvents.length) : [];")
+                            for he in hover_events:
+                                self.record_activity("hover", he)
+                        except Exception:
+                            pass
                 if not trackers_injected and use_fallback:
                     # Use fallback methods
                     self.fallback_track_dom_changes()
